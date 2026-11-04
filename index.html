@@ -469,43 +469,91 @@ button{font-family:inherit}
 .gal i{position:absolute;right:2px;top:2px;font-style:normal;font-size:12px;font-weight:700;background:var(--gold);border:2px solid var(--ink);border-radius:99px;padding:0 4px}
 .finActs{position:absolute;right:0;bottom:0}
 .finActs .btn{font-size:26px}
-/* Mix-Oberfläche */
+/* Mix-Oberfläche: geführt, Schritt für Schritt */
 .mix{position:relative;font-family:var(--f);color:var(--ink)}
-.mixTV{position:absolute;inset:0;display:grid;grid-template-columns:400px 1fr;grid-template-rows:auto 1fr auto;grid-template-areas:"prev tabs" "prev tiles" "bottom tiles";gap:12px 18px}
-.mixTV .mxPrev{grid-area:prev;background:#fffaf0;border:4px solid var(--ink);border-radius:22px;box-shadow:4px 5px 0 var(--ink);padding:10px;display:flex;flex-direction:column;align-items:center;overflow:hidden}
-.mixTV .mxSvg{width:220px;height:340px}
-.mixTV .mxInfo{width:100%}
-.mixTV .mxTabs{grid-area:tabs;flex-wrap:wrap;overflow:visible}
-.mixTV .mxTiles{grid-area:tiles;grid-template-columns:repeat(6,1fr);align-content:start;overflow:auto}
-.mixTV .mxBottom{grid-area:bottom;display:grid;gap:10px}
-.mixTV .tile{height:118px}
-.mixTV .tile .te{font-size:46px}
-.mixTV .tile .tn{font-size:17px}
-.mixTV .mxTabs button{font-size:19px}
-.mixTV .mxName{font-size:20px}
-.mixTV .mxDone{font-size:26px}
 .mxSvg .cksvg{width:100%;height:100%;display:block}
-.mxCount{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:6px 0}
-.mxCount span{font-size:14px;font-weight:700;padding:2px 10px;border-radius:99px;border:2px solid var(--ink);background:#fff}
-.mxCount span.ok{background:#bdeccd}
-.mxCount.shake2{animation:shake .4s}
-.mxChips{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
-.chip2{font:600 13px var(--f);background:#fff3d1;border:2px solid var(--ink);border-radius:99px;padding:3px 8px;cursor:pointer;color:var(--ink)}
-.chip2 i{font-style:normal;color:#b3261e;margin-left:2px}
-.mxHint{font-size:14px;color:var(--muted);font-weight:600}
-.mxTabs{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 6px;scrollbar-width:none}
-.mxTabs button{flex:none;font:700 14px var(--f);color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:99px;padding:6px 12px;cursor:pointer}
-.mxTabs button.on{background:var(--gold);box-shadow:0 3px 0 var(--ink)}
-.mxTiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.tile{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:88px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:0 4px 0 var(--ink);cursor:pointer;font:600 12px var(--f);color:var(--ink);padding:4px;text-align:center;line-height:1.05}
+.mxNum{display:block;font-size:14px;font-weight:700;color:var(--muted);letter-spacing:.03em}
+.mxQ{display:block;font-size:20px;line-height:1.15}
+.mxSteps{display:flex;gap:4px}
+.stp{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:1px;padding:3px 2px;background:#fff;border:2.5px solid var(--ink);border-radius:12px;cursor:pointer;font:600 11px var(--f);color:var(--ink);opacity:.55}
+.stp i{font-style:normal;font-size:18px;line-height:1.1}
+.stp span{display:none;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stp.set{opacity:1;background:#bdeccd}
+.stp.on{opacity:1;background:var(--gold);box-shadow:0 3px 0 var(--ink);transform:translateY(-2px)}
+.stp.fin{background:#fff3d1}
+.stp.fin:not(:disabled){opacity:1;background:#3fd27a}
+.stp:disabled{cursor:default}
+.mxTiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;animation:stepIn .28s ease-out}
+@keyframes stepIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+.tile{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:84px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:0 4px 0 var(--ink);cursor:pointer;font:600 12px var(--f);color:var(--ink);padding:4px;text-align:center;line-height:1.05}
 .tile::before{content:"";position:absolute;left:6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--tc);border:2px solid var(--ink)}
 .tile .te{font-size:30px;line-height:1}
 .tile:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
 .tile.sel{background:var(--gold);box-shadow:0 0 0 3px #fff,0 4px 0 var(--ink)}
 .tile.sel::after{content:"✓";position:absolute;right:6px;top:2px;font-size:16px;font-weight:700}
-.mxBottom{display:flex;gap:8px;align-items:center}
-.mxName{flex:1;min-width:0;font:600 16px var(--f);color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:14px;padding:10px 12px}
-.mxDone{flex:none}
+.tile.pop{animation:tpop .35s cubic-bezier(.2,1.6,.4,1)}
+@keyframes tpop{0%{transform:scale(.9)}60%{transform:scale(1.08)}100%{transform:none}}
+.mxSum{display:grid;grid-template-columns:1fr 1fr;gap:6px;animation:stepIn .28s ease-out}
+.sumRow{display:grid;grid-template-columns:30px 1fr 14px;gap:6px;align-items:center;text-align:left;background:#fff;border:2.5px solid var(--ink);border-radius:12px;padding:5px 8px;cursor:pointer;font-family:var(--f);color:var(--ink);min-width:0}
+.sumRow .se{font-size:22px;text-align:center}
+.sumRow .sn{min-width:0}
+.sumRow small{display:block;font-size:11px;font-weight:700;color:var(--muted)}
+.sumRow b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sumRow i{font-style:normal;color:var(--muted)}
+.mxFin{display:grid;gap:8px;margin-top:10px}
+.mxName{min-width:0;font:600 16px var(--f);color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:14px;padding:10px 12px}
+.mxDone{font-size:20px}
+.mxBottom{display:flex}
+.mxBack{font:700 15px var(--f);color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:99px;padding:6px 14px;cursor:pointer;box-shadow:0 3px 0 var(--ink)}
+.mxBack:disabled{opacity:.4;cursor:default;box-shadow:none}
+/* Fernseher */
+.mixTV{position:absolute;inset:0;display:grid;grid-template-columns:330px 1fr auto;grid-template-rows:auto auto 1fr;grid-template-areas:"steps steps steps" "svg head back" "svg body body";gap:16px 20px}
+.mixTV .mxTop{display:contents}
+.mixTV .mxSvg{grid-area:svg;background:#fffaf0;border:4px solid var(--ink);border-radius:22px;box-shadow:4px 5px 0 var(--ink);padding:20px 40px;min-height:0;align-self:start;height:min(100%,470px)}
+.mixTV .mxSteps{grid-area:steps;gap:6px}
+.mixTV .stp{padding:6px 4px;border-width:3px;border-radius:14px;font-size:14px}
+.mixTV .stp i{font-size:28px}
+.mixTV .stp span{display:block}
+.mixTV .mxHead{grid-area:head;align-self:center}
+.mixTV .mxNum{font-size:20px;color:#ffe8c4}
+.mixTV .mxQ{font-size:38px;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.35)}
+.mixTV .mxBody{grid-area:body;min-height:0;overflow:auto}
+.mixTV .mxTiles{grid-template-columns:repeat(6,1fr);gap:12px}
+.mixTV .tile{height:124px}
+.mixTV .tile .te{font-size:50px}
+.mixTV .tile .tn{font-size:18px}
+.mixTV .mxBottom{grid-area:back;align-items:center}
+.mixTV .mxBack{font-size:22px;padding:10px 22px}
+.mixTV .mxSum{grid-template-columns:repeat(4,1fr);gap:10px}
+.mixTV .sumRow{grid-template-columns:48px 1fr 18px;padding:10px 12px;border-width:3px;border-radius:16px}
+.mixTV .sumRow .se{font-size:36px}
+.mixTV .sumRow small{font-size:14px}
+.mixTV .sumRow b{font-size:19px}
+.mixTV .mxFin{grid-template-columns:1fr auto;margin-top:18px;gap:14px}
+.mixTV .mxName{font-size:24px;padding:14px 18px}
+.mixTV .mxDone{font-size:30px}
+/* Wunsch des Gastes */
+.wish{display:block}
+.wish > span{display:block}
+.wish .wSec{color:#5a2a86;font-weight:600}
+.wish .wSec q{font-weight:700;quotes:"„" "“"}
+.wish .wNo{color:#7a2230;font-weight:600}
+.gSay .wish{font-size:25px;line-height:1.3}
+.gSay .wSec{background:#efe4ff;border:3px dashed #a66bff;border-radius:16px;padding:8px 14px;margin-bottom:8px}
+.mwSay .wish{font-size:18px;margin-top:6px}
+.mwSay .wSec{background:#efe4ff;border-radius:12px;padding:4px 8px;margin-bottom:4px}
+.tvmGuest .wish{font-size:14px;line-height:1.2}
+.tvmGuest .wish > span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Geheimtipp bei der Auflösung */
+.rvSec{position:absolute;left:50%;bottom:18px;transform:translate(-50%,30px) scale(.6);opacity:0;background:#a66bff;color:#fff;font-size:24px;font-weight:700;border:4px solid var(--ink);border-radius:99px;padding:6px 20px;box-shadow:4px 5px 0 var(--ink);white-space:nowrap;transition:transform .5s cubic-bezier(.2,1.6,.4,1),opacity .3s}
+.rvSec.show{opacity:1;transform:translate(-50%,0)}
+.bdSay{text-align:center}
+.bdSec{display:block;margin-top:10px;padding:10px;background:#efe4ff;border:3px dashed #a66bff;border-radius:14px}
+.bdSec small{display:block;font-size:15px;font-weight:700;color:var(--muted)}
+.bdSec em{display:block;font-style:normal;font-size:26px;font-weight:700}
+.bdSec q{display:block;font-size:15px;font-weight:600;color:#5a2a86;quotes:"„" "“";margin-top:2px}
+.bdHits{display:block !important;margin-top:6px;font-size:17px !important;color:var(--ink) !important}
+.bdHits i{font-style:normal;display:inline-block;background:var(--c);color:#fff;border:2px solid var(--ink);border-radius:99px;padding:0 8px;margin:2px}
 .mxShake{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(255,246,230,.94);border-radius:20px;font-size:24px}
 .mxShake .shaker{width:110px;animation:shk .18s ease-in-out infinite alternate}
 @keyframes shk{from{transform:rotate(-18deg) translateY(-6px)}to{transform:rotate(18deg) translateY(6px)}}
@@ -514,21 +562,19 @@ button{font-family:inherit}
 .mixPh{display:grid;gap:10px;min-width:0}
 .mixPh > *,#mixHost{min-width:0}
 .pw > *{min-width:0}
-.mixPh .mxPrev{display:grid;grid-template-columns:92px 1fr;gap:10px;align-items:center;background:var(--paper);border:3px solid var(--ink);border-radius:18px;box-shadow:0 4px 0 var(--ink);padding:6px 10px;position:sticky;top:6px;z-index:3}
-.mixPh .mxSvg{width:92px;height:152px}
-.mixPh .mxCount{justify-content:flex-start}
-.mixPh .mxChips{justify-content:flex-start;max-height:86px;overflow:auto}
-.mixPh .mxBottom{position:sticky;bottom:8px;z-index:3;background:var(--paper);border:3px solid var(--ink);border-radius:18px;padding:8px;box-shadow:0 4px 0 var(--ink)}
-.mixPh .mxDone{font-size:17px;padding:.55em 1em}
+.mixPh .mxTop{display:grid;grid-template-columns:70px 1fr;grid-template-areas:"svg head" "steps steps";gap:6px 10px;align-items:center;background:var(--paper);border:3px solid var(--ink);border-radius:18px;box-shadow:0 4px 0 var(--ink);padding:8px 10px}
+.mixPh .mxSvg{grid-area:svg;width:70px;height:116px}
+.mixPh .mxHead{grid-area:head}
+.mixPh .mxSteps{grid-area:steps}
+.mixPh .mxBody{min-width:0}
+.mixPh .mxFin .mxDone{font-size:19px}
 .mixPh .mxShake{position:fixed;inset:0;border-radius:0}
 .ckG{display:grid;grid-template-columns:110px 1fr;gap:10px;align-items:center}
 .ckG b{display:block;font-size:20px}
 .ckG small{font-weight:700;color:var(--muted)}
 .ckG p{margin:6px 0 2px;font-size:19px;font-weight:700}
-.ckG span{font-size:14px;font-weight:600;color:#7a2230}
 .ckStrip{display:grid;grid-template-columns:56px 1fr;gap:8px;align-items:center;background:var(--paper);border:3px solid var(--ink);border-radius:16px;padding:6px 10px}
 .ckStrip b{display:block;font-size:15px}
-.ckStrip small{display:block;font-size:12px;font-weight:600;color:#7a2230}
 .ckRv{text-align:center;border-top:10px solid var(--c)}
 .ckRvSvg{width:130px;height:214px;margin:0 auto}
 .ckRvSvg .cksvg{width:100%;height:100%;display:block}
@@ -541,6 +587,172 @@ button{font-family:inherit}
 .ckRow b{font-size:20px;text-align:right}
 .ckRow i{font-style:normal;font-weight:700;color:var(--green)}
 .ckRow.me2{box-shadow:0 0 0 3px var(--gold)}
+.ckG .wish,.ckStrip .wish{font-size:13px;line-height:1.25;margin-top:3px}
+.ckG .wSec,.ckStrip .wSec{background:#efe4ff;border-radius:10px;padding:3px 7px;margin-bottom:2px}
+.ckG .wish{font-size:14px}
+.ckSecHit{margin-top:8px;display:inline-block;background:#a66bff;color:#fff;font-weight:700;border:3px solid var(--ink);border-radius:99px;padding:3px 14px}
+.ckSecCard{text-align:center;background:#efe4ff;border-style:dashed}
+.ckSecCard.hit{background:#d5f5df}
+.ckSecCard small{display:block;font-weight:700;color:var(--muted)}
+.ckSecCard b{display:block;font-size:24px;margin:2px 0}
+.ckSecCard q{display:block;font-size:14px;font-weight:600;color:#5a2a86;quotes:"„" "“"}
+.ckSecCard span{display:block;margin-top:6px;font-weight:700}
+/* Zwei Köpfe, ein Gedanke · Fernseher */
+.wl{position:absolute;inset:0}
+.wlTop{position:absolute;left:200px;right:0;top:-8px;height:72px;display:flex;align-items:center;gap:22px;background:var(--t);border:4px solid var(--ink);border-left:16px solid var(--c);border-radius:20px;padding:4px 16px}
+.wlTeam{display:flex;align-items:center}
+.wlTeam .bust{width:50px;height:50px;margin-right:-14px;border-width:2px}
+.wlTeam b{font-size:26px;margin-left:24px;white-space:nowrap}
+.wlRound{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:600;white-space:nowrap}
+.wlRound b{font-size:26px}
+.wlDots{display:flex;gap:4px;margin-left:4px}
+.wlDots i{width:13px;height:13px;border-radius:50%;border:2px solid var(--ink);background:#fff}
+.wlDots i.p{background:#ff8a8a}
+.wlDots i.c{background:var(--gold);transform:scale(1.35)}
+.wlDots i.m{background:#3fd27a;transform:scale(1.35)}
+.wlOthers{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.wlTop .wlOthers{margin-left:auto;flex-wrap:nowrap}
+.wlTop .wlO.cur{display:none}
+.wlO{display:flex;align-items:center;background:#fff;border:2px solid var(--ink);border-left:6px solid var(--c);border-radius:99px;padding:2px 10px 2px 4px;font-weight:700;font-size:15px;white-space:nowrap}
+.wlO .bust{width:28px;height:28px;margin-right:-8px;border-width:2px}
+.wlO > span{margin-left:12px}
+.wlO.cur{background:var(--gold)}
+.turnCard .wlOthers{margin:4px 0}
+.turnCard .wlO{font-size:18px}
+.turnCard .wlO .bust{width:34px;height:34px}
+.wlPrompt{position:absolute;left:200px;right:330px;top:76px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff}
+.wlPrompt small{font-size:22px;font-weight:700;color:#ffe8c4;letter-spacing:.03em}
+.wlPrompt > span{font-size:24px;font-weight:600;margin-top:10px}
+.wlPrompt .row{display:flex;align-items:center;gap:18px;margin-top:8px}
+.wlPrompt i{font-style:normal;font-size:46px;font-weight:700;-webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
+.wlWord{display:inline-block;background:var(--paper);color:var(--ink);border:4px solid var(--ink);border-radius:18px;box-shadow:4px 5px 0 var(--ink);padding:6px 22px;font-size:38px;line-height:1.1;max-width:420px;overflow-wrap:anywhere;animation:pop .45s cubic-bezier(.2,1.5,.4,1) both}
+.wlWord.start{background:var(--gold);font-size:56px;padding:8px 30px;margin-top:6px}
+.wlStage{position:absolute;left:200px;right:330px;top:232px;bottom:0;display:grid;grid-template-columns:1fr 220px 1fr}
+.wlP{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0}
+.wlP img{height:290px;position:relative;z-index:1;filter:drop-shadow(0 8px 10px rgba(0,0,0,.35))}
+.wlP.jump img{animation:wlJump .6s ease-in-out 3}
+@keyframes wlJump{50%{transform:translateY(-34px)}}
+.wlPlate{position:absolute;bottom:4px;z-index:2;background:var(--paper);border:3px solid var(--ink);border-radius:14px;box-shadow:3px 4px 0 var(--ink);padding:3px 14px;text-align:center}
+.wlPlate b{display:block;font-size:22px;line-height:1.1}
+.wlPlate span{display:block;font-size:14px;font-weight:600;color:var(--muted)}
+.thought{position:relative;z-index:2;width:100%;max-width:350px;min-height:128px;margin-bottom:42px;background:#fff;border:4px solid var(--ink);border-radius:64px;box-shadow:4px 5px 0 var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 22px;text-align:center}
+.thought::before,.thought::after{content:"";position:absolute;background:inherit;border:4px solid var(--ink);border-radius:50%}
+.thought::before{width:28px;height:28px;bottom:-30px;left:calc(50% - 24px)}
+.thought::after{width:15px;height:15px;bottom:-50px;left:calc(50% - 2px)}
+.thought .st{font-size:24px;font-weight:700;color:var(--muted)}
+.thought .w{font-weight:700;line-height:1.08;overflow-wrap:anywhere}
+.thought.done{background:#e3f6ea}
+.thought.done .st{color:var(--green)}
+.thought.show{animation:wlFlip .5s ease-out}
+.thought.ok{background:#bdeccd}
+.thought.no{background:#ffd9d5}
+@keyframes wlFlip{0%{transform:rotateY(90deg)}100%{transform:none}}
+.dots3 i{font-style:normal;animation:wlBlink 1.2s infinite}
+.dots3 i:nth-child(2){animation-delay:.2s}.dots3 i:nth-child(3){animation-delay:.4s}
+@keyframes wlBlink{0%,100%{opacity:.2}50%{opacity:1}}
+.wlTvBtn{margin-top:6px;font:700 14px var(--f);background:#fff3d1;color:var(--ink);border:2px solid var(--ink);border-radius:99px;padding:3px 12px;cursor:pointer}
+.wlMid{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:40px;gap:12px;text-align:center}
+.wlSign{font-size:120px;font-weight:700;line-height:1;color:#fff;-webkit-text-stroke:5px var(--ink);paint-order:stroke fill;text-shadow:0 6px 0 var(--ink);animation:pop .4s cubic-bezier(.2,1.5,.4,1) both}
+.wlSign.ok{color:#3fd27a}.wlSign.no{color:#ff5d5d}.wlSign.q{color:rgba(255,255,255,.35);-webkit-text-stroke:3px rgba(42,27,45,.6);text-shadow:none;animation:none}
+.wlMid p{margin:0;color:#fff;font-weight:700;font-size:22px;text-shadow:0 2px 0 var(--ink)}
+.wlMid .btn{font-size:22px;padding:.45em 1em;width:100%}
+.wlMid .btn.sec{background:#fff}
+.wlMid .btn.sm2{font-size:17px;padding:.35em .8em}
+.wlChain{position:absolute;right:0;top:76px;bottom:0;width:310px;padding:14px 16px;overflow:hidden}
+.wlChain h3{margin:0 0 8px;font-size:22px}
+.wlC{display:grid;grid-template-columns:30px 1fr 1fr;gap:6px;align-items:center;padding:4px 0;border-top:2px dashed #e4d6b4;font-size:16px;font-weight:600}
+.wlC > span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wlC .n{width:26px;height:26px;border-radius:50%;background:#ff8a8a;border:2px solid var(--ink);display:grid;place-items:center;font-size:13px;font-weight:700}
+.wlC.m{background:#d5f5df;border-radius:10px}
+.wlC.m .n{background:#3fd27a}
+.wlC.c .n{background:var(--gold)}
+.wlC.c > span:not(.n){color:var(--muted)}
+.wlC.s{grid-template-columns:auto 1fr;border-top:0}
+.wlC.s span{font-size:14px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.wlC.s b{background:var(--gold);border:2px solid var(--ink);border-radius:99px;padding:1px 10px;justify-self:start;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}
+.wlTvIn{position:absolute;inset:-110px -40px -30px -40px;z-index:7;display:grid;place-items:center;background:rgba(26,15,18,.72)}
+.wlTvCard{width:680px;padding:26px 30px}
+.wlTvWho{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.wlTvWho .bust{width:76px;height:76px}
+.wlTvWho b{display:block;font-size:32px;line-height:1.1}
+.wlTvWho span{font-size:22px;font-weight:600;color:#7a2230}
+#wlTvInp{width:100%;box-sizing:border-box;font:700 36px var(--f);color:var(--ink);background:#fff;padding:12px 18px;border:4px solid var(--ink);border-radius:16px}
+.wlErr{min-height:1.2em;margin:6px 0 0;color:#b3261e;font-weight:700}
+.wlTvBtns{display:flex;gap:12px;justify-content:flex-end;margin-top:12px}
+.wlTvBtns .btn{font-size:26px}
+.wlTvBtns .btn.sec{background:#fff}
+/* Team fertig und Auswertung */
+.wlEnd .duo{height:240px}
+.wlEnd .duo img{height:240px}
+.wlEnd h2{font-size:52px}
+.wlPath{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px;max-width:1040px;max-height:150px;overflow:hidden}
+.wlPath span{background:#fff;border:2px solid var(--ink);border-radius:99px;padding:2px 10px;font-weight:600;font-size:16px}
+.wlPath span i{font-style:normal;font-size:12px;font-weight:700;color:var(--muted)}
+.wlPath span.s{background:var(--gold);font-weight:700}
+.wlPath span.m{background:#3fd27a;font-weight:700}
+.wlPath em{font-style:normal;font-weight:700;color:var(--muted)}
+.wlFin{position:absolute;left:220px;right:20px;top:0;bottom:0;padding:24px 34px}
+.wlFin h2{margin:0 0 10px;font-size:40px;text-align:center}
+.wlFr{display:grid;grid-template-columns:48px 120px 1fr 170px;gap:14px;align-items:center;padding:10px 16px;margin-top:10px;background:var(--t);border:3px solid var(--ink);border-left:12px solid var(--c);border-radius:16px}
+.wlFr .n{width:44px;height:44px;border-radius:50%;background:var(--c);border:3px solid var(--ink);display:grid;place-items:center;font-weight:700;font-size:22px}
+.wlFr .duo2{display:flex}
+.wlFr .duo2 .bust{width:54px;height:54px;margin-right:-14px;border-width:2px}
+.wfw b{display:block;font-size:28px;line-height:1.1}
+.wfw small{display:block;font-size:16px;font-weight:600;color:var(--muted)}
+.wfr{font-size:28px;text-align:right}
+.wlFinActs{position:absolute;right:30px;bottom:24px}
+.wlTie{position:absolute;left:34px;bottom:34px;margin:0;font-size:22px;font-weight:700;max-width:620px}
+.wlFinActs .btn{font-size:28px}
+.rrow b.sm{font-size:20px}
+/* Spielauswahl mit vier Spielen */
+.games{grid-template-columns:repeat(4,minmax(0,300px));gap:18px}
+.games .gcard{padding:18px 14px 20px}
+.games .gcard svg{width:190px;height:165px}
+.games .gcard b{font-size:31px}
+.games .gcard span{font-size:17px!important}
+.games .gcard em{font-size:14px}
+/* Zwei Köpfe, ein Gedanke · Handy */
+.wlPr{text-align:center}
+.wlPr small{display:block;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.wlPr > span{display:block;margin-top:6px;font-weight:600;color:var(--muted)}
+.wlW{display:inline-block;background:#fff;border:3px solid var(--ink);border-radius:14px;box-shadow:0 3px 0 var(--ink);padding:4px 14px;font-size:22px;line-height:1.15;margin-top:6px;overflow-wrap:anywhere;max-width:100%}
+.wlW.st{background:var(--gold);font-size:30px}
+.wlPair{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.wlPair i{font-style:normal;font-size:26px;font-weight:700}
+.wlTabu{margin:-4px 4px 0;font-size:13px;line-height:1.35;color:#ffe8c4;text-align:center}
+.wlIn{display:grid;gap:10px;min-width:0}
+.wlIn > *,.wlForm,.wlRow{min-width:0}
+#wlHost{min-width:0}
+.wlQ{margin:0;font-size:19px;font-weight:700;text-align:center}
+.wlClaim{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wlCb{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:0 4px 0 var(--ink);font-family:var(--f);color:var(--ink);cursor:pointer}
+.wlCb .bust{width:62px;height:62px}
+.wlCb b{font-size:19px}
+.wlCb small{font-size:13px;font-weight:600;color:var(--muted)}
+.wlCb:disabled{opacity:.45;box-shadow:none;cursor:default}
+.wlLab{display:block;font-size:17px;font-weight:600;margin-bottom:6px}
+.wlRow{display:flex;gap:8px}
+#wlInp{flex:1;min-width:0;width:100%;box-sizing:border-box;font:700 22px var(--f);color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:14px;padding:10px 12px}
+#wlInp:disabled{opacity:.6}
+.wlSend{flex:none;font-size:20px;padding:.4em 1em}
+.wlIn .wlErr{min-height:0;margin:4px 0 0;font-size:15px}
+.wlStat{display:grid;gap:6px}
+.wlS{display:grid;grid-template-columns:36px 1fr auto;gap:8px;align-items:center;padding:4px 10px 4px 4px;background:#fff3d1;border:2px solid var(--ink);border-radius:99px}
+.wlS .bust{width:32px;height:32px;border-width:2px}
+.wlS span{font-size:14px;font-weight:600;color:var(--muted)}
+.wlS.ok{background:#d5f5df}
+.wlS.ok span{color:var(--green);font-weight:700}
+.wlRv{text-align:center}
+.wlRv.ok{background:#d5f5df}
+.wlRv.no{background:#ffe3df}
+.wlRvRow{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center}
+.wlRvRow > i{font-style:normal;font-size:40px;font-weight:700}
+.wlRvW{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0}
+.wlRvW .bust{width:56px;height:56px}
+.wlRvW b{font-size:20px;line-height:1.1;overflow-wrap:anywhere}
+.wlRv p{margin:10px 0 0;font-weight:700}
+.ckRow.wlRk{grid-template-columns:34px 1fr auto}
+.ckRow.wlRk b{font-size:17px;white-space:nowrap}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -795,6 +1007,7 @@ function setNetNote() {
 
 /* ---------- Spielauswahl ---------- */
 const ICONS = {
+  wl: `<svg viewBox="0 0 170 150"><path d="M52 44 Q60 18 88 22 Q110 8 126 28 Q150 28 150 52 Q160 72 140 82 Q132 100 108 94 Q92 106 74 96 Q50 104 42 84 Q20 76 28 58 Q30 40 52 44Z" fill="#fff" stroke="#2a1b2d" stroke-width="5" stroke-linejoin="round"/><circle cx="90" cy="54" r="17" fill="#ffd36b" stroke="#2a1b2d" stroke-width="4"/><rect x="82" y="70" width="16" height="11" rx="3" fill="#cfd5df" stroke="#2a1b2d" stroke-width="3"/><path d="M84 54 L90 48 L96 54" fill="none" stroke="#2a1b2d" stroke-width="3" stroke-linecap="round"/><circle cx="56" cy="108" r="6" fill="#fff" stroke="#2a1b2d" stroke-width="3"/><circle cx="118" cy="108" r="6" fill="#fff" stroke="#2a1b2d" stroke-width="3"/><circle cx="34" cy="126" r="20" fill="#f6cfb2" stroke="#2a1b2d" stroke-width="4"/><path d="M14 122 Q20 100 40 104 Q54 108 52 122 Q40 112 14 122Z" fill="#7a4e2c" stroke="#2a1b2d" stroke-width="3"/><circle cx="40" cy="128" r="2.8" fill="#2a1b2d"/><path d="M34 136 Q40 140 46 136" fill="none" stroke="#2a1b2d" stroke-width="2.5" stroke-linecap="round"/><circle cx="136" cy="126" r="20" fill="#e8b48d" stroke="#2a1b2d" stroke-width="4"/><path d="M116 122 Q118 102 136 104 Q156 104 156 122 Q140 112 116 122Z" fill="#ffc531" stroke="#2a1b2d" stroke-width="3"/><circle cx="130" cy="128" r="2.8" fill="#2a1b2d"/><path d="M124 136 Q130 140 136 136" fill="none" stroke="#2a1b2d" stroke-width="2.5" stroke-linecap="round"/></svg>`,
   cocktail: `<svg viewBox="0 0 170 150"><path d="M40 30 L130 30 L85 92 Z" fill="#ff8a5c" stroke="#2a1b2d" stroke-width="5" stroke-linejoin="round"/><path d="M52 44 L118 44 L85 88 Z" fill="#ffb07a"/><path d="M85 92 L85 132 M60 138 L110 138" stroke="#2a1b2d" stroke-width="6" stroke-linecap="round"/><path d="M106 34 L132 2" stroke="#2a1b2d" stroke-width="5" stroke-linecap="round"/><g transform="translate(134 4) rotate(-20)"><path d="M-26 0 Q0 -26 26 0 Z" fill="#ff6fb1" stroke="#2a1b2d" stroke-width="4" stroke-linejoin="round"/><path d="M-26 0 Q-14 -20 -6 -21 L0 0 Z M6 -21 Q14 -20 26 0 L0 0 Z" fill="#ffd36b"/></g><circle cx="58" cy="28" r="14" fill="#ffa62b" stroke="#2a1b2d" stroke-width="4"/><circle cx="58" cy="28" r="9" fill="#ffd27a"/></svg>`,
   ludo: `<svg viewBox="0 0 170 150"><circle cx="85" cy="75" r="66" fill="#fff3d1" stroke="#2a1b2d" stroke-width="5"/><path d="M85 75 L85 18 M85 75 L139 57 M85 75 L118 121 M85 75 L52 121 M85 75 L31 57" stroke="#ffd98c" stroke-width="16" stroke-linecap="round"/>
     <circle cx="85" cy="75" r="18" fill="#ffd23f" stroke="#2a1b2d" stroke-width="4"/><circle cx="85" cy="22" r="10" fill="#ff5d5d" stroke="#2a1b2d" stroke-width="3"/><circle cx="135" cy="58" r="10" fill="#3f8cff" stroke="#2a1b2d" stroke-width="3"/><circle cx="116" cy="118" r="10" fill="#2fc46a" stroke="#2a1b2d" stroke-width="3"/><circle cx="54" cy="118" r="10" fill="#ffc531" stroke="#2a1b2d" stroke-width="3"/><circle cx="35" cy="58" r="10" fill="#a66bff" stroke="#2a1b2d" stroke-width="3"/>
@@ -807,6 +1020,7 @@ const ICONS = {
 const GAMES = [
   { id:'ludo', title:'Mensch ärgere dich', desc:'Globus-Ludo mit der Crew: Das Brett läuft auf dem Fernseher, gewürfelt und gezogen wird am Handy.', meta:'2 Figuren pro Team · ca. 15–25 Min', make: () => Ludo() },
   { id:'cocktail', title:'Hugos Cocktail-Bar', desc:'Hugos Freunde kommen an die Bar. Mixt geheim am Handy den Cocktail, der zu ihrem Motto passt.', meta:'1–12 Gäste · ca. 3 Min pro Gast', make: () => Cocktail() },
+  { id:'wl', title:'Zwei Köpfe, ein Gedanke', desc:'Startwort, dann tippen beide geheim ein Wort. Ungleich? Findet ein Wort, das beide verbindet.', meta:'Bis 15 Runden pro Team · ca. 4 Min pro Team', make: () => Gedanke() },
   { id:'cookies', title:'Hugos Plätzchen-Tabletts', desc:'Vier Tabletts, wenig bis viel Plätzchen. Wählt ein Tablett, aber nicht dasselbe wie die anderen!', meta:'7 Runden · ca. 8 Min', make: () => Cookies() },
 ];
 function renderMenu() {
@@ -850,13 +1064,14 @@ async function introCard(g, rules, hugoLine, buttons) {
 function teamTotals(pts, roster) {
   return T.teams.map(tm => { const mem = tm.filter(ch => ch && roster.has(ch)); if (!mem.length) return 0; return Math.round(mem.reduce((s, ch) => s + (pts[ch] || 0), 0) / mem.length * 2); });
 }
-function finishGame(g, scores) {
+function finishGame(g, scores, opt) {
+  opt = opt || {};
   g.alive = false;
-  const teams = realTeams(), max = Math.max(...teams.map(i => scores[i]));
-  const top = teams.filter(i => scores[i] === max), winner = pick(top);
+  const teams = realTeams(), dir = opt.low ? -1 : 1, max = Math.max(...teams.map(i => dir * scores[i]));
+  const top = teams.filter(i => dir * scores[i] === max), winner = pick(top);
   T.wins[winner]++; save();
-  const ranking = teams.slice().sort((a, b) => scores[b] - scores[a] || (a === winner ? -1 : b === winner ? 1 : 0));
-  T.result = { game: g.def.title, scores, ranking, winner, tie: top.length > 1, chars: tchars(winner) };
+  const ranking = teams.slice().sort((a, b) => dir * (scores[b] - scores[a]) || (a === winner ? -1 : b === winner ? 1 : 0));
+  T.result = { game: g.def.title, scores, ranking, winner, tie: top.length > 1, chars: tchars(winner), disp: opt.disp || null, bar: opt.bar || null };
   T.screen = 'result'; T.game = null; $('#bAbort').hidden = true;
   renderResult(); sync();
 }
@@ -867,7 +1082,7 @@ function renderResult() {
     <div class="winner"><svg class="crown" viewBox="0 0 120 80"><path d="M10 70 L18 20 L42 46 L60 8 L78 46 L102 20 L110 70 Z" fill="#ffd36b" stroke="#2a1b2d" stroke-width="5" stroke-linejoin="round"/><circle cx="60" cy="50" r="7" fill="#ff5d5d" stroke="#2a1b2d" stroke-width="3"/></svg>
       <div class="duo">${R.chars.map(ch => `<img src="${ART.full[ch]}" alt="${esc(ch)}">`).join('')}</div>
       <h2>Team ${tc.name} gewinnt!</h2><p>${esc(duoName(R.chars))} ${R.chars.length > 1 ? 'entscheiden' : 'entscheidet'}, wer in die Buddy-Box geht.</p></div>
-    <div class="card rank"><h3>Endstand: ${esc(R.game)}</h3>${R.ranking.map((i, n) => `<div class="rrow" style="--c:${TEAMC[i].c};--t:${TEAMC[i].t}"><span class="n">${n + 1}</span><span class="duo2">${tchars(i).map(ch => bust(ch, TEAMC[i])).join('')}</span><div class="bar"><i data-w="${Math.max(3, Math.round(Math.max(0, R.scores[i]) / max * 100))}"></i></div><b>${R.scores[i]}</b></div>`).join('')}
+    <div class="card rank"><h3>Endstand: ${esc(R.game)}</h3>${R.ranking.map((i, n) => `<div class="rrow" style="--c:${TEAMC[i].c};--t:${TEAMC[i].t}"><span class="n">${n + 1}</span><span class="duo2">${tchars(i).map(ch => bust(ch, TEAMC[i])).join('')}</span><div class="bar"><i data-w="${R.bar ? Math.max(3, R.bar[i]) : Math.max(3, Math.round(Math.max(0, R.scores[i]) / max * 100))}"></i></div><b class="${R.disp ? 'sm' : ''}">${R.disp ? esc(R.disp[i]) : R.scores[i]}</b></div>`).join('')}
       <div class="resActs"><button class="btn" id="back">Neue Teams fürs nächste Spiel</button></div></div>
   </section>`;
   requestAnimationFrame(() => requestAnimationFrame(() => document.querySelectorAll('.rrow .bar i').forEach(el => el.style.width = el.dataset.w + '%')));
@@ -1362,7 +1577,6 @@ function Ludo() {
    SPIEL: HUGOS COCKTAIL-BAR · Daten
    ================================================================= */
 const CK_TAGS = ['herbstlich','winterlich','sommerlich','tropisch','fruchtig','süß','sauer','bitter','scharf','cremig','edel','trashig','stark','erfrischend','romantisch','gefährlich','gemütlich','gesund','kindisch','nostalgisch'];
-const CK_CATS = ['Spirituosen', 'Liköre', 'Säfte', 'Sirups & Süßes', 'Gewürze & Kräuter', 'Fun & Trash', 'Deko', 'Glas'];
 // Zutat: id, Name, Kurzname (für Cocktailnamen), Emoji, Farbe, Kategorie, gewichtete Tags, Eigenschaften
 // Eigenschaften: layer = schichtet sich unten ab · foam:Farbe = Haube · fizz = Kohlensäure · ice = Eis · glitter = Funkeln
 //                dairy = Milchprodukt · acid = Säure · w = Gewicht für die Farbmischung
@@ -1471,72 +1685,95 @@ const GLASS = [
 const ING_BY = Object.fromEntries(ING.map(i => [i.id, i]));
 const DECO_BY = Object.fromEntries(DECO.map(i => [i.id, i]));
 const GLASS_BY = Object.fromEntries(GLASS.map(i => [i.id, i]));
+// Geführtes Mixen: pro Schritt genau eine Sache (k = Zutat-Kategorie)
+const CK_STEPS = [
+  { n: 'Glas', q: 'Worin wird serviert?', e: '🥂', list: () => GLASS },
+  { n: 'Basis', q: 'Was ist die Basis?', e: '🥃', k: 0 },
+  { n: 'Likör', q: 'Welcher Likör kommt dazu?', e: '🍯', k: 1 },
+  { n: 'Saft', q: 'Welcher Saft oder welche Limo?', e: '🧃', k: 2 },
+  { n: 'Süßes', q: 'Was Süßes oder Cremiges?', e: '🍬', k: 3 },
+  { n: 'Gewürz', q: 'Welches Gewürz oder Kraut?', e: '🌿', k: 4 },
+  { n: 'Fun & Trash', q: 'Jetzt was Verrücktes!', e: '🤪', k: 5 },
+  { n: 'Deko', q: 'Welche Deko kommt drauf?', e: '🎀', list: () => DECO },
+];
+CK_STEPS.forEach(s => { if (s.k != null) s.list = () => ING.filter(i => i.k === s.k); });
+const ckItem = id => ING_BY[id] || DECO_BY[id] || GLASS_BY[id] || null;
 
 const CK_CHAR = {
   // hi/lo = Anteil am bestmöglichen Cocktail für diesen Gast, ab dem er begeistert bzw. zufrieden ist
-  streng:     { label: 'Streng', icon: '🧐', mul: .85, add: -2, hi: .68, lo: .33 },
-  begeistert: { label: 'Leicht zu begeistern', icon: '🤩', mul: 1.2, add: 4, hi: .42, lo: .15 },
-  snob:       { label: 'Snob', icon: '🎩', mul: 1, add: 0, hi: .62, lo: .32 },
-  chaot:      { label: 'Chaot', icon: '🌀', mul: 1, add: 0, hi: .5, lo: .22 },
+  streng:     { label: 'Streng', icon: '🧐', mul: .85, add: -2, hi: .78, lo: .42 },
+  begeistert: { label: 'Leicht zu begeistern', icon: '🤩', mul: 1.2, add: 4, hi: .68, lo: .25 },
+  snob:       { label: 'Snob', icon: '🎩', mul: 1, add: 0, hi: .74, lo: .40 },
+  chaot:      { label: 'Chaot', icon: '🌀', mul: 1, add: 0, hi: .68, lo: .32 },
 };
-// Hugos Freunde. like/dislike: { k:'i' Zutat-ID | 't' Tag, v, txt }
+// Hugos Freunde. sec = mögliche Geheimtipps [Rätsel, gültige IDs …], pro Spiel wird einer gezogen
+// dislike: { k:'i' Zutat-ID | 't' Tag, v, txt }
 const GUESTS = [
   { id: 'willi', n: 'Wichtel Willi', intro: 'Mein Kumpel aus der Wichtelwerkstatt!', motto: 'Was Herbstliches, bitte!', mw: 'Herbstlaub', mn: 'Herbst', t: { herbstlich: 3, gemütlich: 2, fruchtig: 1 },
-    like: { k: 'i', v: 'ahorn', txt: '…mit Ahornsirup wär’s ein Traum!' }, dislike: { k: 'i', v: 'gin', txt: '…aber bitte ohne Gin!' }, ch: 'begeistert',
+    sec: [['Was Klebriges, das aus einem Baum läuft.', 'ahorn'], ['Was Dickes, Oranges, das sonst vor der Haustür grinst.', 'kuerbis'], ['Was Eva im Paradies nicht liegen lassen konnte.', 'apfel']], dislike: { k: 'i', v: 'gin', txt: 'Bloß kein Gin!' }, ch: 'begeistert',
     av: { skin: '#f6cfb2', face: 'round', hair: 'short', hc: '#d9772b', hat: 'zipfel', hatc: '#2f8a3e', ears: 'elf', nose: 'button', acc: ['blush'], shirt: '#3fae55' } },
   { id: 'frostine', n: 'Tante Frostine', intro: 'Meine strenge Tante aus dem Eispalast.', motto: 'Erinnert mich an Oma!', mw: 'Omas', mn: 'Oma-Cocktail', t: { nostalgisch: 3, gemütlich: 2, cremig: 1, süß: 1 },
-    like: { k: 'i', v: 'eierlikoer', txt: '…Eierlikör wäre herrlich.' }, dislike: { k: 't', v: 'scharf', txt: '…und bloß nichts Scharfes!' }, ch: 'streng',
+    sec: [['Was Gelbes, Dickflüssiges aus Omas Vitrine.', 'eierlikoer'], ['Schmeckt wie die Bonbons aus Opas Jackentasche.', 'karamell'], ['Worin Oma ihre Marmelade aufbewahrt.', 'einmach']], dislike: { k: 't', v: 'scharf', txt: 'Bloß nichts Scharfes!' }, ch: 'streng',
     av: { skin: '#f3e3ee', face: 'oval', hair: 'bun', hc: '#f4f6fb', hat: 'diadem', hatc: '#9fd8ff', ears: 'round', nose: 'normal', acc: ['glasses', 'earrings'], shirt: '#9fc9ef' } },
   { id: 'rudi', n: 'Rentier Rudi', intro: 'Rudi ist gerade aus dem Urlaub zurück!', motto: 'Tropischer Urlaub, ich brauch Sonne!', mw: 'Palmen', mn: 'Urlaub', t: { tropisch: 3, sommerlich: 2, fruchtig: 2 },
-    like: { k: 'i', v: 'kokos', txt: '…mit Kokos, bitte!' }, dislike: { k: 't', v: 'bitter', txt: '…aber nichts Bitteres!' }, ch: 'chaot',
+    sec: [['Was man erst mit dem Hammer knacken muss.', 'kokos', 'kokosnuss'], ['Was mit Krone, aber ohne Königreich.', 'ananas'], ['Was im Glas steckt und bei Regen nichts nützt.', 'schirm']], dislike: { k: 't', v: 'bitter', txt: 'Nichts Bitteres!' }, ch: 'chaot',
     av: { skin: '#a8703f', face: 'oval', hair: 'none', hc: '#6b4226', hat: 'geweih', hatc: '#8a5a2b', ears: 'round', nose: 'red', acc: ['shades'], shirt: '#ff7a3d', special: 'reindeer' } },
   { id: 'baron', n: 'Baron von Lebkuchen', intro: 'Sehr vornehm, sehr anspruchsvoll.', motto: 'Elegant wie James Bond.', mw: 'Agenten', mn: 'Agenten-Abend', t: { edel: 3, stark: 2, erfrischend: 1 },
-    like: { k: 'i', v: 'wodka', txt: '…mit Wodka, versteht sich.' }, dislike: { k: 't', v: 'kindisch', txt: '…und nichts Kindisches!' }, ch: 'snob',
+    sec: [['Was Klares aus Russland, das man eiskalt trinkt.', 'wodka'], ['Ein Glas, so spitz wie ein Dreieck. Mit Stiel.', 'martini'], ['Was Grünes, Rundes, das gern im Glas badet.', 'olive']], dislike: { k: 't', v: 'kindisch', txt: 'Nichts Kindisches!' }, ch: 'snob',
     av: { skin: '#c98a4b', face: 'wide', hair: 'none', hc: '#3a2416', hat: 'zylinder', hatc: '#24202a', ears: 'round', nose: 'normal', stache: '#fff6e6', acc: ['monocle', 'bow'], shirt: '#2b2b38', special: 'ginger' } },
   { id: 'gerda', n: 'Gerda Glühwein', intro: 'Sie hat den besten Stand auf dem Weihnachtsmarkt.', motto: 'Weihnachtsmarkt-Feeling!', mw: 'Weihnachtsmarkt', mn: 'Weihnachtsmarkt', t: { winterlich: 3, gemütlich: 2, süß: 1 },
-    like: { k: 'i', v: 'zimt', txt: '…mit ganz viel Zimt!' }, dislike: { k: 'i', v: 'tonic', txt: '…aber kein Tonic!' }, ch: 'begeistert',
+    sec: [['Was von einer Baumrinde kommt und nach Advent duftet.', 'zimt', 'zimtstange'], ['Was es auf dem Weihnachtsmarkt nur mit Tassenpfand gibt.', 'gluehwein'], ['Was nach den Herzen schmeckt, die man sich um den Hals hängt.', 'lebkuchen']], dislike: { k: 'i', v: 'tonic', txt: 'Kein Tonic!' }, ch: 'begeistert',
     av: { skin: '#f7d2b8', face: 'round', hair: 'curly', hc: '#c4472d', hat: 'muetze', hatc: '#d92f3c', ears: 'round', nose: 'button', acc: ['scarf', 'blush'], shirt: '#2f8a3e' } },
   { id: 'siggi', n: 'Schneemann Siggi', intro: 'Siggi schmilzt gerade vor Liebeskummer.', motto: 'Liebeskummer … ich brauch Trost.', mw: 'Herzschmerz', mn: 'Liebeskummer', t: { romantisch: 3, süß: 2, cremig: 1 },
-    like: { k: 'i', v: 'erdbeer', txt: '…Erdbeere tröstet mich immer.' }, dislike: { k: 't', v: 'sauer', txt: '…und bitte nichts Saures!' }, ch: 'streng',
+    sec: [['Was Rotes mit kleinen Pünktchen drauf.', 'erdbeer'], ['Was Lilanes, das in Omas Wäscheschrank duftet.', 'lavendel'], ['Was so flauschig ist wie eine Babywange.', 'pfirsich']], dislike: { k: 't', v: 'sauer', txt: 'Bitte nichts Saures!' }, ch: 'streng',
     av: { skin: '#ffffff', face: 'round', hair: 'none', hc: '#333', hat: 'muetze', hatc: '#3f8cff', ears: 'none', nose: 'carrot', acc: ['scarf'], shirt: '#ffffff', special: 'snowman' } },
   { id: 'elvira', n: 'Elfe Elvira', intro: 'Sie hat heute Frühschicht in der Werkstatt.', motto: 'Montagmorgen. Macht mich wach!', mw: 'Montags', mn: 'Montagmorgen', t: { stark: 2, bitter: 2, erfrischend: 2 },
-    like: { k: 'i', v: 'espresso', txt: '…mit Espresso!' }, dislike: { k: 't', v: 'süß', txt: '…aber nicht so süß!' }, ch: 'streng',
+    sec: [['Was Italiener im Stehen in einem Schluck trinken.', 'espresso'], ['Was Grünes, das früher Maler verrückt gemacht hat.', 'absinth'], ['Was Bitteres mit Bläschen, das sonst immer den Gin begleitet.', 'tonic']], dislike: { k: 't', v: 'süß', txt: 'Nicht so süß!' }, ch: 'streng',
     av: { skin: '#f6d6c0', face: 'oval', hair: 'long', hc: '#f1cf6a', hat: 'none', ears: 'elf', nose: 'normal', acc: ['glasses'], shirt: '#a66bff', tired: true } },
   { id: 'kalle', n: 'Knecht Kalle', intro: 'Kalle hat heute Geburtstag. Hohoho!', motto: 'Ich hab heute Geburtstag!', mw: 'Geburtstags', mn: 'Geburtstag', t: { kindisch: 2, süß: 2, fruchtig: 1, romantisch: 1 },
-    like: { k: 'i', v: 'sekt', txt: '…mit Sekt zum Anstoßen!' }, dislike: { k: 'i', v: 'senf', txt: '…aber bitte keinen Senf!' }, ch: 'begeistert',
+    sec: [['Was beim Anstoßen „Plopp“ macht.', 'sekt'], ['Was Buntes, das in einer Tüte wohnt und Ohren hat.', 'gummi', 'gummispiess'], ['Was rosa Wolkiges von der Kirmes.', 'zuckerwatte']], dislike: { k: 'i', v: 'senf', txt: 'Bitte keinen Senf!' }, ch: 'begeistert',
     av: { skin: '#d9a77c', face: 'wide', hair: 'short', hc: '#5a3a22', hat: 'partyhut', hatc: '#ff5d5d', ears: 'round', nose: 'button', beard: '#5a3a22', acc: [], shirt: '#8a5a33' } },
   { id: 'kurt', n: 'Krampus Kurt', intro: 'Mein wilder Cousin aus den Bergen.', motto: 'Was richtig Gefährliches!', mw: 'Teufels', mn: 'Gefahr', t: { gefährlich: 3, scharf: 2, stark: 2 },
-    like: { k: 'i', v: 'chili', txt: '…mit Chili, je mehr, desto besser!' }, dislike: { k: 't', v: 'gesund', txt: '…und bloß nichts Gesundes!' }, ch: 'chaot',
+    sec: [['Was Kleines, Rotes, Spitzes, das richtig brennt.', 'chili', 'chilischote'], ['Was Grünes, das früher Maler verrückt gemacht hat.', 'absinth'], ['Was man mit Salz und Zitrone runterkippt.', 'tequila']], dislike: { k: 't', v: 'gesund', txt: 'Bloß nichts Gesundes!' }, ch: 'chaot',
     av: { skin: '#b5523b', face: 'wide', hair: 'spiky', hc: '#24202a', hat: 'hoerner', hatc: '#efe6d2', ears: 'elf', nose: 'normal', beard: '#24202a', acc: [], shirt: '#3a2a22', special: 'krampus' } },
   { id: 'lametta', n: 'Oma Lametta', intro: 'Sie war gestern auf der Weihnachtsfeier …', motto: 'Katerfrühstück. Hilfe.', mw: 'Kater', mn: 'Katerfrühstück', t: { gesund: 2, sauer: 2, scharf: 1, erfrischend: 1 },
-    like: { k: 'i', v: 'tomate', txt: '…Tomatensaft rettet mich.' }, dislike: { k: 't', v: 'stark', txt: '…aber NICHTS Starkes!' }, ch: 'streng',
+    sec: [['Was man nur im Flugzeug plötzlich bestellt.', 'tomate'], ['Was im Glas übrig bleibt, wenn die Gurken weg sind.', 'gurkenwasser'], ['Eine knubbelige Wurzel, die im Hals kratzt.', 'ingwer', 'ginger']], dislike: { k: 't', v: 'stark', txt: 'NICHTS Starkes!' }, ch: 'streng',
     av: { skin: '#f4d0bb', face: 'round', hair: 'bun', hc: '#c9c9d1', hat: 'kopftuch', hatc: '#a66bff', ears: 'round', nose: 'normal', acc: ['glasses'], shirt: '#e88aa8', tired: true } },
   { id: 'punsch', n: 'Prinz Punsch', intro: 'Er hat heute Abend ein Date.', motto: 'Erstes Date heute Abend!', mw: 'Herzklopf', mn: 'erstes Date', t: { romantisch: 3, edel: 1, fruchtig: 1 },
-    like: { k: 'i', v: 'sekt', txt: '…mit Sekt, das wirkt edel.' }, dislike: { k: 'i', v: 'gurkenwasser', txt: '…aber bitte kein Gurkenwasser!' }, ch: 'snob',
+    sec: [['Was man beim Candle-Light-Dinner aus bauchigen Gläsern trinkt.', 'rotwein'], ['Ein Glas, so schlank wie eine Tulpe.', 'flute'], ['Was sprüht und funkelt wie Schmetterlinge im Bauch.', 'wunderkerze']], dislike: { k: 'i', v: 'gurkenwasser', txt: 'Kein Gurkenwasser!' }, ch: 'snob',
     av: { skin: '#8d5a3b', face: 'oval', hair: 'short', hc: '#1d1520', hat: 'krone', hatc: '#ffd36b', ears: 'round', nose: 'normal', acc: ['bow'], shirt: '#7a2a8a' } },
   { id: 'toni', n: 'Trainer Toni Tannenzweig', intro: 'Er trainiert die Wichtel-Fußballmannschaft.', motto: 'Fußballabend mit den Jungs!', mw: 'Stadion', mn: 'Fußballabend', t: { trashig: 2, erfrischend: 2, gemütlich: 1 },
-    like: { k: 'i', v: 'bier', txt: '…mit Bier natürlich!' }, dislike: { k: 't', v: 'edel', txt: '…und nichts Schickimicki!' }, ch: 'begeistert',
+    sec: [['Was im Stadion im Plastikbecher verkauft wird.', 'bier'], ['Was man auf die Stadionwurst kleckert.', 'senf', 'ketchup'], ['Was man auf dem Oktoberfest zu zehnt auf einmal schleppt.', 'bierkrug']], dislike: { k: 't', v: 'edel', txt: 'Nichts Schickimicki!' }, ch: 'begeistert',
     av: { skin: '#e1b48d', face: 'wide', hair: 'none', hc: '#5a3a22', hat: 'schirm', hatc: '#2fc46a', ears: 'round', nose: 'normal', stache: '#5a3a22', acc: [], shirt: '#2fc46a' } },
   { id: 'flocke', n: 'Fee Flocke', intro: 'Sie macht den ganzen Schnee hier oben.', motto: 'Winterwunderland!', mw: 'Schneeflocken', mn: 'Winterwunderland', t: { winterlich: 3, cremig: 1, romantisch: 1 },
-    like: { k: 'i', v: 'sahne', txt: '…mit einer Sahnehaube wie Schnee!' }, dislike: { k: 't', v: 'tropisch', txt: '…aber nichts Tropisches!' }, ch: 'snob',
+    sec: [['Was Weißes, Weiches, das obendrauf liegt wie Neuschnee.', 'sahne'], ['Was Feuriges, das nach Weihnachten schmeckt.', 'zimtlikoer'], ['Was glänzt wie Sternenstaub.', 'glitzer']], dislike: { k: 't', v: 'tropisch', txt: 'Nichts Tropisches!' }, ch: 'snob',
     av: { skin: '#6e4630', face: 'oval', hair: 'curly', hc: '#eef3ff', hat: 'diadem', hatc: '#bfe3f5', ears: 'round', nose: 'normal', acc: ['earrings', 'blush'], shirt: '#bfe3f5' } },
   { id: 'nussknacker', n: 'Opa Nussknacker', intro: 'Der älteste Freund, den ich habe.', motto: 'Hüttengaudi auf der Alm!', mw: 'Hütten', mn: 'Hüttenabend', t: { gemütlich: 3, stark: 1, nostalgisch: 1, winterlich: 1 },
-    like: { k: 'i', v: 'kraeuter', txt: '…mit einem ordentlichen Kräuterlikör!' }, dislike: { k: 'i', v: 'energy', txt: '…aber keinen Energydrink!' }, ch: 'streng',
+    sec: [['Was der Förster nach der Jagd aus dem Flachmann trinkt.', 'kraeuter'], ['Was Rauchiges, Goldenes aus Schottland.', 'whisky'], ['Was Klebriges, das Bären am liebsten naschen.', 'honig']], dislike: { k: 'i', v: 'energy', txt: 'Keinen Energydrink!' }, ch: 'streng',
     av: { skin: '#f2c9a5', face: 'wide', hair: 'none', hc: '#fff', hat: 'zylinder', hatc: '#c9262f', ears: 'round', nose: 'normal', beard: '#fbf7ee', stache: '#fbf7ee', acc: [], shirt: '#c9262f' } },
   { id: 'zappel', n: 'Zwerg Zappel', intro: 'Er ist erst 312 Jahre alt.', motto: 'Kindergeburtstag!', mw: 'Zuckerschock', mn: 'Kindergeburtstag', t: { kindisch: 3, süß: 2 },
-    like: { k: 'i', v: 'gummi', txt: '…mit Gummibärchen!!' }, dislike: { k: 't', v: 'bitter', txt: '…aber nix Bitteres, bäh!' }, ch: 'chaot',
+    sec: [['Was Buntes, das in einer Tüte wohnt und Ohren hat.', 'gummi', 'gummispiess'], ['Was auf der Zunge knistert und kitzelt.', 'brause'], ['Was es im Kino in riesigen Eimern gibt.', 'popcorn']], dislike: { k: 't', v: 'bitter', txt: 'Nix Bitteres, bäh!' }, ch: 'chaot',
     av: { skin: '#f7d6bf', face: 'round', hair: 'spiky', hc: '#3f8cff', hat: 'zipfel', hatc: '#ffc531', ears: 'elf', nose: 'button', acc: ['blush'], shirt: '#ff7a3d' } },
   { id: 'mistel', n: 'Madame Mistelzweig', intro: 'Sie kommt direkt aus dem Spa.', motto: 'Wellness-Tag, ganz gesund.', mw: 'Detox', mn: 'Wellness-Tag', t: { gesund: 3, erfrischend: 2 },
-    like: { k: 'i', v: 'gurke', txt: '…mit Gurke, für den Teint.' }, dislike: { k: 't', v: 'süß', txt: '…aber keinen Zucker!' }, ch: 'snob',
+    sec: [['Was man sich bei der Gesichtsmaske auf die Augen legt.', 'gurke'], ['Was nach Zahnpasta schmeckt, aber im Mojito super ist.', 'minze'], ['Ein Zweig, der sonst am Lammbraten hängt.', 'rosmarin']], dislike: { k: 't', v: 'süß', txt: 'Kein Zucker!' }, ch: 'snob',
     av: { skin: '#c99064', face: 'oval', hair: 'long', hc: '#24202a', hat: 'turban', hatc: '#ffffff', ears: 'round', nose: 'normal', acc: ['earrings'], shirt: '#9be3c5' } },
   { id: 'sven', n: 'Sommer-Sven', intro: 'Mein Cousin aus dem Süden. Er friert immer.', motto: 'Sommer am See!', mw: 'Badesee', mn: 'Sommer', t: { sommerlich: 3, erfrischend: 2, fruchtig: 1 },
-    like: { k: 'i', v: 'minze', txt: '…mit frischer Minze!' }, dislike: { k: 'i', v: 'gluehwein', txt: '…aber keinen Glühwein!' }, ch: 'begeistert',
+    sec: [['Was nach Zahnpasta schmeckt, aber im Mojito super ist.', 'minze'], ['Was im Glas steckt und bei Regen nichts nützt.', 'schirm'], ['Was Rundes, Oranges, das am Glasrand klemmt.', 'orangenscheibe']], dislike: { k: 'i', v: 'gluehwein', txt: 'Keinen Glühwein!' }, ch: 'begeistert',
     av: { skin: '#d8a274', face: 'round', hair: 'messy', hc: '#f1cf6a', hat: 'sonnenhut', hatc: '#e9c46a', ears: 'round', nose: 'button', acc: ['shades'], shirt: '#2ec4d6' } },
   { id: 'susi', n: 'Silvester-Susi', intro: 'Bei ihr knallt es immer.', motto: 'Silvesterparty! Es muss knallen!', mw: 'Raketen', mn: 'Silvester', t: { gefährlich: 1, edel: 1, kindisch: 1, romantisch: 1, stark: 1 },
-    like: { k: 'i', v: 'glitzer', txt: '…mit Glitzer!' }, dislike: { k: 't', v: 'gesund', txt: '…und nichts Gesundes!' }, ch: 'chaot',
+    sec: [['Was glänzt wie Sternenstaub.', 'glitzer'], ['Was zischt und sprüht wie eine kleine Rakete.', 'wunderkerze'], ['Was um Mitternacht „Plopp“ macht.', 'sekt']], dislike: { k: 't', v: 'gesund', txt: 'Nichts Gesundes!' }, ch: 'chaot',
     av: { skin: '#7a4a32', face: 'round', hair: 'curly', hc: '#ff6fb1', hat: 'partyhut', hatc: '#ffd36b', ears: 'round', nose: 'button', acc: ['earrings', 'blush'], shirt: '#24202a' } },
 ];
 const GUESTS_BY = Object.fromEntries(GUESTS.map(g => [g.id, g]));
+// Gast mit gezogenem Geheimtipp (si = Index in sec)
+const ckGuestCache = {};
+function ckGuest(id, si) {
+  const b = GUESTS_BY[id]; if (!b) return null;
+  si = ((si | 0) % b.sec.length + b.sec.length) % b.sec.length;
+  const key = id + '|' + si;
+  if (!ckGuestCache[key]) { const [hint, ...ids] = b.sec[si]; ckGuestCache[key] = Object.assign({}, b, { si, like: { hint, ids } }); }
+  return ckGuestCache[key];
+}
 
 // Kommentarvorlagen: {z} = konkrete Zutat, {m} = Motto, {M} = Motto in Großbuchstaben, {g} = Glas
 const CK_COMMENTS = {
@@ -1553,7 +1790,7 @@ const CK_COMMENTS = {
   snob: {
     top: ['Exquisit. {z} hat Niveau.', 'Endlich ein Getränk meines Standes.', 'Formidabel! Fast so gut wie in Monaco.', 'Sehr distinguiert. Ich nehme noch einen.'],
     ok: ['Ganz passabel für eine Hütte.', '{z} ist etwas … gewöhnlich.', 'Nun ja. Man hat schon Edleres getrunken.', 'Im {g}? Interessante Wahl.'],
-    bad: ['{z}?! Ich bitte Sie!', 'Das serviert man nicht einmal meinem Butler.', 'Wie vulgär. Bringen Sie mir Wasser.', 'Mein Monokel ist gerade vor Entsetzen beschlagen.'],
+    bad: ['{z}?! Ich bitte Sie!', 'Das serviert man nicht einmal meinem Butler.', 'Wie vulgär. Bringen Sie mir Wasser.', 'Ich bin entsetzt. Zutiefst entsetzt.'],
   },
   chaot: {
     top: ['JAAA! {z}! Wer kommt auf sowas?! Genial!', 'Das explodiert in meinem Mund! Im guten Sinne!', 'Keine Ahnung, was das ist, aber ich will mehr!', 'Chaos im Glas! Ich liebe es!'],
@@ -1562,7 +1799,7 @@ const CK_COMMENTS = {
   },
   dislike: ['Ich hatte doch gesagt: ohne {z}!', '{z}! Ausgerechnet {z}!', 'Hat hier jemand zugehört? {z}!'],
   conflict: ['{z} und {z2}? Das ist ja geronnen!', '{z} mit {z2} … mein Magen macht Saltos.'],
-  like: ['Mit {z}! Ihr habt zugehört!', '{z}! Ihr kennt mich einfach!'],
+  like: ['Mit {z}! Ihr habt mein Rätsel geknackt!', '{z}! Genau das meinte ich!', 'Ihr habt meinen Geheimtipp erraten: {z}!'],
 };
 // Widersprüche: Milchprodukt + Säure, dazu einzelne Paare
 const CK_CONFLICTS = [['senf', 'zuckerwatte'], ['milch', 'cola'], ['tabasco', 'eierlikoer'], ['gurkenwasser', 'sahne'], ['energy', 'eierlikoer'], ['ketchup', 'sekt'], ['senf', 'vanilleeis'], ['tomate', 'schoko'], ['kraeuter', 'zuckerwatte']];
@@ -1768,15 +2005,27 @@ function ckProfile(mix) {
   if (GLASS_BY[mix.glass]) add(GLASS_BY[mix.glass].t);
   return P;
 }
-const ckItemName = id => (ING_BY[id] || DECO_BY[id] || GLASS_BY[id] || { n: id }).n;
-// Bestmöglicher Cocktail für einen Gast (gierig gewählt), als Maßstab für die Reaktion
+const ckItemName = id => (ckItem(id) || { n: id }).n;
+// Pro Schritt: gewählte ID → Mix-Objekt (Glas, 6 Zutaten, Deko)
+const ckPicksToMix = p => ({ glass: p[0] || null, ings: p.slice(1, 7).filter(Boolean), deco: p[7] || null });
+// Bestmöglicher Cocktail für einen Gast (je Schritt eine Sache, per Bergsteigen optimiert), als Maßstab für die Reaktion
 const ckIdealCache = {};
 function ckIdeal(gu) {
-  if (ckIdealCache[gu.id]) return ckIdealCache[gu.id];
-  const byC = L => L.slice().sort((a, b) => ckContrib(b, gu) - ckContrib(a, gu));
-  let best = 1;
-  for (let n = 3; n <= 6; n++) { const m = { glass: byC(GLASS)[0].id, deco: byC(DECO)[0].id, ings: byC(ING).slice(0, n).map(i => i.id) }; best = Math.max(best, ckEval(m, gu, () => .5, true).score); }
-  return (ckIdealCache[gu.id] = best);
+  const key = gu.id + '|' + (gu.like ? gu.like.ids.join(',') : '');
+  if (ckIdealCache[key]) return ckIdealCache[key];
+  const slots = CK_STEPS.map(s => s.list().map(i => i.id));
+  const sc = p => ckEval(ckPicksToMix(p), gu, () => .5, true).score;
+  let p = slots.map(L => L.slice().sort((a, b) => ckContrib(ckItem(b), gu) - ckContrib(ckItem(a), gu))[0]);
+  let best = sc(p), better = true;
+  while (better) {
+    better = false;
+    for (let s = 0; s < slots.length; s++) for (const id of slots[s]) {
+      if (id === p[s]) continue;
+      const q = p.slice(); q[s] = id; const v = sc(q);
+      if (v > best + 1e-9) { best = v; p = q; better = true; }
+    }
+  }
+  return (ckIdealCache[key] = Math.max(1, best));
 }
 function ckEval(mix, gu, rnd, raw) {
   rnd = rnd || Math.random;
@@ -1785,9 +2034,9 @@ function ckEval(mix, gu, rnd, raw) {
   let match = 0; for (const t in gu.t) match += gu.t[t] * (P[t] || 0);
   const off = ings.filter(i => !ckContrib(i, gu)).length;
   let score = match - off * 1.5;
-  const hitL = gu.like.k === 'i' ? has(gu.like.v) : (P[gu.like.v] || 0) >= 2;
-  const hitD = gu.dislike.k === 'i' ? has(gu.dislike.v) : (P[gu.dislike.v] || 0) >= 2;
-  if (hitL) score += 8;
+  const likeId = gu.like ? gu.like.ids.find(has) : null, hitL = !!likeId;
+  const hitD = gu.dislike.k === 'i' ? has(gu.dislike.v) : (P[gu.dislike.v] || 0) >= 3;
+  if (hitL) score += 10;
   if (hitD) score -= 12;
   const creative = ings.filter(i => i.k === 5 && ckContrib(i, gu) > 0);
   score += Math.min(2, creative.length) * 4;
@@ -1805,14 +2054,14 @@ function ckEval(mix, gu, rnd, raw) {
   const worst = ings.slice().sort((a, b) => ckContrib(a, gu) - ckContrib(b, gu) || (b.k === 5) - (a.k === 5))[0];
   let disl = null;
   if (hitD) disl = gu.dislike.k === 'i' ? ckItemName(gu.dislike.v) : (ings.slice().sort((a, b) => (b.t[gu.dislike.v] || 0) - (a.t[gu.dislike.v] || 0))[0] || {}).n;
-  return { score: Math.round(score * 10) / 10, cat, hitL, hitD, disl, conflicts, creative: creative.map(i => i.n), best: best && best.n, worst: worst && worst.n };
+  return { score: Math.round(score * 10) / 10, cat, hitL, likeN: likeId ? ckItemName(likeId) : null, hitD, disl, conflicts, creative: creative.map(i => i.n), best: best && best.n, worst: worst && worst.n };
 }
 function ckComment(ev, mix, gu) {
   const C = CK_COMMENTS, glass = GLASS_BY[mix.glass] ? GLASS_BY[mix.glass].n : 'Glas';
   const fill = (t, z, z2) => t.replace(/\{z\}/g, z || 'Das').replace(/\{z2\}/g, z2 || '').replace(/\{m\}/g, gu.mn).replace(/\{M\}/g, gu.mn.toUpperCase()).replace(/\{g\}/g, glass);
   if (ev.hitD && Math.random() < .75) return fill(pick(C.dislike), ev.disl);
+  if (ev.hitL && ev.cat !== 'bad' && Math.random() < .7) return fill(pick(C.like), ev.likeN);
   if (ev.conflicts.length && ev.cat !== 'top' && Math.random() < .75) return fill(pick(C.conflict), ev.conflicts[0][0].n, ev.conflicts[0][1].n);
-  if (ev.hitL && ev.cat !== 'bad' && Math.random() < .5) return fill(pick(C.like), gu.like.k === 'i' ? ckItemName(gu.like.v) : ev.best);
   const z = ev.cat === 'top' ? ev.best : ev.cat === 'bad' ? ev.worst : ckItemName(pick(mix.ings));
   return fill(pick(C[gu.ch][ev.cat]), z);
 }
@@ -1831,91 +2080,116 @@ function ckPoints(list, gu) {
 }
 function ckClean(m) {
   if (!m || typeof m !== 'object') return null;
-  const ings = [...new Set((Array.isArray(m.ings) ? m.ings : []).filter(id => ING_BY[id]))].slice(0, 6);
+  const src = Array.isArray(m.ings) ? m.ings : [], ings = [];
+  for (let k = 0; k < 6; k++) { const id = src.find(x => ING_BY[x] && ING_BY[x].k === k); if (id) ings.push(id); }
   const out = { glass: GLASS_BY[m.glass] ? m.glass : null, deco: DECO_BY[m.deco] ? m.deco : null, ings, name: typeof m.name === 'string' ? m.name.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 40) : '' };
   return ckFill(out);
 }
+// Fehlende Schritte zufällig auffüllen: je Kategorie genau eine Zutat, in Schritt-Reihenfolge
 function ckFill(m) {
   if (!m.glass) m.glass = pick(GLASS).id;
   if (!m.deco) m.deco = pick(DECO).id;
-  while (m.ings.length < 3) { const i = pick(ING); if (!m.ings.includes(i.id)) m.ings.push(i.id); }
+  const ings = m.ings || [];
+  m.ings = [0, 1, 2, 3, 4, 5].map(k => ings.find(id => ING_BY[id] && ING_BY[id].k === k) || pick(ING.filter(i => i.k === k)).id);
   return m;
 }
+// Wunsch des Gastes: Rätsel statt Zutat, dazu die Abneigung
+function ckWishHTML(gu) {
+  if (!gu) return '';
+  return `<span class="wish"><span class="wSec">🤫 Geheimtipp: <q>${esc(gu.like.hint)}</q></span><span class="wNo">🚫 ${esc(gu.dislike.txt)}</span></span>`;
+}
 
-/* ---------- Cocktail-Bar: Mix-Oberfläche (Handy und Fernseher) ---------- */
+/* ---------- Cocktail-Bar: geführtes Mixen (Handy und Fernseher) ---------- */
 function MixUI(opts) {
-  const gu = opts.guest, st = { glass:null, deco:null, ings:[], tab:0, done:false };
+  const gu = opts.guest, N = CK_STEPS.length, st = { p: Array(N).fill(null), step: 0, done: false, name: '' };
+  let advT = 0;
   const el = document.createElement('div');
   el.className = 'mix ' + (opts.big ? 'mixTV' : 'mixPh');
-  el.innerHTML = `<div class="mxPrev"><div class="mxSvg"></div><div class="mxInfo"><div class="mxCount"></div><div class="mxChips"></div></div></div>
-    <div class="mxTabs">${CK_CATS.map((c, i) => `<button type="button" data-tab="${i}">${c}</button>`).join('')}</div>
-    <div class="mxTiles"></div>
-    <div class="mxBottom"><input class="mxName" maxlength="40" aria-label="Eigener Cocktailname (optional)"><button type="button" class="btn mxDone">Fertig gemixt</button></div>
+  el.innerHTML = `<div class="mxTop"><div class="mxSvg"></div><div class="mxHead"><small class="mxNum"></small><b class="mxQ"></b></div><div class="mxSteps"></div></div>
+    <div class="mxBody"></div>
+    <div class="mxBottom"><button type="button" class="mxBack">‹ Zurück</button></div>
     <div class="mxShake" hidden><svg viewBox="0 0 120 200" class="shaker"><path d="M38 70 L82 70 L92 190 L28 190 Z" fill="#cfd5df" stroke="#2a1b2d" stroke-width="6" stroke-linejoin="round"/><rect x="34" y="48" width="52" height="24" rx="8" fill="#b9bfcb" stroke="#2a1b2d" stroke-width="6"/><path d="M46 48 Q48 22 60 18 Q72 22 74 48 Z" fill="#cfd5df" stroke="#2a1b2d" stroke-width="6"/><circle cx="60" cy="14" r="8" fill="#b9bfcb" stroke="#2a1b2d" stroke-width="5"/><path d="M44 90 L48 176" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".7"/></svg><b>Wird geshakt …</b></div>`;
   const $q = s => el.querySelector(s);
-  const mix = () => ({ glass: st.glass, deco: st.deco, ings: st.ings.slice() });
-  const valid = () => st.glass && st.deco && st.ings.length >= 3 && st.ings.length <= 6;
-  function tiles() {
-    const t = st.tab;
-    const list = t < 6 ? ING.filter(i => i.k === t) : t === 6 ? DECO : GLASS;
-    $q('.mxTiles').innerHTML = list.map(i => {
-      const sel = t < 6 ? st.ings.includes(i.id) : t === 6 ? st.deco === i.id : st.glass === i.id;
-      return `<button type="button" class="tile${sel ? ' sel' : ''}" data-id="${i.id}" style="--tc:${i.c || '#fff3d1'}"><span class="te">${i.e}</span><span class="tn">${esc(i.n)}</span></button>`;
-    }).join('');
-    el.querySelectorAll('.mxTabs button').forEach(b => b.classList.toggle('on', +b.dataset.tab === t));
+  const mix = () => ckPicksToMix(st.p);
+  const full = () => st.p.every(Boolean);
+  const nextFree = i => { for (let j = i + 1; j < N; j++) if (!st.p[j]) return j; for (let j = 0; j < N; j++) if (!st.p[j]) return j; return N; };
+  function steps() {
+    $q('.mxSteps').innerHTML = CK_STEPS.map((cs, i) => {
+      const it = st.p[i] && ckItem(st.p[i]);
+      return `<button type="button" class="stp${i === st.step ? ' on' : ''}${it ? ' set' : ''}" data-go="${i}" aria-label="Schritt ${i + 1}: ${cs.n}${it ? ', ' + esc(it.n) : ''}"><i>${it ? it.e : cs.e}</i><span>${esc(cs.n)}</span></button>`;
+    }).join('') + `<button type="button" class="stp fin${st.step === N ? ' on' : ''}" data-go="${N}"${full() ? '' : ' disabled'} aria-label="Fertig"><i>✓</i><span>Fertig</span></button>`;
   }
-  function update() {
+  function body() {
+    const s = st.step;
+    if (s < N) {
+      const cs = CK_STEPS[s];
+      $q('.mxNum').textContent = `Schritt ${s + 1} von ${N}`;
+      $q('.mxQ').textContent = cs.q;
+      $q('.mxBody').innerHTML = `<div class="mxTiles">${cs.list().map(i => `<button type="button" class="tile${st.p[s] === i.id ? ' sel' : ''}" data-id="${i.id}" style="--tc:${i.c || '#fff3d1'}"><span class="te">${i.e}</span><span class="tn">${esc(i.n)}</span></button>`).join('')}</div>`;
+    } else {
+      $q('.mxNum').textContent = 'Alles drin!';
+      $q('.mxQ').textContent = 'Gebt eurem Cocktail einen Namen';
+      $q('.mxBody').innerHTML = `<div class="mxSum">${CK_STEPS.map((cs, i) => { const it = ckItem(st.p[i]); return `<button type="button" class="sumRow" data-go="${i}"><span class="se">${it.e}</span><span class="sn"><small>${cs.n}</small><b>${esc(it.n)}</b></span><i aria-hidden="true">✎</i></button>`; }).join('')}</div>
+        <div class="mxFin"><input class="mxName" maxlength="40" aria-label="Eigener Cocktailname (optional)" placeholder="${esc(ckName(mix(), gu))}"><button type="button" class="btn mxDone">Fertig gemixt</button></div>`;
+      const inp = $q('.mxName'); inp.value = st.name;
+      inp.addEventListener('input', () => { st.name = inp.value; });
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); finish(false); } });
+    }
+    $q('.mxBack').disabled = s === 0;
+  }
+  function update(moved) {
     $q('.mxSvg').innerHTML = cocktailSVG(mix(), { anim: true });
-    const n = st.ings.length;
-    $q('.mxCount').innerHTML = `<span class="${n >= 3 && n <= 6 ? 'ok' : ''}">Zutaten ${n}/6</span><span class="${st.deco ? 'ok' : ''}">Deko ${st.deco ? '✓' : '–'}</span><span class="${st.glass ? 'ok' : ''}">Glas ${st.glass ? '✓' : '–'}</span>`;
-    $q('.mxChips').innerHTML = [...st.ings.map(id => ['i', ING_BY[id]]), st.deco && ['d', DECO_BY[st.deco]], st.glass && ['g', GLASS_BY[st.glass]]].filter(Boolean)
-      .map(([k, i]) => `<button type="button" class="chip2" data-k="${k}" data-id="${i.id}" title="Entfernen">${i.e} ${esc(i.n)} <i>×</i></button>`).join('') || '<span class="mxHint">Wählt 3 bis 6 Zutaten, 1 Deko und 1 Glas.</span>';
-    $q('.mxName').placeholder = n ? ckName(mix(), gu) : 'Eigener Name (optional)';
-    $q('.mxDone').disabled = !valid();
-    $q('.mxDone').textContent = valid() ? 'Fertig gemixt' : n < 3 ? `Noch ${3 - n} Zutat${3 - n > 1 ? 'en' : ''}` : !st.deco ? 'Noch eine Deko' : 'Noch ein Glas';
-    tiles();
+    steps(); body();
+    if (moved && opts.onStep) opts.onStep(el);
   }
-  function bump(msg) { const b = $q('.mxCount'); b.classList.remove('shake2'); void b.offsetWidth; b.classList.add('shake2'); if (opts.toast) opts.toast(msg); }
+  function go(i) {
+    clearTimeout(advT);
+    if (i >= N && !full()) i = nextFree(-1);
+    st.step = clamp(i, 0, N);
+    update(true);
+  }
   el.addEventListener('click', e => {
     if (st.done) return;
-    const tb = e.target.closest('[data-tab]'); if (tb) { st.tab = +tb.dataset.tab; tiles(); return; }
+    const gb = e.target.closest('[data-go]');
+    if (gb) { if (!gb.disabled) { go(+gb.dataset.go); if (opts.tap) opts.tap(); } return; }
     const tile = e.target.closest('.tile');
-    if (tile) {
-      const id = tile.dataset.id;
-      if (st.tab < 6) { const k = st.ings.indexOf(id); if (k >= 0) st.ings.splice(k, 1); else if (st.ings.length >= 6) { bump('Maximal 6 Zutaten!'); return; } else st.ings.push(id); }
-      else if (st.tab === 6) st.deco = st.deco === id ? null : id;
-      else st.glass = st.glass === id ? null : id;
+    if (tile && st.step < N) {
+      const s = st.step; st.p[s] = tile.dataset.id;
       if (opts.tap) opts.tap();
-      update(); return;
+      update(false);
+      const sel = $q('.tile.sel'); if (sel) sel.classList.add('pop');
+      clearTimeout(advT);
+      advT = setTimeout(() => { if (!st.done && st.step === s) go(nextFree(s)); }, 420);
+      return;
     }
-    const chip = e.target.closest('.chip2');
-    if (chip) { const id = chip.dataset.id; if (chip.dataset.k === 'i') st.ings = st.ings.filter(x => x !== id); else if (chip.dataset.k === 'd') st.deco = null; else st.glass = null; update(); return; }
-    if (e.target.closest('.mxDone') && valid()) finish(false);
+    if (e.target.closest('.mxBack')) { go(st.step - 1); return; }
+    if (e.target.closest('.mxDone') && full()) finish(false);
   });
   function finish(auto) {
     if (st.done) return;
-    if (auto) { const m = ckFill(mix()); st.glass = m.glass; st.deco = m.deco; st.ings = m.ings; update(); }
+    clearTimeout(advT);
+    if (auto) { const m = ckFill(mix()); st.p = [m.glass, ...m.ings, m.deco]; st.step = N; update(false); }
     st.done = true;
-    const out = { glass: st.glass, deco: st.deco, ings: st.ings.slice(), name: ($q('.mxName').value || '').trim().slice(0, 40) };
+    const m = mix(), out = { glass: m.glass, deco: m.deco, ings: m.ings, name: (st.name || '').trim().slice(0, 40) };
     if (!out.name) out.name = ckName(out, gu);
     $q('.mxShake').hidden = false;
     if (opts.shakeSound) opts.shakeSound();
     setTimeout(() => opts.onDone(out, auto), 1400);
   }
-  update();
+  update(false);
   return { el, get done() { return st.done; }, autoSubmit: () => finish(true), current: mix };
 }
 /* ---------- Cocktail-Bar: Spielablauf am Fernseher ---------- */
 function Cocktail() {
   const g = { id:'cocktail', phase:'intro', gi:0, ng:6, mixOn:true, mixS:75, guests:[], teams:[], mixes:{}, done:{}, phoneTeams:[], tvTeam:null,
-    totals:[0, 0, 0, 0, 0], last:[0, 0, 0, 0, 0], hist:[], cur:null, deadline:0, raf:0, endMix:null, bestOf:null };
+    totals:[0, 0, 0, 0, 0], last:[0, 0, 0, 0, 0], hist:[], cur:null, deadline:0, raf:0, endMix:null, bestOf:null, hits:[] };
   const guest = () => g.guests[g.gi];
   const leftS = () => g.mixOn && (g.phase === 'mix' || g.phase === 'tvmix') ? Math.max(0, (g.deadline - performance.now()) / 1000) : null;
   const charTag = gu => `${CK_CHAR[gu.ch].icon} ${CK_CHAR[gu.ch].label}`;
   const duoImgs = t => tchars(t).map(ch => bust(ch, TEAMC[t])).join('');
-  g.pub = () => ({ id:'cocktail', phase:g.phase, gi:g.gi, round:g.gi + 1, ng:g.ng, guest: guest() ? guest().id : null, mixOn:g.mixOn, mixS:g.mixS,
+  g.pub = () => ({ id:'cocktail', phase:g.phase, gi:g.gi, round:g.gi + 1, ng:g.ng, guest: guest() ? guest().id : null, sec: guest() ? guest().si : 0, hits: g.phase === 'board' ? g.hits : null, mixOn:g.mixOn, mixS:g.mixS,
     left: leftS(), done:g.done, phoneTeams:g.phoneTeams, tvTeam:g.tvTeam, totals:g.totals, last:g.last, teams:g.teams,
-    cur: g.cur ? { team:g.cur.team, mix:g.cur.mix, name:g.cur.name, stage:g.cur.stage, cat: g.cur.stage === 'react' ? g.cur.cat : null, comment: g.cur.stage === 'react' ? g.cur.comment : null, pts: g.cur.stage === 'react' ? g.cur.pts : null } : null,
+    cur: g.cur ? { team:g.cur.team, mix:g.cur.mix, name:g.cur.name, stage:g.cur.stage, cat: g.cur.stage === 'react' ? g.cur.cat : null, sec: g.cur.stage === 'react' ? g.cur.sec : null, comment: g.cur.stage === 'react' ? g.cur.comment : null, pts: g.cur.stage === 'react' ? g.cur.pts : null } : null,
     best: g.phase === 'finale' ? g.bestOf : null });
   g.stop = () => { g.alive = false; cancelAnimationFrame(g.raf); };
   const waitFor = (sel, ms) => new Promise(res => { const b = document.querySelector(sel); if (b) b.addEventListener('click', res, { once:true }); if (ms) setTimeout(res, ms); }).then(() => { if (!g.alive) throw STOP; Snd.pling(); });
@@ -1923,7 +2197,7 @@ function Cocktail() {
   g.run = async () => {
     await settings();
     g.teams = realTeams();
-    g.guests = shuffle(GUESTS).slice(0, g.ng);
+    g.guests = shuffle(GUESTS).slice(0, g.ng).map(b => ckGuest(b.id, Math.floor(Math.random() * b.sec.length)));
     for (g.gi = 0; g.gi < g.ng; g.gi++) await guestRound();
     await finale();
     finishGame(g, g.totals.slice());
@@ -1933,8 +2207,8 @@ function Cocktail() {
   async function settings() {
     g.phase = 'intro';
     $('#screen').innerHTML = `<section class="intro"><div class="card introCard cset"><div class="eyebrow">Spiel um die Buddy-Box</div><h2>Hugos Cocktail-Bar</h2>
-      <ul>${['Nacheinander kommen Hugos Freunde an die Bar. Jeder hat ein <b>Motto</b>, eine Vorliebe und eine Abneigung.',
-        'Jedes Team mixt geheim am Handy: <b>3 bis 6 Zutaten</b>, <b>1 Deko</b> und <b>1 Glas</b>. Teams ohne Handy mixen nacheinander am Fernseher.',
+      <ul>${['Nacheinander kommen Hugos Freunde an die Bar. Jeder hat ein <b>Motto</b>, eine Abneigung und einen <b>Geheimtipp als Rätsel</b>. Wer das Rätsel knackt, bekommt Bonus.',
+        'Jedes Team mixt geheim, <b>Schritt für Schritt je eine Sache</b>: Glas, Basis, Likör, Saft, Süßes, Gewürz, Fun & Trash und Deko. Teams ohne Handy mixen nacheinander am Fernseher.',
         'Dann wird serviert: Der Gast probiert jeden Cocktail und vergibt <b>5, 4, 3, 2 oder 1 Punkt</b>. Strenge Gäste geben weniger.',
         'Wer nach allen Gästen die meisten Punkte hat, gewinnt die Cocktail-Bar und entscheidet über die Buddy-Box.'].map((r, i) => `<li><i>${i + 1}</i><span>${r}</span></li>`).join('')}</ul>
       <div class="csetGrid">
@@ -2000,7 +2274,7 @@ function Cocktail() {
 
   function renderArrive(gu) {
     $('#screen').innerHTML = `<section class="ckx arr"><div class="gHead">Gast ${g.gi + 1} von ${g.ng}</div>
-      <div class="card gSay"><small>${esc(gu.n)} wünscht sich:</small><b>„${esc(gu.motto)}“</b><p>${esc(gu.like.txt)}<br>${esc(gu.dislike.txt)}</p></div>
+      <div class="card gSay"><small>${esc(gu.n)} wünscht sich:</small><b>„${esc(gu.motto)}“</b>${ckWishHTML(gu)}</div>
       <div class="gBig">${guestSVG(gu, 'neutral')}<div class="gPlate"><b>${esc(gu.n)}</b><span>${charTag(gu)}</span></div></div>
       <button class="btn arrGo" id="arrGo">Jetzt wird gemixt!</button></section>`;
   }
@@ -2011,7 +2285,7 @@ function Cocktail() {
         <div class="mwTeams" id="mwTeams"></div>
         ${tvTeams.length ? `<p class="mwNote">Danach mixen am Fernseher: ${tvTeams.map(t => 'Team ' + TEAMC[t].name).join(', ')}</p>` : ''}
         <div class="mwActs"><button class="btn sec" id="mwEnd">Jetzt beenden</button></div></div>
-      <div class="mwGuest">${guestSVG(gu, 'neutral')}<div class="card mwSay"><b>„${esc(gu.motto)}“</b><span>${esc(gu.like.txt)} ${esc(gu.dislike.txt)}</span><small>${esc(gu.n)} · ${charTag(gu)}</small></div></div></section>`;
+      <div class="mwGuest">${guestSVG(gu, 'neutral')}<div class="card mwSay"><b>„${esc(gu.motto)}“</b>${ckWishHTML(gu)}<small>${esc(gu.n)} · ${charTag(gu)}</small></div></div></section>`;
     $('#mwEnd').addEventListener('click', () => g.endMix && g.endMix());
     mwStatus();
   }
@@ -2035,7 +2309,7 @@ function Cocktail() {
     let doneRes; const doneP = new Promise(r => doneRes = r);
     const ui = MixUI({ guest: gu, big: true, onDone: m => doneRes(m), shakeSound: () => Snd.shake(), toast: m => hugo(m, 1800), tap: () => Snd.tick() });
     $('#screen').innerHTML = `<section class="ckx tvm"><div class="tvmHead" style="--c:${tc.c};--t:${tc.t}"><span class="tvmTeam">${duoImgs(t)}<b>Team ${tc.name}</b></span>
-      <span class="tvmGuest">${guestSVG(gu, 'neutral')}<span><b>„${esc(gu.motto)}“</b><small>${esc(gu.like.txt)} ${esc(gu.dislike.txt)}</small></span></span>
+      <span class="tvmGuest">${guestSVG(gu, 'neutral')}<span><b>„${esc(gu.motto)}“</b>${ckWishHTML(gu)}</span></span>
       ${g.mixOn ? `<span class="tvmTime"><b id="tvT">${g.mixS}</b><div class="tbar"><i id="tvBar" style="width:100%"></i></div></span>` : ''}</div><div class="tvmHost" id="tvmHost"></div></section>`;
     $('#tvmHost').appendChild(ui.el);
     let lastS = -1;
@@ -2069,7 +2343,7 @@ function Cocktail() {
     for (let k = 0; k < order.length; k++) {
       const t = order[k], ev = evs.find(e => e.team === t), mix = g.mixes[t];
       const comment = ckComment(ev, mix, gu);
-      g.cur = { team:t, mix, name:mix.name, stage:'cover', cat:ev.cat, comment, pts:pts[t], score:ev.score };
+      g.cur = { team:t, mix, name:mix.name, stage:'cover', cat:ev.cat, comment, pts:pts[t], score:ev.score, sec:ev.hitL };
       renderReveal(gu, g.cur, k === order.length - 1); sync();
       Snd.drum(1.3); await g.wait(1500);
       g.cur.stage = 'show'; $('#rvCard').classList.remove('cover'); $('#rvSv').classList.add('open'); Snd.pop(); sync();
@@ -2079,9 +2353,10 @@ function Cocktail() {
       $('#rvFace').innerHTML = guestSVG(gu, expr); $('#rvFace').classList.add('jump');
       $('#rvSay').innerHTML = `<b>${esc(comment)}</b>`; $('#rvSay').classList.add('show');
       const pe = $('#rvPts'); pe.className = 'rvPts show ' + ev.cat; pe.innerHTML = `<b>+${pts[t]}</b><small>${pts[t] === 1 ? 'Punkt' : 'Punkte'}</small>`;
+      if (ev.hitL) $('#rvSec').classList.add('show');
       if (ev.cat === 'top') { Snd.fanfare(); confetti(50, 650, 1150); } else if (ev.cat === 'ok') Snd.pling(); else Snd.sad();
       sync();
-      g.hist.push({ gi:g.gi, guest:gu.id, team:t, mix, name:mix.name, score:ev.score, pts:pts[t], cat:ev.cat, comment });
+      g.hist.push({ gi:g.gi, guest:gu.id, team:t, mix, name:mix.name, score:ev.score, pts:pts[t], cat:ev.cat, comment, sec:ev.hitL });
       await waitFor('#rvNext', 6500);
     }
     g.last = [0, 0, 0, 0, 0];
@@ -2100,7 +2375,7 @@ function Cocktail() {
         <div class="rvCover"><span>?</span><small>Trommelwirbel …</small></div>
         <div class="rvShow"><div class="rvSvg">${cocktailSVG(mix, { anim:true })}</div><h3>${esc(mix.name)}</h3><div class="rvIngs">${chips}</div>
           <p class="rvMeta">${GLASS_BY[mix.glass].e} ${esc(GLASS_BY[mix.glass].n)} · ${DECO_BY[mix.deco].e} ${esc(DECO_BY[mix.deco].n)}${mix.auto ? ' · von Hugo zusammengekippt' : ''}</p></div>
-        <div class="rvPts" id="rvPts"></div></div>
+        <div class="rvPts" id="rvPts"></div><div class="rvSec" id="rvSec">🤫 Geheimtipp geknackt!</div></div>
       <div class="rvGuest"><div class="rvFace" id="rvFace">${guestSVG(gu, 'neutral')}</div><b>${esc(gu.n)}</b><div class="card rvSay" id="rvSay"></div></div>
       <button class="btn sec rvNext" id="rvNext">${lastOne ? 'Zum Zwischenstand' : 'Nächster Cocktail'}</button></section>`;
   }
@@ -2114,9 +2389,13 @@ function Cocktail() {
     const newOrder = g.teams.slice().sort((a, b) => g.totals[b] - g.totals[a] || a - b);
     const max = Math.max(1, ...g.teams.map(t => g.totals[t])), RH = 92, last = g.gi === g.ng - 1;
     const fav = g.teams.slice().sort((a, b) => g.last[b] - g.last[a])[0];
+    g.hits = g.hist.filter(h => h.gi === g.gi && h.sec).map(h => h.team);
+    const secIt = ckItem(gu.like.ids[0]);
     $('#screen').innerHTML = `<section class="ckx bd"><h2 class="gh2">Zwischenstand nach Gast ${g.gi + 1} von ${g.ng}</h2>
       <div class="bdList" style="height:${g.teams.length * RH}px">${g.teams.map((t, i) => `<div class="bdRow" data-t="${t}" style="top:${oldOrder.indexOf(t) * RH}px;--c:${TEAMC[t].c};--t:${TEAMC[t].t}"><span class="n">${oldOrder.indexOf(t) + 1}</span><span class="duo2">${duoImgs(t)}</span><b class="bn">Team ${TEAMC[t].name}</b><div class="bar"><i style="width:${Math.max(2, prev[i] / max * 100)}%"></i></div><b class="bt">${prev[i]}</b><i class="dl">+${g.last[t]}</i></div>`).join('')}</div>
-      <div class="bdGuest">${guestSVG(gu, 'happy')}<div class="card mwSay"><b>Mein Favorit: Team ${TEAMC[fav].name}!</b><small>${esc(gu.n)}</small></div></div>
+      <div class="bdGuest">${guestSVG(gu, 'happy')}<div class="card mwSay bdSay"><b>${g.last[fav] > 0 ? `Mein Favorit: Team ${TEAMC[fav].name}!` : 'Keiner hat mich überzeugt!'}</b>
+        <span class="bdSec"><small>Mein Geheimtipp war:</small><em>${secIt.e} ${esc(secIt.n)}</em><q>${esc(gu.like.hint)}</q>
+        <span class="bdHits">${g.hits.length ? 'Geknackt von ' + g.hits.map(t => `<i style="--c:${TEAMC[t].c}">${TEAMC[t].name}</i>`).join(' ') : 'Keiner hat’s geknackt!'}</span></span><small>${esc(gu.n)}</small></div></div>
       <div class="bdActs"><button class="btn" id="bdNext">${last ? 'Zum Finale' : 'Nächster Gast'}</button></div></section>`;
     sync();
     await g.wait(900);
@@ -2150,6 +2429,312 @@ function Cocktail() {
     Snd.fanfare(); confetti(200);
     hugo(`Was für ein Abend an der Bar! ${best ? `Der Cocktail des Abends: „${best.name}“ von Team ${TEAMC[best.team].name}!` : ''}`, 7000);
     await waitFor('#finNext');
+  }
+  return g;
+}
+
+/* =================================================================
+   SPIEL: ZWEI KÖPFE, EIN GEDANKE · Startwörter und Wortvergleich
+   ================================================================= */
+const WL_MAX = 15;
+// Startwörter aus allen Richtungen: Natur, Tiere, Technik, Berufe, Alltag, Orte, Essen, Sport, Kultur, Gefühle, Körper, Verkehr, Medien …
+const WL_START = [
+  'Vulkan', 'Wüste', 'Regenwald', 'Höhle', 'Insel', 'Wasserfall', 'Sumpf', 'Klippe', 'Erdbeben', 'Gewitter', 'Nebel', 'Ebbe', 'Koralle',
+  'Kaktus', 'Pilz', 'Sonnenblume', 'Bambus', 'Moos', 'Lava', 'Tornado', 'Krake', 'Giraffe', 'Faultier', 'Ameise', 'Fledermaus', 'Qualle',
+  'Papagei', 'Nashorn', 'Schnecke', 'Biber', 'Flamingo', 'Wal', 'Hai', 'Igel', 'Spinne', 'Kamel', 'Esel', 'Kakerlake', 'Pfau', 'Chamäleon',
+  'Magnet', 'Akku', 'Roboter', 'Satellit', 'Mikroskop', 'Rakete', 'Kompass', 'Laser', 'Teleskop', 'Atom', 'Schwerkraft', 'Drohne',
+  'Passwort', 'WLAN', 'Zahnrad', 'Lupe', 'Kabel', 'Barcode', 'Feuerwehr', 'Pilot', 'Detektiv', 'Bäcker', 'Chirurg', 'Astronaut', 'Richter',
+  'Clown', 'Bauer', 'Postbote', 'Zauberer', 'Dirigent', 'Spion', 'Hausmeister', 'Tierarzt', 'Regenschirm', 'Schlüssel', 'Spiegel',
+  'Kühlschrank', 'Staubsauger', 'Briefmarke', 'Taschenlampe', 'Leiter', 'Kissen', 'Schere', 'Zahnbürste', 'Toaster', 'Rucksack',
+  'Wäscheklammer', 'Fernbedienung', 'Sanduhr', 'Thermometer', 'Gießkanne', 'Würfel', 'Puzzle', 'Klebeband', 'Socke', 'Krankenhaus',
+  'Flughafen', 'Bibliothek', 'Museum', 'Gefängnis', 'Leuchtturm', 'Bauernhof', 'Baustelle', 'Tankstelle', 'Friseur', 'Zoo', 'Schwimmbad',
+  'Autobahn', 'Kreuzfahrtschiff', 'Burg', 'Pyramide', 'Hafen', 'Waschanlage', 'Fitnessstudio', 'Zitrone', 'Knoblauch', 'Brokkoli', 'Sushi',
+  'Honig', 'Pfannkuchen', 'Senf', 'Avocado', 'Brezel', 'Spaghetti', 'Chili', 'Wassermelone', 'Kaugummi', 'Pommes', 'Schach', 'Bowling',
+  'Marathon', 'Surfbrett', 'Trampolin', 'Angeln', 'Zelt', 'Boxen', 'Golf', 'Tischtennis', 'Achterbahn', 'Karussell', 'Fallschirm', 'Oper',
+  'Gitarre', 'Trommel', 'Zirkus', 'Theater', 'Comic', 'Ritter', 'Pirat', 'Vampir', 'Zombie', 'Drache', 'Hexe', 'Superheld', 'Mumie',
+  'Cowboy', 'Ninja', 'Märchen', 'Dinosaurier', 'Angst', 'Geheimnis', 'Glück', 'Zufall', 'Freiheit', 'Langeweile', 'Eifersucht', 'Heimweh',
+  'Zeit', 'Lüge', 'Mut', 'Erinnerung', 'Traum', 'Peinlichkeit', 'Ordnung', 'Herz', 'Zahn', 'Gähnen', 'Schluckauf', 'Fingerabdruck', 'Muskel',
+  'Knochen', 'Gänsehaut', 'Schnarchen', 'Muskelkater', 'Krone', 'Münze', 'Schatz', 'Kaiser', 'Gerücht', 'Hochzeit', 'Scheidung', 'Erbe',
+  'Wette', 'Steuererklärung', 'U-Bahn', 'Fahrrad', 'Heißluftballon', 'Traktor', 'Hubschrauber', 'U-Boot', 'Segelboot', 'Skateboard', 'Stau',
+  'Ampel', 'Wohnmobil', 'Selfie', 'Podcast', 'Emoji', 'Influencer', 'Spam', 'Update', 'Werbung', 'Fernseher', 'Zeitung', 'Kinofilm'];
+
+// Vergleichsform: klein, Umlaute ausgeschrieben, ohne Satzzeichen, Artikel und Leerzeichen
+function wlNorm(s) {
+  return String(s || '').toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim()
+    .replace(/^(der|die|das|den|dem|ein|eine|einen|the|a|an) (?=\S)/, '').replace(/ /g, '');
+}
+// Einzahl/Mehrzahl: Kugel/Kugeln, Stern/Sterne, Geschenk/Geschenke …
+function wlPlural(a, b) {
+  const [s, l] = a.length <= b.length ? [a, b] : [b, a];
+  return s.length >= 3 && l.startsWith(s) && ['e', 'n', 'en', 'er', 'r', 's', 'es', 'nen'].includes(l.slice(s.length));
+}
+function wlLev(a, b) {
+  const d = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    let p = d[0]; d[0] = i;
+    for (let j = 1; j <= b.length; j++) { const t = d[j]; d[j] = Math.min(d[j] + 1, d[j - 1] + 1, p + (a[i - 1] === b[j - 1] ? 0 : 1)); p = t; }
+  }
+  return d[b.length];
+}
+// 'same' = gleich · 'near' = fast gleich (Tippfehler, Mehrzahl), Hugo fragt nach · 'diff' = verschieden
+function wlSame(a, b) {
+  const x = wlNorm(a), y = wlNorm(b);
+  if (!x || !y) return 'diff';
+  if (x === y) return 'same';
+  if (wlPlural(x, y)) return 'near';
+  const m = Math.min(x.length, y.length), d = wlLev(x, y);
+  return (m >= 4 && d <= 1) || (m >= 7 && d <= 2) ? 'near' : 'diff';
+}
+// Prüft ein eingetipptes Wort: leer, zu lang oder schon benutzt (auch als Mehrzahl)?
+function wlCheck(w, used) {
+  const raw = String(w || '').trim(), n = wlNorm(raw);
+  if (!n) return 'Bitte ein Wort eintippen.';
+  if (raw.length > 30) return 'Höchstens 30 Zeichen.';
+  const hit = (used || []).find(u => { const m = wlNorm(u); return m && (m === n || wlPlural(m, n)); });
+  if (hit) return `„${hit}“ gab es schon. Denkt euch ein neues Wort aus.`;
+  return '';
+}
+/* =================================================================
+   SPIEL: ZWEI KÖPFE, EIN GEDANKE
+   Ein Team nach dem anderen. Startwort, dann tippen beide geheim ein Wort.
+   Ungleich: Nächste Runde mit einem Wort, das die beiden letzten verbindet.
+   Höchstens 15 Runden. Wenigste Runden gewinnt.
+   ================================================================= */
+function Gedanke() {
+  const g = { id:'wl', phase:'intro', order:[], ti:-1, team:-1, r:0, start:'', chain:[], words:[null, null], claims:[null, null], shown:false, match:null,
+    res:[null, null, null, null, null], tvIn:-1 };
+  const claimOk = pid => !!pid && alive(pid) && T.phones[pid] === g.team;
+  const used = () => [g.start, ...g.chain.flat()];
+  const nm = () => tchars(g.team);
+  const prev = () => g.chain[g.chain.length - 1];
+  let doneRes = null, liveT = 0;
+  g.pub = () => ({ id:'wl', phase:g.phase, ti:g.ti, order:g.order, team:g.team, round:g.r, max:WL_MAX, start: g.phase === 'turn' ? null : g.start,
+    chain:g.chain, sub:[!!g.words[0], !!g.words[1]], claims:g.claims.map(p => claimOk(p) ? p : null), words: g.shown ? g.words : null,
+    match:g.match, res:g.res, tvIn:g.tvIn, win: g.phase === 'finale' ? g.win : null });
+  g.stop = () => { g.alive = false; clearInterval(liveT); };
+  const waitFor = (sel, ms) => new Promise(res => { const b = document.querySelector(sel); if (b) b.addEventListener('click', res, { once:true }); if (ms) setTimeout(res, ms); }).then(() => { if (!g.alive) throw STOP; Snd.pling(); });
+  const choose = (ids, ms, dflt) => new Promise(res => { ids.forEach(id => { const b = document.getElementById(id); if (b) b.addEventListener('click', () => res(id), { once:true }); }); if (ms) setTimeout(() => res(dflt), ms); }).then(id => { if (!g.alive) throw STOP; Snd.pling(); return id; });
+
+  g.run = async () => {
+    await introCard(g, [
+      'Ein Team nach dem anderen ist dran. Ihr bekommt ein <b>Startwort</b>.',
+      'Beide tippen <b>geheim</b> ein Wort, an das sie dabei denken: am besten jeder an seinem Handy, sonst nacheinander an einem Handy oder am Fernseher.',
+      'Auf drei werden beide Wörter gezeigt. Gleich? Geschafft! Sonst sucht ihr ein Wort, das <b>eure beiden Wörter verbindet</b>. Schon benutzte Wörter sind tabu.',
+      `Höchstens ${WL_MAX} Runden. Das Team mit den <b>wenigsten Runden</b> gewinnt und entscheidet über die Buddy-Box.`],
+      'Mal sehen, wer hier wirklich auf einer Wellenlänge ist!');
+    g.order = shuffle(realTeams().filter(t => tchars(t).length === 2));
+    const starts = shuffle(WL_START);
+    for (g.ti = 0; g.ti < g.order.length; g.ti++) await turn(g.order[g.ti], starts[g.ti]);
+    const sc = [0, 1, 2, 3, 4].map(t => g.res[t] ? g.res[t].r : 99);
+    const disp = sc.map((v, t) => !g.res[t] ? '–' : g.res[t].ok ? `Runde ${v}` : '✗'), bar = sc.map(v => v > WL_MAX ? 3 : Math.round((WL_MAX + 1 - v) / WL_MAX * 100));
+    const w = await finale();
+    if (w != null) sc[w] -= .5;
+    finishGame(g, sc, { low:true, disp, bar });
+  };
+
+  // ---------- Ein Team ----------
+  async function turn(t, start) {
+    Object.assign(g, { team:t, start, r:0, chain:[], words:[null, null], claims:[null, null], shown:false, match:null, tvIn:-1, phase:'turn' });
+    renderTurn(); sync();
+    hugo(`Team ${TEAMC[t].name}, ihr seid dran! ${duoName(nm())}, seid ihr auf einer Wellenlänge?`, 5000);
+    await waitFor('#wlGo'); Snd.whoosh();
+    build();
+    let ok = false;
+    for (let r = 1; r <= WL_MAX; r++) { g.r = r; if (await round()) { ok = true; break; } }
+    g.res[t] = { r: ok ? g.r : WL_MAX + 1, ok, start, word: ok ? prev()[0] : null, chain: g.chain.map(p => p.slice()) };
+    await turnEnd(t);
+  }
+  function renderTurn() {
+    const t = g.team, tc = TEAMC[t], n = teamPhones(t);
+    $('#screen').innerHTML = `<section class="wl"><div class="card turnCard" style="--c:${tc.c};--t:${tc.t}"><div class="duo">${nm().map(ch => `<img src="${ART.full[ch]}" alt="${esc(ch)}">`).join('')}</div>
+      <h2>Team ${tc.name} ist dran!</h2><p class="big2">${esc(duoName(nm()))}: Seid ihr auf einer Wellenlänge?</p>
+      <p>${n >= 2 ? 'Jeder tippt geheim an seinem eigenen Handy.' : n === 1 ? 'Ihr habt ein Handy: Tippt nacheinander, der andere schaut weg.' : 'Ihr tippt nacheinander am Fernseher, der andere schaut weg.'}</p>
+      ${othersHTML()}
+      <button class="btn" id="wlGo">Startwort aufdecken</button></div></section>`;
+  }
+  function othersHTML() {
+    return `<div class="wlOthers">${g.order.map(t => { const R = g.res[t]; return `<span class="wlO${t === g.team ? ' cur' : ''}" style="--c:${TEAMC[t].c};--t:${TEAMC[t].t}">${tchars(t).map(ch => bust(ch, TEAMC[t])).join('')}<span>${R ? (R.ok ? 'Runde ' + R.r : '✗') : t === g.team ? 'spielt' : '–'}</span></span>`; }).join('')}</div>`;
+  }
+
+  // ---------- Bühne ----------
+  function build() {
+    const t = g.team, tc = TEAMC[t];
+    $('#screen').innerHTML = `<section class="wl" id="wl">
+      <div class="wlTop" style="--c:${tc.c};--t:${tc.t}"><span class="wlTeam">${nm().map(ch => bust(ch, tc)).join('')}<b>Team ${tc.name}</b></span><span class="wlRound" id="wlRound"></span>${othersHTML()}</div>
+      <div class="wlPrompt" id="wlPrompt"></div>
+      <div class="wlStage">${[0, 1].map(s => `<div class="wlP" id="wlP${s}"><div class="thought" id="wlB${s}"></div><img src="${ART.full[nm()[s]]}" alt="${esc(nm()[s])}"><div class="wlPlate"><b>${esc(nm()[s])}</b><span id="wlD${s}"></span></div></div>`).join('<div class="wlMid" id="wlMid"></div>')}</div>
+      <aside class="card wlChain" id="wlChain"></aside>
+      <div class="wlTvIn" id="wlTvIn" hidden></div></section>`;
+    $('#wl').addEventListener('click', e => { const b = e.target.closest('[data-tvin]'); if (b && g.phase === 'input') { Snd.tick(); openTvIn(+b.dataset.tvin, false); } });
+  }
+  function drawTop() {
+    const el = $('#wlRound'); if (!el) return;
+    const done = g.chain.length;
+    el.innerHTML = `<b>Runde ${g.r}</b> von ${WL_MAX}<span class="wlDots">${Array.from({ length: WL_MAX }, (_, i) => `<i class="${i < done ? (g.match && i === done - 1 ? 'm' : 'p') : i === g.r - 1 ? 'c' : ''}"></i>`).join('')}</span>`;
+  }
+  function drawPrompt() {
+    const el = $('#wlPrompt'); if (!el) return;
+    const p = g.r > 1 ? g.chain[g.r - 2] : null;
+    el.innerHTML = !p ? `<small>Euer Startwort</small><b class="wlWord start">${esc(g.start)}</b><span>Woran denkt ihr dabei?</span>`
+      : `<small>Runde ${g.r}: Welches Wort verbindet …</small><div class="row"><b class="wlWord">${esc(p[0])}</b><i>+</i><b class="wlWord">${esc(p[1])}</b></div>`;
+  }
+  function drawBubbles() {
+    [0, 1].forEach(s => {
+      const b = $('#wlB' + s), d = $('#wlD' + s); if (!b) return;
+      if (g.shown) {
+        const w = g.words[s] || '';
+        b.className = 'thought show' + (g.match === true ? ' ok' : g.match === false ? ' no' : '');
+        b.innerHTML = `<span class="w" style="font-size:${w.length > 18 ? 24 : w.length > 11 ? 30 : 38}px">${esc(w)}</span>`;
+      } else if (g.words[s]) { b.className = 'thought done'; b.innerHTML = `<span class="st">✓ hat getippt</span>`; }
+      else { b.className = 'thought'; b.innerHTML = `<span class="st">denkt nach <span class="dots3"><i>.</i><i>.</i><i>.</i></span></span>${g.phase === 'input' && g.tvIn !== s && !claimOk(g.claims[s]) ? `<button class="wlTvBtn" data-tvin="${s}">am Fernseher tippen</button>` : ''}`; }
+      const n = teamPhones(g.team);
+      if (d) d.textContent = g.tvIn === s ? '📺 tippt am Fernseher' : claimOk(g.claims[s]) ? '📱 eigenes Handy' : n === 1 ? '📱 teilt sich ein Handy' : n === 0 ? '📺 Fernseher' : '📱 wählt am Handy …';
+    });
+  }
+  function drawChain() {
+    const el = $('#wlChain'); if (!el) return;
+    const rows = g.chain.map((p, i) => `<div class="wlC${g.match && i === g.chain.length - 1 ? ' m' : ''}"><span class="n">${i + 1}</span><span>${esc(p[0])}</span><span>${esc(p[1])}</span></div>`);
+    if (g.chain.length < g.r) rows.push(`<div class="wlC c"><span class="n">${g.r}</span><span>?</span><span>?</span></div>`);
+    el.innerHTML = `<h3>Gedankenkette</h3><div class="wlC s"><span>Start</span><b>${esc(g.start)}</b></div>${rows.join('')}`;
+  }
+  function drawMid(kind) {
+    const el = $('#wlMid'); if (!el) return;
+    const last = g.r >= WL_MAX;
+    el.innerHTML = kind === 'judge' ? `<span class="wlSign">≈</span><p>Fast gleich! Zählt das?</p><button class="btn" id="wlYes">Ja, gleich!</button><button class="btn sec" id="wlNo">Nein</button>`
+      : kind === 'miss' ? `<span class="wlSign no">≠</span><p>${last ? 'Leider nicht gleich.' : 'Nicht gleich!'}</p><button class="btn" id="wlNext">${last ? 'Weiter' : 'Nächste Runde'}</button><button class="btn sec sm2" id="wlSame">Doch gleich!</button>`
+      : kind === 'match' ? `<span class="wlSign ok">=</span><p>Gleicher Gedanke!</p>`
+      : kind === 'count' ? `<span class="wlSign">?</span>` : `<span class="wlSign q">?</span><p>${g.words[0] && g.words[1] ? 'Beide haben getippt!' : 'Geheim tippen …'}</p>`;
+  }
+  function drawAll(mid) { drawTop(); drawPrompt(); drawBubbles(); drawChain(); drawMid(mid || 'input'); }
+
+  // ---------- Eine Runde ----------
+  async function round() {
+    Object.assign(g, { phase:'input', words:[null, null], shown:false, match:null, tvIn:-1 });
+    drawAll(); sync();
+    const p = prev();
+    hugo(g.r === 1 ? `Euer Startwort: „${g.start}“. Woran denkt ihr?` : `Welches Wort verbindet „${p[0]}“ und „${p[1]}“?`, 4500);
+    const both = new Promise(res => { doneRes = res; });
+    clearInterval(liveT); liveT = setInterval(() => { if (g.alive && g.phase === 'input') drawBubbles(); }, 1000);
+    if (teamPhones(g.team) === 0) tvSeq();
+    await both;
+    clearInterval(liveT); closeTvIn();
+    if (!g.alive) throw STOP;
+    // Auf drei aufdecken
+    g.phase = 'reveal'; drawBubbles(); drawMid('count'); sync();
+    for (const n of ['3', '2', '1']) { big(n); Snd.tick(); await g.wait(650); }
+    hideBig();
+    g.shown = true; drawBubbles(); Snd.pop(); sync();
+    await g.wait(900);
+    const s = wlSame(g.words[0], g.words[1]);
+    let ok = s === 'same';
+    if (s === 'near') {
+      g.phase = 'judge'; drawMid('judge'); sync();
+      hugo(`„${g.words[0]}“ und „${g.words[1]}“: Zählt das als gleich?`, 6000);
+      ok = (await choose(['wlYes', 'wlNo'])) === 'wlYes';
+    }
+    g.chain.push(g.words.slice());
+    if (!ok) {
+      g.match = false; g.phase = 'miss'; drawBubbles(); drawChain(); drawTop(); drawMid('miss'); Snd.sad(); sync();
+      hugo(g.r >= WL_MAX ? `${WL_MAX} Runden und kein gleicher Gedanke. Schade!` : pick(['Knapp daneben! Findet ein Wort, das beide verbindet.', 'Noch nicht synchron. Nächster Versuch!', 'Hmm. Was haben die beiden Wörter gemeinsam?', 'Nicht gleich, aber ihr kommt euch näher!']), 4000);
+      if ((await choose(['wlNext', 'wlSame'], 9000, 'wlNext')) === 'wlSame') ok = true;
+    }
+    if (ok) {
+      g.match = true; g.phase = 'match'; drawBubbles(); drawChain(); drawTop(); drawMid('match'); sync();
+      [0, 1].forEach(k => { const el = $('#wlP' + k); if (el) el.classList.add('jump'); });
+      Snd.fanfare(); confetti(140, 300, 1200); big('Gleicher Gedanke!', `in Runde ${g.r}`, 2600);
+      hugo(pick(['Zwei Köpfe, ein Gedanke!', 'Seelenverwandt! Hohoho!', 'Das nenne ich Party Buddys!', 'Perfekt synchron!']), 4000);
+      await g.wait(3400);
+    }
+    return ok;
+  }
+  function setWord(s, w) {
+    if (g.phase !== 'input' || g.words[s]) return false;
+    g.words[s] = w; Snd.pling();
+    if (g.tvIn === s) closeTvIn();
+    drawBubbles(); drawMid('input'); sync();
+    if (g.words[0] && g.words[1] && doneRes) { const r = doneRes; doneRes = null; setTimeout(r, 600); }
+    return true;
+  }
+  g.onAct = (pid, team, a) => {
+    if (team !== g.team || g.phase !== 'input' || a.ti !== g.ti || a.r !== g.r) return;
+    const s = a.slot; if (s !== 0 && s !== 1) return;
+    if (claimOk(g.claims[s]) && g.claims[s] !== pid) return;
+    if (a.wl === 'claim') {
+      if (g.claims[1 - s] === pid) g.claims[1 - s] = null;
+      g.claims[s] = pid; drawBubbles(); sync(); return;
+    }
+    if (a.wl === 'word') {
+      const w = String(a.w || '').trim().slice(0, 30);
+      if (wlCheck(w, used())) { sync(); return; }
+      setWord(s, w);
+    }
+  };
+
+  // ---------- Eingabe am Fernseher ----------
+  function tvSeq() { const s = !g.words[0] ? 0 : !g.words[1] ? 1 : -1; if (s >= 0) openTvIn(s, s === 1); }
+  function openTvIn(s, handover) {
+    const el = $('#wlTvIn'); if (!el || g.words[s]) return;
+    const me = nm()[s], other = nm()[1 - s], tc = TEAMC[g.team];
+    g.tvIn = s; drawBubbles(); sync();
+    const head = (title, sub) => `<div class="wlTvWho">${bust(me, tc)}<div><b>${title}</b><span>${sub}</span></div></div>`;
+    const form = () => {
+      el.innerHTML = `<div class="card wlTvCard">${head(`${esc(me)} tippt am Fernseher`, `${esc(other)}: wegschauen! 🙈`)}
+        <input id="wlTvInp" maxlength="30" autocomplete="off" spellcheck="false" aria-label="Wort von ${esc(me)}"><p class="wlErr" id="wlTvErr" role="alert"></p>
+        <div class="wlTvBtns"><button class="btn sec" id="wlTvX">Abbrechen</button><button class="btn" id="wlTvOk">Abschicken</button></div></div>`;
+      el.hidden = false;
+      const inp = $('#wlTvInp'); inp.focus();
+      const ok = () => {
+        const w = inp.value.trim(), e = wlCheck(w, used());
+        if (e) { $('#wlTvErr').textContent = e; Snd.sad(); return; }
+        closeTvIn();
+        if (setWord(s, w.slice(0, 30)) && teamPhones(g.team) === 0) tvSeq();
+      };
+      $('#wlTvOk').addEventListener('click', ok);
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ok(); } });
+      inp.addEventListener('input', () => { $('#wlTvErr').textContent = ''; });
+      $('#wlTvX').addEventListener('click', () => closeTvIn());
+    };
+    if (handover) {
+      el.innerHTML = `<div class="card wlTvCard">${head(`Jetzt ${esc(me)}!`, `${esc(other)}: schau weg! 🙈`)}<div class="wlTvBtns"><button class="btn" id="wlTvReady">${esc(me)} ist bereit</button></div></div>`;
+      el.hidden = false; $('#wlTvReady').addEventListener('click', () => { Snd.tick(); form(); });
+      setTimeout(() => { const r = $('#wlTvReady'); if (r) r.focus(); }, 700);
+    } else form();
+  }
+  function closeTvIn() {
+    const el = $('#wlTvIn'); if (el) { el.hidden = true; el.innerHTML = ''; }
+    if (g.tvIn !== -1) { g.tvIn = -1; drawBubbles(); sync(); }
+  }
+
+  // ---------- Team fertig ----------
+  async function turnEnd(t) {
+    g.phase = 'turnEnd'; sync();
+    const R = g.res[t], tc = TEAMC[t], last = g.ti === g.order.length - 1;
+    const path = [`<span class="s">${esc(R.start)}</span>`, ...R.chain.map((p, i) => `<span class="${R.ok && i === R.chain.length - 1 ? 'm' : ''}"><i>${i + 1}</i> ${esc(p[0])} · ${esc(p[1])}</span>`)].join('<em>→</em>');
+    $('#screen').innerHTML = `<section class="wl"><div class="card turnCard wlEnd" style="--c:${tc.c};--t:${tc.t}"><div class="duo">${nm().map(ch => `<img src="${ART.full[ch]}" alt="${esc(ch)}">`).join('')}</div>
+      <h2>${R.ok ? `Gleicher Gedanke in Runde ${R.r}!` : 'Kein gleicher Gedanke'}</h2>
+      <p class="big2">${R.ok ? `Beide dachten an „${esc(R.word)}“` : `Nach ${WL_MAX} Runden noch nicht synchron.`}</p>
+      <div class="wlPath">${path}</div>
+      <button class="btn" id="wlNextT">${last ? 'Zur Auswertung' : 'Nächstes Team'}</button></div></section>`;
+    if (R.ok) { Snd.cheer(); hugo(R.r === 1 ? 'Gleich in der ersten Runde! Das ist Gedankenlesen!' : R.r <= 4 ? 'Stark! Ihr seid echte Party Buddys.' : 'Geschafft! Mal sehen, ob das reicht.', 5000); }
+    else { Snd.sad(); hugo('Ihr habt alles gegeben. Vielleicht klappt es beim nächsten Spiel!', 5000); }
+    await waitFor('#wlNextT');
+  }
+
+  // ---------- Auswertung ----------
+  async function finale() {
+    g.phase = 'finale'; g.team = -1;
+    const best = Math.min(...g.order.map(t => g.res[t].r)), tied = g.order.filter(t => g.res[t].r === best), w = tied.length ? pick(tied) : null;
+    const rk = g.order.slice().sort((a, b) => g.res[a].r - g.res[b].r || (a === w ? -1 : b === w ? 1 : 0) || a - b);
+    g.win = w; sync();
+    $('#screen').innerHTML = `<section class="wl"><div class="card wlFin"><h2>Wer denkt am gleichsten?</h2>
+      ${rk.map((t, i) => { const R = g.res[t], tc = TEAMC[t]; return `<div class="wlFr" style="--c:${tc.c};--t:${tc.t}"><span class="n">${i + 1}</span><span class="duo2">${tchars(t).map(ch => bust(ch, tc)).join('')}</span><span class="wfw"><b>${R.ok ? `„${esc(R.word)}“` : '✗ nicht geschafft'}</b><small>Start: ${esc(R.start)}${R.chain.length > 1 ? ` · ${R.chain.length} Runden Gedankenkette` : ''}</small></span><b class="wfr">${R.ok ? `Runde ${R.r}` : '–'}</b></div>`; }).join('')}
+      ${tied.length > 1 ? `<p class="wlTie">🪙 Gleichstand! Hugo hat eine Münze geworfen: Team ${TEAMC[w].name} gewinnt.</p>` : ''}
+      <div class="wlFinActs"><button class="btn" id="wlFin">Weiter zur Siegerehrung</button></div></div></section>`;
+    Snd.fanfare();
+    if (w != null) hugo(tied.length > 1 ? `Gleichstand! ${tied.length} Teams mit ${best > WL_MAX ? 'keinem Treffer' : `Runde ${best}`}. Ich werfe eine Münze … Team ${TEAMC[w].name} gewinnt!` : `Team ${TEAMC[w].name} war am schnellsten auf einer Wellenlänge!`, 7000);
+    await waitFor('#wlFin');
+    return w;
   }
   return g;
 }
@@ -2227,8 +2812,9 @@ function startPhone(room) {
     else if (myTeam() < 0) h += pickHTML();
     else h += meHTML() + screenHTML();
     h += `</div>`;
-    if (h === lastHTML) return;
-    lastHTML = h; root.innerHTML = h; bind(); mountMix();
+    if (h === lastHTML) { mountWL(false); return; }
+    const wlF = !!document.activeElement && document.activeElement.id === 'wlInp';
+    lastHTML = h; root.innerHTML = h; bind(); mountMix(); mountWL(wlF);
   }
   function pickHTML() {
     return `<section class="card pcard"><h2 class="ph2">Welches Team seid ihr in diesem Spiel?</h2><p class="psub">Tippt auf eure Teamfarbe. Ein Handy pro Team reicht.</p><div class="tpick">${S.teams.map((t, i) => t.length ? `<button class="tpb" data-team="${i}" style="--t:${TEAMC[i].t};--c:${TEAMC[i].c}"><span class="pics">${t.map(ch => bust(ch, TEAMC[i])).join('')}</span><span class="tx"><b>Team ${TEAMC[i].name}</b>${esc(duoName(t))}<small>${S.tlive[i] ? (S.tlive[i] === 1 ? '1 Handy verbunden' : S.tlive[i] + ' Handys verbunden') : 'noch kein Handy'}</small></span></button>` : '').join('')}</div></section>`;
@@ -2250,23 +2836,24 @@ function startPhone(room) {
     if (g.id === 'cookies') return cookieHTML(g);
     if (g.id === 'ludo') return ludoHTML(g);
     if (g.id === 'cocktail') return cocktailHTML(g);
+    if (g.id === 'wl') return wlHTML(g);
     return '';
   }
   // ---------- Cocktail-Bar am Handy ----------
   const ckWait = (h2, p) => `<section class="card pcard wait"><img class="bust" src="${ART.bust.Hugo}" alt="Hugo"><h2 class="ph2">${h2}</h2><p class="psub">${p}</p></section>`;
   function cocktailHTML(g) {
-    const t = myTeam(), gu = GUESTS_BY[g.guest], key = 'ck|' + g.gi;
+    const t = myTeam(), gu = ckGuest(g.guest, g.sec), key = 'ck|' + g.gi;
     const head = `<p class="psub" style="text-align:center;color:#ffe8c4">Hugos Cocktail-Bar${g.guest ? ` · Gast ${g.round} von ${g.ng}` : ''} · Euer Stand: <b>${g.totals[t] || 0}</b></p>`;
-    const gcard = () => gu ? `<section class="card pcard ckG">${guestSVG(gu, 'neutral')}<div><b>${esc(gu.n)}</b><small>${CK_CHAR[gu.ch].icon} ${CK_CHAR[gu.ch].label}</small><p>„${esc(gu.motto)}“</p><span>${esc(gu.like.txt)} ${esc(gu.dislike.txt)}</span></div></section>` : '';
+    const gcard = () => gu ? `<section class="card pcard ckG">${guestSVG(gu, 'neutral')}<div><b>${esc(gu.n)}</b><small>${CK_CHAR[gu.ch].icon} ${CK_CHAR[gu.ch].label}</small><p>„${esc(gu.motto)}“</p>${ckWishHTML(gu)}</div></section>` : '';
     const myMix = local.ckKey === key ? local.ckMix : null;
     switch (g.phase) {
       case 'intro': return ckWait('Gleich öffnet die Bar', 'Hugo erklärt am Fernseher, wie es läuft.');
-      case 'arrive': return head + gcard() + `<p class="note" style="color:#fff">Merkt euch das Motto. Gleich wird gemixt!</p>`;
+      case 'arrive': return head + gcard() + `<p class="note" style="color:#fff">Merkt euch Motto und Rätsel. Gleich wird gemixt!</p>`;
       case 'mix': case 'mixend':
         if (!g.phoneTeams.includes(t)) return head + gcard() + ckWait('Ihr mixt gleich am Fernseher', 'Wartet, bis Hugo euch aufruft.');
         if (g.done[t] || myMix) return head + `<section class="card pcard wait">${myMix ? `<div class="ckRvSvg">${cocktailSVG(myMix, { anim:true })}</div><h2 class="ph2">${esc(myMix.name)}</h2>` : '<h2 class="ph2">Abgegeben!</h2>'}<p class="psub">Euer Cocktail steht verdeckt unter der Haube. Schaut auf den Fernseher.</p></section>`;
         if (g.phase === 'mixend') return head + ckWait('Zeit ist um!', 'Euer Cocktail wird noch schnell fertig gemacht …');
-        return head + `<div class="ckStrip">${gu ? guestSVG(gu, 'neutral') : ''}<div><b>„${esc(gu ? gu.motto : '')}“</b><small>${gu ? esc(gu.like.txt) + ' ' + esc(gu.dislike.txt) : ''}</small></div></div>${g.mixOn ? '<div class="timer"><i id="tm" style="width:100%"></i></div>' : ''}<div id="mixHost"></div>`;
+        return head + `<div class="ckStrip">${gu ? guestSVG(gu, 'neutral') : ''}<div><b>„${esc(gu ? gu.motto : '')}“</b>${ckWishHTML(gu)}</div></div>${g.mixOn ? '<div class="timer"><i id="tm" style="width:100%"></i></div>' : ''}<div id="mixHost"></div>`;
       case 'turn': case 'tvmix': case 'covered':
         if (g.tvTeam === t) return head + ckWait('Ihr seid dran!', 'Mixt jetzt am Fernseher. Alle anderen schauen weg.');
         return head + ckWait(`Team ${TEAMC[g.tvTeam] ? TEAMC[g.tvTeam].name : ''} mixt am Fernseher`, 'Nicht hinschauen! 🙈');
@@ -2277,13 +2864,14 @@ function startPhone(room) {
         if (c.stage === 'cover') h += `<h2 class="ph2" style="margin-top:10px">Trommelwirbel …</h2>`;
         else {
           h += `<div class="ckRvSvg">${cocktailSVG(c.mix, { anim:true })}</div><h2 class="ph2">${esc(c.name)}</h2>`;
-          if (c.stage === 'react' && gu) h += `<div class="ckReact">${guestSVG(gu, c.cat === 'top' ? 'happy' : c.cat === 'ok' ? 'ok' : 'disgust')}<p>„${esc(c.comment)}“</p><b class="pts ${c.cat}">+${c.pts}</b></div>`;
+          if (c.stage === 'react' && gu) h += `<div class="ckReact">${guestSVG(gu, c.cat === 'top' ? 'happy' : c.cat === 'ok' ? 'ok' : 'disgust')}<p>„${esc(c.comment)}“</p><b class="pts ${c.cat}">+${c.pts}</b></div>${c.sec ? '<div class="ckSecHit">🤫 Geheimtipp geknackt!</div>' : ''}`;
         }
         return h + `</section>`;
       }
       case 'board': {
         const order = g.teams.slice().sort((a, b) => g.totals[b] - g.totals[a] || a - b);
-        return head + `<section class="card pcard"><h2 class="ph2">Zwischenstand</h2>${order.map((x, i) => `<div class="ckRow${x === t ? ' me2' : ''}" style="--c:${TEAMC[x].c};--t:${TEAMC[x].t}"><span class="n">${i + 1}</span><span>Team ${TEAMC[x].name}</span><b>${g.totals[x]}</b><i>+${g.last[x]}</i></div>`).join('')}</section>`;
+        const si = gu && ckItem(gu.like.ids[0]), hit = (g.hits || []).includes(t);
+        return head + (si ? `<section class="card pcard ckSecCard${hit ? ' hit' : ''}"><small>Der Geheimtipp von ${esc(gu.n)} war</small><b>${si.e} ${esc(si.n)}</b><q>${esc(gu.like.hint)}</q><span>${hit ? 'Ihr habt ihn geknackt! 🎉' : (g.hits || []).length ? 'Geknackt von ' + g.hits.map(x => 'Team ' + TEAMC[x].name).join(', ') : 'Keiner hat’s geknackt.'}</span></section>` : '') + `<section class="card pcard"><h2 class="ph2">Zwischenstand</h2>${order.map((x, i) => `<div class="ckRow${x === t ? ' me2' : ''}" style="--c:${TEAMC[x].c};--t:${TEAMC[x].t}"><span class="n">${i + 1}</span><span>Team ${TEAMC[x].name}</span><b>${g.totals[x]}</b><i>+${g.last[x]}</i></div>`).join('')}</section>`;
       }
       case 'finale': {
         const order = g.teams.slice().sort((a, b) => g.totals[b] - g.totals[a] || a - b), w = order[0];
@@ -2298,10 +2886,102 @@ function startPhone(room) {
     const key = 'ck|' + S.g.gi;
     if (local.ckKey !== key || !local.ckUI) {
       local.ckKey = key; local.ckMix = null;
-      local.ckUI = MixUI({ guest: GUESTS_BY[S.g.guest], big:false, toast: m => banner(m), tap: () => buzz(10),
+      local.ckUI = MixUI({ guest: ckGuest(S.g.guest, S.g.sec), big:false, toast: m => banner(m), tap: () => buzz(10),
+        onStep: el => { const sc = document.getElementById('ph'), r = el.getBoundingClientRect(); if (sc && r.top < 0) sc.scrollBy({ top: r.top - 8, behavior: 'smooth' }); },
         onDone: m => { local.ckMix = m; act({ mix: m }); buzz([60, 40, 60]); lastHTML = ''; render(); } });
     }
     if (local.ckUI.el.parentNode !== host) host.appendChild(local.ckUI.el);
+  }
+  // ---------- Zwei Köpfe, ein Gedanke am Handy ----------
+  function wlHTML(g) {
+    const t = myTeam(), mine = g.team === t, tc = TEAMC[g.team] || TEAMC[t], chars = S.teams[g.team] || [];
+    const head = `<p class="psub" style="text-align:center;color:#ffe8c4">Zwei Köpfe, ein Gedanke${g.team >= 0 && g.round ? ` · Team ${tc.name} · Runde ${g.round} von ${g.max}` : ''}</p>`;
+    const wait = (h2, p, pics) => `<section class="card pcard wait">${pics ? `<div style="display:flex;justify-content:center">${pics}</div>` : `<img class="bust" src="${ART.bust.Hugo}" alt="Hugo">`}<h2 class="ph2">${h2}</h2><p class="psub">${p}</p></section>`;
+    const duo = x => (S.teams[x] || []).map(ch => bust(ch, TEAMC[x])).join('');
+    const p = g.round > 1 ? g.chain[g.round - 2] : null;
+    const prompt = () => !p ? `<section class="card pcard wlPr"><small>Startwort</small><b class="wlW st">${esc(g.start || '?')}</b><span>Woran denkt ihr dabei?</span></section>`
+      : `<section class="card pcard wlPr"><small>Was verbindet …</small><div class="wlPair"><b class="wlW">${esc(p[0])}</b><i>+</i><b class="wlW">${esc(p[1])}</b></div></section>`;
+    const tabu = () => { const u = [g.start, ...g.chain.flat()].filter(Boolean); return u.length > 1 ? `<p class="wlTabu"><b>Tabu:</b> ${u.map(esc).join(' · ')}</p>` : ''; };
+    const words = () => {
+      const sign = g.match === true ? '=' : g.match === false ? '≠' : g.phase === 'judge' ? '≈' : '?';
+      const txt = g.phase === 'judge' ? 'Fast gleich! Hugo fragt am Fernseher, ob es zählt …' : g.match === true ? `Gleicher Gedanke in Runde ${g.round}!` : g.match === false ? (g.round < g.max ? 'Nicht gleich. Gleich geht es weiter!' : 'Leider nicht gleich.') : 'Auf drei …';
+      return `<section class="card pcard wlRv${g.match === true ? ' ok' : g.match === false ? ' no' : ''}"><div class="wlRvRow">${[0, 1].map(s => `<div class="wlRvW">${bust(chars[s], tc)}<b>${g.words ? esc(g.words[s]) : '…'}</b></div>`).join(`<i>${sign}</i>`)}</div><p>${txt}</p></section>`;
+    };
+    switch (g.phase) {
+      case 'turn':
+        if (mine) { const n = S.tlive[t] || 0; return head + wait('Ihr seid dran!', n >= 2 ? 'Gleich kommt euer Startwort. Jeder tippt an seinem eigenen Handy.' : 'Gleich kommt euer Startwort. Ihr tippt nacheinander an diesem Handy, der andere schaut weg.', duo(t)); }
+        return head + wait(`Team ${tc.name} ist dran`, 'Schaut auf den Fernseher und ratet mit!', duo(g.team));
+      case 'input':
+        if (mine) return head + prompt() + tabu() + '<div id="wlHost"></div>';
+        return head + prompt() + wait(`Team ${tc.name} denkt nach …`, 'Was würdet ihr tippen?', duo(g.team));
+      case 'reveal': case 'judge': case 'miss': case 'match':
+        return head + words();
+      case 'turnEnd': {
+        const R = g.res[g.team]; if (!R) return head;
+        return head + `<section class="card pcard wait" style="background:${mine && R.ok ? 'var(--gold)' : ''}"><div style="display:flex;justify-content:center">${duo(g.team)}</div><h2 class="ph2">${R.ok ? `${mine ? 'Ihr habt' : `Team ${tc.name} hat`} es in Runde ${R.r} geschafft!` : `${mine ? 'Ihr habt' : `Team ${tc.name} hat`} es nicht geschafft`}</h2><p class="psub" style="color:var(--ink)">${R.ok ? `Beide dachten an „${esc(R.word)}“.` : `Kein gleicher Gedanke in ${g.max} Runden.`}</p></section>`;
+      }
+      case 'finale': {
+        const rk = g.order.filter(x => g.res[x]).sort((a, b) => g.res[a].r - g.res[b].r || (a === g.win ? -1 : b === g.win ? 1 : 0) || a - b);
+        return head + `<section class="card pcard"><h2 class="ph2">Wer denkt am gleichsten?</h2>${rk.map((x, i) => `<div class="ckRow wlRk${x === t ? ' me2' : ''}" style="--c:${TEAMC[x].c};--t:${TEAMC[x].t}"><span class="n">${i + 1}</span><span>Team ${TEAMC[x].name}</span><b>${g.res[x].ok ? 'Runde ' + g.res[x].r : '✗'}</b></div>`).join('')}</section>`;
+      }
+    }
+    return head;
+  }
+  // Eingabe bleibt beim Neuzeichnen erhalten (Text und Fokus gehen nicht verloren)
+  function wlUI() {
+    const el = document.createElement('section');
+    el.className = 'card pcard wlIn';
+    el.innerHTML = `<div class="wlWho"></div><div class="wlForm" hidden><label class="wlLab" for="wlInp"></label><div class="wlRow"><input id="wlInp" maxlength="30" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="send"><button type="button" class="btn wlSend">OK</button></div><p class="wlErr" role="alert"></p></div><div class="wlStat"></div>`;
+    const $e = s => el.querySelector(s), inp = $e('#wlInp');
+    let g = null, key = '', slot = -1, pend = null, sent = {};
+    const used = () => [g.start, ...g.chain.flat()];
+    function submit() {
+      if (!g || slot < 0 || pend) return;
+      const w = inp.value.trim(), e = wlCheck(w, used());
+      if (e) { $e('.wlErr').textContent = e; buzz(120); return; }
+      pend = { key, slot, at: Date.now() }; sent[key] = w;
+      act({ wl:'word', slot, w, ti:g.ti, r:g.round }); buzz([40, 30, 40]);
+      inp.blur(); update(g);
+      setTimeout(() => { if (pend && pend.key === key && g && !g.sub[pend.slot]) { pend = null; delete sent[key]; $e('.wlErr').textContent = 'Nicht angekommen. Bitte nochmal senden.'; update(g); } }, 5000);
+    }
+    $e('.wlSend').addEventListener('click', submit);
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); submit(); } });
+    inp.addEventListener('input', () => { $e('.wlErr').textContent = ''; });
+    el.addEventListener('click', e => { const b = e.target.closest('[data-claim]'); if (b && !b.disabled && g) { act({ wl:'claim', slot:+b.dataset.claim, ti:g.ti, r:g.round }); buzz(30); } });
+    function update(ng) {
+      g = ng;
+      const t = myTeam(), chars = S.teams[t] || [], tc = TEAMC[t], np = S.tlive[t] || 0;
+      if (pend && g.sub[pend.slot]) pend = null;
+      let s = -1, who = '';
+      if (np >= 2) {
+        const my = g.claims.indexOf(me);
+        if (my < 0) who = `<p class="wlQ">Wer tippt an diesem Handy?</p><div class="wlClaim">${[0, 1].map(k => { const taken = g.claims[k] && g.claims[k] !== me; return `<button type="button" class="wlCb" data-claim="${k}" ${taken || g.sub[k] ? 'disabled' : ''}>${bust(chars[k], tc)}<b>${esc(chars[k])}</b><small>${g.sub[k] ? 'hat schon getippt' : taken ? 'am anderen Handy' : 'Das bin ich'}</small></button>`; }).join('')}</div>`;
+        else if (!g.sub[my]) s = my;
+        else who = `<p class="wlQ">✓ Abgeschickt${sent[`${g.ti}|${g.round}|${my}`] ? `: „${esc(sent[`${g.ti}|${g.round}|${my}`])}“` : ''}</p>`;
+      } else s = !g.sub[0] ? 0 : !g.sub[1] ? 1 : -1;
+      if (s >= 0 && g.tvIn === s) { who = `<p class="wlQ">${esc(chars[s])} tippt gerade am Fernseher.</p>`; s = -1; }
+      if (g.sub[0] && g.sub[1]) who = `<p class="wlQ">Beide haben getippt! Schaut auf den Fernseher.</p>`;
+      const nk = `${g.ti}|${g.round}|${s}`;
+      if (nk !== key) { key = nk; inp.value = ''; $e('.wlErr').textContent = ''; }
+      slot = s;
+      const form = $e('.wlForm');
+      form.hidden = s < 0;
+      if (s >= 0) {
+        $e('.wlLab').innerHTML = np >= 2 ? `${esc(chars[s])}, dein Wort:` : s === 0 ? `<b>${esc(chars[0])}</b> tippt zuerst. ${esc(chars[1])}, schau weg! 🙈` : `Jetzt <b>${esc(chars[1])}</b>! ${esc(chars[0])}, schau weg! 🙈`;
+        inp.disabled = !!pend; $e('.wlSend').disabled = !!pend; $e('.wlSend').textContent = pend ? '…' : 'OK';
+      }
+      $e('.wlWho').innerHTML = who;
+      $e('.wlStat').innerHTML = [0, 1].map(k => `<div class="wlS${g.sub[k] ? ' ok' : ''}">${bust(chars[k], tc)}<b>${esc(chars[k])}</b><span>${g.sub[k] ? '✓ hat getippt' : g.tvIn === k ? 'tippt am Fernseher' : 'tippt noch …'}</span></div>`).join('');
+    }
+    return { el, update };
+  }
+  function mountWL(refocus) {
+    const host = document.getElementById('wlHost'); if (!host || !S || !S.g || S.g.id !== 'wl') return;
+    if (!local.wl) local.wl = wlUI();
+    if (local.wl.el.parentNode !== host) host.appendChild(local.wl.el);
+    local.wl.update(S.g);
+    const inp = local.wl.el.querySelector('#wlInp');
+    if (refocus && !inp.disabled && document.activeElement !== inp) inp.focus();
   }
   function ludoHTML(g) {
     const t = myTeam(), tc = TEAMC[t], meP = g.players.find(p => p.seat === t);
