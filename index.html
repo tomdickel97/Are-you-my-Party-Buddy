@@ -949,6 +949,11 @@ button{font-family:inherit}
 .efRow > b{font-size:30px;text-align:right}
 .efActs{position:absolute;right:30px;bottom:24px}
 .efActs .btn{font-size:28px}
+/* Startkarte kompakt, damit der Start-Knopf immer sichtbar ist */
+.introCard.eiSet{max-height:750px;overflow:auto}
+.introCard.eiSet h2{margin:2px 0 8px}
+.introCard.eiSet li{font-size:22px;line-height:1.3;margin-bottom:6px}
+.introCard.eiSet .csetGrid{margin:8px 0 12px}
 /* Einlass! · Handy */
 #eiHost{min-width:0}
 .eiPity{margin:0;text-align:center;font-weight:700;color:#3a2a10;background:var(--gold);border:3px solid var(--ink);border-radius:14px;padding:6px}
@@ -3262,11 +3267,11 @@ function Einlass() {
   // ---------- Einstellungen ----------
   async function settings() {
     g.phase = 'intro';
-    $('#screen').innerHTML = `<section class="intro"><div class="card introCard cset"><div class="eyebrow">Spiel um die Buddy-Box</div><h2>Einlass!</h2>
-      <ul>${['Jedes Team betreibt eine Hütte. Jeden Abend steht eine <b>Schlange</b> vor der Tür. Ihr seht, wer ansteht, aber nicht in welcher Reihenfolge.',
-        'Alle Teams spielen gleichzeitig: <b>Reinlassen oder Laden dicht?</b> Gäste bringen Geld, Störenfriede bringen Ärger. Bei 3 Ärger kommt die Polizei und ihr verliert die Hälfte der Einnahmen des Abends. Mehr als 10 Gäste passen nicht rein.',
-        'Vor jedem Abend wird geplant: <b>Motto</b> wählen (Bonus gibt es nur, wenn kein anderes Team dasselbe Motto hat), Club ausbauen, Getränke und Gäste kaufen und <b>Gemeinheiten</b> an zufällige andere Hütten schicken.',
-        `Nach allen Abenden gewinnt die Hütte mit dem meisten Geld und entscheidet über die Buddy-Box.`].map((r, i) => `<li><i>${i + 1}</i><span>${r}</span></li>`).join('')}</ul>
+    $('#screen').innerHTML = `<section class="intro"><div class="card introCard cset eiSet"><div class="eyebrow">Spiel um die Buddy-Box</div><h2>Einlass!</h2>
+      <ul>${['Jede Hütte hat ihre eigene <b>Schlange</b>: Ihr seht, wer ansteht, aber nicht in welcher Reihenfolge.',
+        'Alle spielen gleichzeitig: <b>Reinlassen oder Laden dicht?</b> Bei 3 Ärger kommt die Polizei und die Hälfte der Einnahmen ist weg.',
+        'Vor jedem Abend: <b>Motto</b> wählen (Bonus nur, wenn es kein anderes Team hat), einkaufen und <b>Gemeinheiten</b> verschicken.',
+        'Die vollste Kasse gewinnt und entscheidet über die Buddy-Box.'].map((r, i) => `<li><i>${i + 1}</i><span>${r}</span></li>`).join('')}</ul>
       <div class="csetGrid">
         <div class="csetRow"><span>Abende</span><button class="btn sec sm" data-d="n" data-v="-1" aria-label="Weniger Abende">−</button><b id="sN"></b><button class="btn sec sm" data-d="n" data-v="1" aria-label="Mehr Abende">+</button></div>
         <div class="csetRow"><span>Planungszeit</span><button class="btn sec sm" data-d="p" data-v="-30" aria-label="Weniger Zeit">−</button><b id="sP"></b><button class="btn sec sm" data-d="p" data-v="30" aria-label="Mehr Zeit">+</button><label class="tgl"><input type="checkbox" id="sDr" checked> Trinkregeln</label></div>
