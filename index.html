@@ -1484,7 +1484,7 @@ function onTvMsg(m) {
     const before = T.phones[m.pid];
     const hadPhone = teamPhones(t) > 0;
     T.phones[m.pid] = t;
-    if (m.t === 'join' && before !== t) { Snd.pling(); if (T.screen === 'lobby' && !hadPhone) hugo(pick([`Team ${TEAMC[t].name} ist dabei!`, `Hallo ${duoName(tchars(t))}!`, `Team ${TEAMC[t].name} ist eingecheckt. Hohoho!`]), 2600); }
+    if (m.t === 'join' && before !== t) { Snd.pling(); if (T.screen === 'lobby' && !hadPhone) hugo(pick([`Team ${TEAMC[t].name} ist dabei!`, `Hallo ${duoName(tchars(t))}!`, `Team ${TEAMC[t].name} ist eingecheckt. Hohoho!`, `Team ${TEAMC[t].name} ist dabei! Viel Glück … ihr werdet es brauchen.`, `Hallo ${duoName(tchars(t))}! Ich hab euch schon erwartet …`]), 2600); }
     refreshLive();
   } else if (m.t === 'leave') {
     delete T.phones[m.pid];
@@ -1565,7 +1565,7 @@ function renderLobby(fresh) {
   $('#screen').innerHTML = `<section class="lobby">
     <div>
       <h1 class="logo">Are You My<span>Party Buddy?</span></h1>
-      <p class="tag">Die Spiele zur Buddy-Box: Wer gewinnt, entscheidet, wer in die Box geht.</p>
+      <p class="tag">Die Spiele zur Buddy-Box: Das Gewinnerpaar geht in die Box.</p>
       <div class="card join${T.qrOn ? '' : ' qroff'}"><div class="qr" id="qr"></div><div class="qrHide"><i>🔒</i>QR-Code<br>versteckt</div><div><div class="eyebrow">Handy scannen, Team wählen</div><div class="code">${T.qrOn ? T.room : '••••'}</div><p>Oder im Browser öffnen:<br><b id="urlTxt"></b></p><p class="netnote" id="netNote"></p><button class="btn sec qrTgl" id="qrTgl">${T.qrOn ? 'QR-Code verstecken' : 'QR-Code zeigen'}</button></div></div>
     </div>
     <div class="lobbyR">
@@ -1584,7 +1584,7 @@ function renderLobby(fresh) {
     T.teams[i][k] = v; save(); renderLobby(false); sync();
   }));
   $('#toMenu').addEventListener('click', () => { Snd.pling(); renderMenu(); });
-  hugo('Willkommen zum Spieleabend! Scannt den Code und sucht euch eure Figur aus.', 5000);
+  hugo(pick(['Ihr schon wieder! Letztes Jahr bei „Schlag den Hugo“ habt ihr mich geschlagen. Heute hole ich mir meine Revanche! Scannt den Code und sucht euch eure Figur aus.', 'Willkommen zu meiner Revanche! Scannt den Code und sucht euch eure Figur aus. Diesmal gewinne ich. Hehe.', 'Ein ganzes Jahr habe ich auf diesen Abend gewartet! Scannt den Code und sucht euch eure Figur aus.']), 7000);
   sync();
 }
 function renderQR(el) { if (!el || typeof qrcode !== 'function') return; const q = qrcode(0, 'M'); q.addData(ctlURL()); q.make(); el.innerHTML = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true }); }
@@ -1643,7 +1643,7 @@ function renderMenu(quiet) {
   document.querySelectorAll('[data-rv]').forEach(b => b.addEventListener('click', () => flipTo(+b.dataset.rv, true)));
   document.querySelectorAll('[data-tog]').forEach(b => b.addEventListener('click', () => flipTo(+b.dataset.tog, !REVEAL[GAMES[+b.dataset.tog].id])));
   $('#toLobby').addEventListener('click', () => renderLobby(true));
-  if (!quiet) hugo('Welches Spiel wird es diesmal? Die Gewinner schicken das nächste Paar in die Buddy-Box.', 4500);
+  if (!quiet) hugo(pick(['Welches Spiel wird es diesmal? Das Gewinnerpaar geht in die Buddy-Box. Ich hoffe, ihr verliert alle!', 'Versucht ruhig, mich zu schlagen! Das Gewinnerpaar geht in die Buddy-Box.', 'Nächstes Spiel, nächste Chance für mich! Das Gewinnerpaar geht in die Buddy-Box.']), 5500);
   sync();
 }
 
@@ -1690,14 +1690,14 @@ function renderResult() {
   $('#screen').innerHTML = `<section class="result">
     <div class="winner"><svg class="crown" viewBox="0 0 120 80"><path d="M10 70 L18 20 L42 46 L60 8 L78 46 L102 20 L110 70 Z" fill="#ffd36b" stroke="#2a1b2d" stroke-width="5" stroke-linejoin="round"/><circle cx="60" cy="50" r="7" fill="#ff5d5d" stroke="#2a1b2d" stroke-width="3"/></svg>
       <div class="duo">${R.chars.map(ch => `<img src="${ART.full[ch]}" alt="${esc(ch)}">`).join('')}</div>
-      <h2>Team ${tc.name} gewinnt!</h2><p>${esc(duoName(R.chars))} ${R.chars.length > 1 ? 'entscheiden' : 'entscheidet'}, wer in die Buddy-Box geht.</p></div>
+      <h2>Team ${tc.name} gewinnt!</h2><p>${esc(duoName(R.chars))} ${R.chars.length > 1 ? 'gehen' : 'geht'} in die Buddy-Box.</p></div>
     <div class="card rank"><h3>Endstand: ${esc(R.game)}</h3>${R.ranking.map((i, n) => `<div class="rrow" style="--c:${TEAMC[i].c};--t:${TEAMC[i].t}"><span class="n">${n + 1}</span><span class="duo2">${tchars(i).map(ch => bust(ch, TEAMC[i])).join('')}</span><div class="bar"><i data-w="${R.bar ? Math.max(3, R.bar[i]) : Math.max(3, Math.round(Math.max(0, R.scores[i]) / max * 100))}"></i></div><b class="${R.disp ? 'sm' : ''}">${R.disp ? esc(R.disp[i]) : R.scores[i]}</b></div>`).join('')}
       <div class="resActs"><button class="btn" id="back">Neue Teams fürs nächste Spiel</button></div></div>
   </section>`;
   requestAnimationFrame(() => requestAnimationFrame(() => document.querySelectorAll('.rrow .bar i').forEach(el => el.style.width = el.dataset.w + '%')));
   $('#back').addEventListener('click', () => renderLobby(true));
   Snd.fanfare(); confetti(160);
-  hugo(`${R.tie ? 'Gleichstand! Ich habe eine Münze geworfen: ' : ''}Team ${tc.name} gewinnt! ${duoName(R.chars)}, ihr entscheidet, wer in die Buddy-Box geht.`, 7000);
+  hugo(`${R.tie ? 'Gleichstand! Ich habe eine Münze geworfen: ' : ''}Team ${tc.name} gewinnt! ${duoName(R.chars)}, ab mit ${R.chars.length > 1 ? 'euch' : 'dir'} in die Buddy-Box! ${pick(['Ich drücke die Daumen … dass es nichts wird.', 'Hoffentlich bleibt das Licht aus. Hehe.', 'Pah! Das nächste Spiel gewinne ich.'])}`, 8000);
 }
 function abortGame() { if (T.game) T.game.stop(); hideBig(); renderMenu(); }
 
@@ -1718,7 +1718,7 @@ function Cookies() {
       'Hugo serviert vier Tabletts mit unterschiedlich vielen Plätzchen.',
       'Jedes Team wählt am Handy <b>ein</b> Tablett und legt sich fest. Sprecht euch leise im Team ab!',
       'Ist ein Team allein auf seinem Tablett, bekommt es alle Plätzchen darauf. Wählen mehrere Teams dasselbe Tablett, bekommt <b>keiner</b> etwas.',
-      `${ROUNDS} Runden. Wer am Ende die meisten Plätzchen hat, entscheidet über die Buddy-Box.`],
+      `${ROUNDS} Runden. Wer am Ende die meisten Plätzchen hat, geht in die Buddy-Box.`],
       'Frisch gebacken! Aber Vorsicht: Wer sich ein Tablett teilt, geht leer aus.');
     hugoPose(true);
     build();
@@ -2157,7 +2157,7 @@ function Ludo() {
       '<b>Globus</b> und <b>Fahne</b> sind sicher: Wer dort auf eine fremde Figur zieht, fliegt selbst raus. <b>Stern</b> = springt zum nächsten Stern, der Stern in eurer Farbe direkt ins Ziel.',
       'Ins Ziel (2 Felder) nur mit passender Augenzahl. Gewürfelt und gezogen wird am Handy, Teams ohne Handy spielt der Computer. Wer zuerst beide Figuren im Ziel hat, gewinnt.',
       '<b>Trinkregeln:</b> Landet ihr auf einem Stern, dürft ihr <b>2 Schlucke verteilen</b>. Wer rausgeworfen wird oder selbst rausfliegt, <b>trinkt 3 Schlucke</b>.'],
-      'Mensch, ärgere dich nicht! Na ja, ein bisschen ärgern ist erlaubt. Prost!',
+      'Mensch, ärgere dich nicht! Na ja, ein bisschen ärgern ist erlaubt. Ich ärgere mich ja auch schon ein Jahr lang. Prost!',
       [{ id:'drinks', label:'Los geht\'s mit Trinkregeln' }, { id:'plain', label:'Ohne Trinkregeln' }]);
     g.drinks = mode === 'drinks';
     g.np = NP;
@@ -2819,7 +2819,7 @@ function Cocktail() {
       <ul>${['Nacheinander kommen Hugos Freunde an die Bar. Jeder hat ein <b>Motto</b>, eine Abneigung und einen <b>Geheimtipp als Rätsel</b>. Wer das Rätsel knackt, bekommt Bonus.',
         'Jedes Team mixt geheim, <b>Schritt für Schritt je eine Sache</b>: Glas, Basis, Likör, Saft, Süßes, Gewürz, Fun & Trash und Deko. Teams ohne Handy mixen nacheinander am Fernseher.',
         'Dann wird serviert: Der Gast probiert jeden Cocktail und vergibt <b>5, 4, 3, 2 oder 1 Punkt</b>. Strenge Gäste geben weniger.',
-        'Wer nach allen Gästen die meisten Punkte hat, gewinnt die Cocktail-Bar und entscheidet über die Buddy-Box.'].map((r, i) => `<li><i>${i + 1}</i><span>${r}</span></li>`).join('')}</ul>
+        'Wer nach allen Gästen die meisten Punkte hat, gewinnt die Cocktail-Bar und geht in die Buddy-Box.'].map((r, i) => `<li><i>${i + 1}</i><span>${r}</span></li>`).join('')}</ul>
       <div class="csetGrid">
         <div class="csetRow"><span>Gäste</span><button class="btn sec sm" data-d="ng" data-v="-1" aria-label="Weniger Gäste">−</button><b id="sNg"></b><button class="btn sec sm" data-d="ng" data-v="1" aria-label="Mehr Gäste">+</button></div>
         <div class="csetRow"><span>Mixzeit pro Team</span><button class="btn sec sm" data-d="mx" data-v="-15" aria-label="Weniger Zeit">−</button><b id="sMx"></b><button class="btn sec sm" data-d="mx" data-v="15" aria-label="Mehr Zeit">+</button><label class="tgl"><input type="checkbox" id="sOn" checked> Timer an</label></div>
@@ -2830,7 +2830,7 @@ function Cocktail() {
     upd();
     document.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => { if (b.dataset.d === 'ng') g.ng = clamp(g.ng + +b.dataset.v, 1, 12); else g.mixS = clamp(g.mixS + +b.dataset.v, 30, 240); Snd.tick(); upd(); }));
     $('#sOn').addEventListener('change', e => { g.mixOn = e.target.checked; upd(); });
-    hugo('Heute kommen meine Freunde vorbei! Mixt ihnen, was sie sich wünschen.', 6000); sync();
+    hugo('Heute kommen meine Freunde vorbei! Mixt ihnen, was sie sich wünschen. Und wehe, es schmeckt ihnen nicht!', 6500); sync();
     await waitFor('#go');
   }
 
@@ -3130,7 +3130,7 @@ function Gedanke() {
       'Ein Team nach dem anderen ist dran. Ihr bekommt ein <b>Startwort</b>.',
       'Beide tippen <b>geheim</b> ein Wort, an das sie dabei denken: am besten jeder an seinem Handy, sonst nacheinander an einem Handy oder am Fernseher.',
       'Auf drei werden beide Wörter gezeigt. Gleich? Geschafft! Sonst sucht ihr ein Wort, das <b>eure beiden Wörter verbindet</b>. Schon benutzte Wörter sind tabu.',
-      `Höchstens ${WL_MAX} Runden. Das Team mit den <b>wenigsten Runden</b> gewinnt und entscheidet über die Buddy-Box.`],
+      `Höchstens ${WL_MAX} Runden. Das Team mit den <b>wenigsten Runden</b> gewinnt und geht in die Buddy-Box.`],
       'Mal sehen, wer hier wirklich auf einer Wellenlänge ist!');
     g.order = shuffle(realTeams().filter(t => tchars(t).length === 2));
     const starts = shuffle(WL_START);
@@ -3642,7 +3642,7 @@ function Einlass() {
       <ul>${['Jede Hütte hat ihre eigene <b>Schlange</b>: Ihr seht, wer ansteht, aber nicht in welcher Reihenfolge.',
         'Alle spielen gleichzeitig: <b>Reinlassen oder Laden dicht?</b> Bei 3 Ärger kommt die Polizei und die Hälfte der Einnahmen ist weg.',
         'Vor jedem Abend: <b>Motto</b> wählen (Bonus nur, wenn es kein anderes Team hat), einkaufen und <b>Gemeinheiten</b> verschicken.',
-        'Die vollste Kasse gewinnt und entscheidet über die Buddy-Box.'].map((r, i) => `<li><i>${i + 1}</i><span>${r}</span></li>`).join('')}</ul>
+        'Die vollste Kasse gewinnt, und das Paar geht in die Buddy-Box.'].map((r, i) => `<li><i>${i + 1}</i><span>${r}</span></li>`).join('')}</ul>
       <div class="csetGrid">
         <div class="csetRow"><span>Abende</span><button class="btn sec sm" data-d="n" data-v="-1" aria-label="Weniger Abende">−</button><b id="sN"></b><button class="btn sec sm" data-d="n" data-v="1" aria-label="Mehr Abende">+</button></div>
         <div class="csetRow"><span>Planungszeit</span><button class="btn sec sm" data-d="p" data-v="-30" aria-label="Weniger Zeit">−</button><b id="sP"></b><button class="btn sec sm" data-d="p" data-v="30" aria-label="Mehr Zeit">+</button><label class="tgl"><input type="checkbox" id="sDr" checked> Trinkregeln</label></div>
@@ -3653,7 +3653,7 @@ function Einlass() {
     upd();
     document.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => { if (b.dataset.d === 'n') g.nights = clamp(g.nights + +b.dataset.v, 3, 10); else g.planS = clamp(g.planS + +b.dataset.v, 60, 300); Snd.tick(); upd(); }));
     $('#sDr').addEventListener('change', e => { g.drink = e.target.checked; });
-    hugo('Heute macht jeder seine eigene Hütte auf! Wer hat am Ende die vollste Kasse?', 6000); sync();
+    hugo('Heute macht jeder seine eigene Hütte auf! Wer hat am Ende die vollste Kasse? Meine Hütte ist natürlich die beste.', 6500); sync();
     await waitFor('#go');
   }
 
@@ -4310,7 +4310,7 @@ function Pferderennen() {
     upd();
     document.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => { g.N = clamp(g.N + +b.dataset.v, 20, 80); Snd.tick(); upd(); }));
     $('#sDr').addEventListener('change', e => { g.drink = e.target.checked; });
-    hugo('Hereinspaziert! Eure Figuren reiten um die Buddy-Box. Erst Spieler 1, dann Spieler 2!', 6000); sync();
+    hugo('Hereinspaziert! Eure Figuren reiten um die Buddy-Box. Erst Spieler 1, dann Spieler 2! Ich setze auf … keinen von euch.', 7000); sync();
     await waitFor('#go');
   }
 
@@ -4462,7 +4462,7 @@ function Pferderennen() {
     const lane = document.getElementById('krL' + g.win); if (lane) lane.classList.add('won');
     Snd.fanfare(); confetti(140, 700, 1500);
     big(esc(g.riders[g.win]) + '!', g.stech ? `holt den Sieg für ${nm(g.win)}` : `gewinnt Durchgang ${g.dg} für ${nm(g.win)}`, g.stech ? 3200 : 2600);
-    hugo(g.stech ? `${g.riders[g.win]} gewinnt das Stechen! ${nm(g.win)} holt sich die Buddy-Box!` : pick([`${g.riders[g.win]} gewinnt für ${nm(g.win)}! Was für ein Ritt!`, `Sieg für ${g.riders[g.win]}! Die Kirmes tobt!`]), 4000);
+    hugo(g.stech ? `${g.riders[g.win]} gewinnt das Stechen! ${nm(g.win)} geht in die Buddy-Box!` : pick([`${g.riders[g.win]} gewinnt für ${nm(g.win)}! Was für ein Ritt!`, `Sieg für ${g.riders[g.win]}! Die Kirmes tobt!`]), 4000);
     sync();
     if (g.endRace) g.endRace();
   }
@@ -4546,8 +4546,8 @@ function SongContest() {
       'Hugo lost jedem Team ein <b>Thema</b> zu. Dazu baut ihr offline euren <b>KI-Song</b>.',
       'Sind alle fertig, hören wir die Songs in ausgeloster Reihenfolge nacheinander.',
       `Am Handy verteilt jedes Team Punkte an die anderen Songs: <b>${list(vals0.map(String))} ${vals0.length > 1 ? 'Punkte' : 'Punkt'}</b>, jede Zahl genau einmal.`,
-      `Kein Punkt für den eigenen Song. Am Ende löst Hugo auf, von Platz ${n0} bis Platz 1. Der Sieger entscheidet über die Buddy-Box.`],
-      'Song-Contest! Erst lose ich eure Themen aus, dann seid ihr dran!');
+      `Kein Punkt für den eigenen Song. Am Ende löst Hugo auf, von Platz ${n0} bis Platz 1. Das Siegerteam geht in die Buddy-Box.`],
+      'Song-Contest! Erst lose ich eure Themen aus, dann seid ihr dran! Und wehe, ihr singt nett über mich …');
     g.teams = realTeams(); g.mx = Math.max(1, g.teams.length - 1);
     await themesPhase();
     g.order = shuffle(g.teams); g.teams.forEach(t => { g.votes[t] = {}; g.done[t] = false; });
@@ -4574,7 +4574,7 @@ function SongContest() {
     g.themes = {}; g.teams.forEach((t, k) => { g.themes[t] = pool[k % pool.length]; });
     svSaveThemes(g.themes);
     g.thRev = []; g.drawing = true; renderThemes(); sync();
-    hugo('Ich lose jetzt eure Song-Themen aus. Trommelwirbel!', 4000);
+    hugo('Ich lose jetzt eure Song-Themen aus. Eins davon handelt von mir … Trommelwirbel!', 4500);
     await g.wait(1200);
     for (const t of g.teams) {
       const el = document.getElementById('svTT' + t), card = document.getElementById('svT' + t);
@@ -4584,7 +4584,7 @@ function SongContest() {
       if (el) el.textContent = `„${thName(t)}“`;
       if (card) { card.classList.remove('rolling'); card.classList.add('landed'); }
       Snd.pling(); sync();
-      hugo(`${nm(t)}: „${thName(t)}“!`, 2400);
+      hugo(`${nm(t)}: „${thName(t)}“!${thName(t) === 'Hugo-Diss-Track' ? ' Na wartet …' : ''}`, 2400);
       await g.wait(900);
     }
     g.drawing = false; renderThemes(); Snd.fanfare(); sync();
@@ -4653,7 +4653,7 @@ function SongContest() {
     $('#screen').innerHTML = `<section class="sv svRv"><div class="svHead"><h2>Die Auflösung</h2><p>Von Platz ${n} bis Platz 1</p></div>
       <div class="svRank">${g.rank.map((e, i) => `<div class="svR" id="svR${i}" style="--c:${TEAMC[e.t].c};--t:${TEAMC[e.t].t}"><span class="pl">${e.place}</span><span class="hid">?</span></div>`).join('')}</div>
       <div class="svActs"><button class="btn" id="svEnd" hidden>Zur Siegerehrung</button></div></section>`;
-    hugo('Und jetzt die Punkte! Wir fangen hinten an …', 3500); sync();
+    hugo('Und jetzt die Punkte! Wir fangen hinten an …' + (g.teams.some(t => thName(t) === 'Hugo-Diss-Track') ? ' Hoffentlich landet der Hugo-Diss-Track ganz hinten!' : ''), 4500); sync();
     await g.wait(2600);
     for (let i = n - 1; i >= 0; i--) {
       const e = g.rank[i];
@@ -4825,7 +4825,7 @@ function Leberschuss() {
     document.querySelectorAll('[data-lv]').forEach(b => b.addEventListener('click', () => { g.start = clamp(g.start + +b.dataset.lv, 5, 300); Snd.tick(); upd(); }));
     document.querySelectorAll('[data-lq]').forEach(b => b.addEventListener('click', () => { g.start = +b.dataset.lq; Snd.tick(); upd(); }));
     q('go').addEventListener('click', () => { Snd.pling(); play(); });
-    hugo('Hugos Leberschuss! Wie viele Schlucke muss ich heute wegtrinken?', 5000); sync();
+    hugo('Hugos Leberschuss! Ein Jahr Rachepläne schmieden macht durstig. Wie viele Schlucke muss ich heute wegtrinken?', 6000); sync();
   }
 
   // ---------- Spiel ----------
@@ -5099,7 +5099,7 @@ function startPhone(room) {
     }
     if (S.screen === 'result' && S.res) {
       const w = S.res.winner, mine = w === myTeam(), tc = TEAMC[w];
-      return `<section class="card pcard wait" style="background:${mine ? 'var(--gold)' : ''}"><div style="display:flex;justify-content:center">${S.teams[w].map(ch => bust(ch, tc)).join('')}</div><h2 class="ph2">${mine ? 'Ihr habt gewonnen!' : `Team ${tc.name} gewinnt`}</h2><p class="psub" style="color:var(--ink)">${mine ? 'Ihr entscheidet, wer in die Buddy-Box geht!' : `${esc(duoName(S.teams[w]))} entscheiden, wer in die Buddy-Box geht.`}</p></section>`;
+      return `<section class="card pcard wait" style="background:${mine ? 'var(--gold)' : ''}"><div style="display:flex;justify-content:center">${S.teams[w].map(ch => bust(ch, tc)).join('')}</div><h2 class="ph2">${mine ? 'Ihr habt gewonnen!' : `Team ${tc.name} gewinnt`}</h2><p class="psub" style="color:var(--ink)">${mine ? 'Ihr geht in die Buddy-Box! 🎁' : `${esc(duoName(S.teams[w]))} ${S.teams[w].length > 1 ? 'gehen' : 'geht'} in die Buddy-Box.`}</p></section>`;
     }
     const g = S.g;
     if (g.phase === 'intro') return `<section class="card pcard wait"><img class="bust" src="${ART.bust.Hugo}" alt="Hugo"><h2 class="ph2">Gleich geht's los</h2><p class="psub">Hugo erklärt das Spiel auf dem Fernseher.</p></section>`;
