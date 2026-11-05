@@ -954,6 +954,15 @@ button{font-family:inherit}
 .introCard.eiSet h2{margin:2px 0 8px}
 .introCard.eiSet li{font-size:22px;line-height:1.3;margin-bottom:6px}
 .introCard.eiSet .csetGrid{margin:8px 0 12px}
+/* Laufkundschaft in der Planung */
+.epWalk{position:absolute;left:200px;right:0;top:206px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;color:#fff;font-size:19px;font-weight:600}
+.epWalk b{font-size:19px;margin-left:-4px}
+.epWalk small{font-size:15px;color:#ffd9d5;margin-right:12px}
+.eiPlanScr .epHint{top:250px}
+.eiPlanScr .epTeams{top:288px}
+.eiPlanScr .epMottos{top:56px}
+.eiPlanScr .epMot{padding:4px 8px}
+.eiPlanScr .epMot span{font-size:34px}
 /* Einlass! · Handy */
 #eiHost{min-width:0}
 .eiPity{margin:0;text-align:center;font-weight:700;color:#3a2a10;background:var(--gold);border:3px solid var(--ink);border-radius:14px;padding:6px}
@@ -991,6 +1000,11 @@ button{font-family:inherit}
 .eiDone{margin:10px 0 0;text-align:center;font-weight:700}
 .eiEnd.s-busted{background:#ffd9d5}
 .eiEnd.s-closed,.eiEnd.s-full,.eiEnd.s-empty{background:#d5f5df}
+.eiWalkP{background:#ffe3df;border:3px solid var(--ink);border-radius:14px;padding:6px 10px}
+.eiWalkP > small{display:block;font-weight:700;font-size:13px}
+.eiWalkP > div{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.eiWalkP span{display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:8px}
+.eiWalkP b{font-size:15px}.eiWalkP em{font-style:normal;font-weight:700;font-size:13px}
 /* Spielauswahl mit fünf Spielen */
 .games{grid-template-columns:repeat(5,minmax(0,250px));gap:16px}
 .games .gcard{min-height:280px;padding:16px 10px}
@@ -2990,6 +3004,13 @@ function Gedanke() {
 const EI_START = 60;          // Startkapital
 const EI_PITY = 20;           // Mitleidsbonus für den Letzten vor jeder Planung
 const EI_CAP = 10;            // So viele Gäste passen in die Hütte
+// Laufkundschaft: zusätzliche Störenfriede, bei allen Hütten gleich, jeden Abend mehr.
+// Sie bringen Geld und Ärger.
+const EI_WALK_N = [1, 2, 2, 3, 4, 4, 5, 5, 6];
+function eiWalkIns(n) {
+  const pool = n <= 2 ? ['suff', 'tourist'] : n <= 4 ? ['suff', 'tourist', 'jga'] : ['tourist', 'jga', 'jga'];
+  return Array.from({ length: EI_WALK_N[Math.min(n, EI_WALK_N.length) - 1] }, () => pick(pool));
+}
 const EI_MOTTOS = [
   { id:'80er', n:'80er-Party', e:'🕺', c:'#ff4fa3' },
   { id:'techno', n:'Techno-Party', e:'🎛️', c:'#36c8ff' },
@@ -3037,7 +3058,6 @@ const EI_SHOP = [
   { id:'g_promi', cat:'guest', card:'promi', n:'Promi einladen', p:60, multi:2, t:'Ein Promi mehr in eurer Schlange.' },
   { id:'g_influ', cat:'guest', card:'influ', n:'Influencerin', p:40, multi:2, t:'Der Gast nach ihr bringt doppelt.' },
   { id:'g_oma', cat:'guest', card:'oma', n:'Oma Lametta', p:35, multi:2, t:'Nimmt 1 Ärger wieder weg.' },
-  { id:'hausverbot', cat:'guest', n:'Hausverbot', e:'🚫', p:30, multi:3, t:'Der lauteste Störenfried fliegt für immer aus eurer Schlange.' },
   { id:'m_krampus', cat:'mies', card:'krampus', n:'Krampus schicken', p:40, t:'Geht zu einer zufälligen anderen Hütte in die Schlange und sorgt dort für 2 Ärger. Bringt kein Geld.' },
   { id:'m_rudi', cat:'mies', card:'rudi', n:'Rudi losschicken', p:20, t:'Geht zu einer zufälligen anderen Hütte in die Schlange: 1 Ärger, kein Geld.' },
   { id:'m_ratten', cat:'mies', n:'Gerücht: Ratten!', e:'🐀', p:30, t:'Bei einer zufälligen anderen Hütte drehen die ersten 2 Gäste in der Schlange wieder um.' },
@@ -3054,12 +3074,11 @@ function eiPlanCheck(plan, money, own, deck) {
   const cart = {}, out = { motto: plan && EI_MOTTO_BY[plan.motto] ? plan.motto : null, cart, ready: !!(plan && plan.ready), cost:0, err:'' };
   const src = plan && plan.cart && typeof plan.cart === 'object' ? plan.cart : {};
   let mies = 0;
-  const noisy = deck.filter(id => eiTrouble(id, own) > 0).length;
   for (const it of EI_SHOP) {
     let q = Math.max(0, Math.floor(+src[it.id] || 0));
     if (!q) continue;
     if (it.cat === 'club' || it.cat === 'drink') q = own[it.id] ? 0 : 1;
-    else if (it.cat === 'guest') q = Math.min(q, it.multi || 1, it.id === 'hausverbot' ? noisy : 9);
+    else if (it.cat === 'guest') q = Math.min(q, it.multi || 1);
     else if (it.def) q = 1;
     else q = Math.min(q, EI_MIES_MAX - mies);
     if (it.cat === 'mies' && !it.def) mies += q;
@@ -3082,7 +3101,7 @@ function eiMoney(id, own, ns) {
 }
 // Abend vorbereiten: Schlange mischen, Gemeinheiten einmischen, Ratten-Gerücht anwenden
 function eiPrepNight(ts, o) {
-  const q = shuffle(ts.deck.map(id => ({ id })).concat(o.recv.map(r => ({ id:r.id, from:r.from }))));
+  const q = shuffle(ts.deck.map(id => ({ id })).concat((o.walk || []).map(id => ({ id, walk:true })), o.recv.map(r => ({ id:r.id, from:r.from }))));
   const gone = o.ratten ? q.splice(0, Math.min(q.length, 2 * o.ratten)) : [];
   ts.ns = { q, gone, inside:[], tonight:0, aerger:0, paid:0, dbl:false, shield: ts.own.tuer ? 1 : 0,
     limit: Math.max(1, 3 + (ts.own.schall ? 1 : 0) - (o.tipp || 0)), cap: EI_CAP + (ts.own.anbau ? 3 : 0), state: q.length ? 'open' : 'empty', dec:null,
@@ -3153,14 +3172,13 @@ function EiPlanUI(opts) {
   function emit() { const c = check(); opts.onChange({ motto:st.plan.motto, cart:c.cart, ready:st.plan.ready && !!st.plan.motto && !c.err }); }
   function itemHTML(it, ch) {
     const i = st.info, q = cnt(it.id), owned = (it.cat === 'club' || it.cat === 'drink') && i.own[it.id];
-    const noisy = i.deck.filter(id => eiTrouble(id, i.own) > 0).length;
     const miesN = EI_SHOP.filter(x => x.cat === 'mies' && !x.def).reduce((s, x) => s + cnt(x.id), 0);
     const rest = i.money - ch.cost;
     let ctl;
     if (owned) ctl = '<span class="eOwn">✓ habt ihr</span>';
     else if (it.cat === 'club' || it.cat === 'drink' || it.def) ctl = `<button type="button" class="eBuy${q ? ' on' : ''}" data-buy="${it.id}" ${!q && it.p > rest ? 'disabled' : ''}>${q ? '✓ im Korb' : 'Kaufen'}</button>`;
     else {
-      const max = it.cat === 'mies' ? EI_MIES_MAX - miesN + q : Math.min(it.multi || 1, it.id === 'hausverbot' ? noisy : 9);
+      const max = it.cat === 'mies' ? EI_MIES_MAX - miesN + q : (it.multi || 1);
       ctl = `<div class="eStep"><button type="button" data-sub="${it.id}" ${q ? '' : 'disabled'} aria-label="Weniger">−</button><b>${q}</b><button type="button" data-add="${it.id}" ${q >= max || it.p > rest ? 'disabled' : ''} aria-label="Mehr">+</button></div>`;
     }
     return `<div class="eItem${q ? ' sel' : ''}${owned ? ' owned' : ''}">${eiCardHTML(it.id)}${ctl}</div>`;
@@ -3233,10 +3251,11 @@ function eiHutSVG(c, st) {
 }
 function Einlass() {
   const g = { id:'ein', gid: Date.now().toString(36), phase:'intro', night:0, nights:6, planS:150, waveS:25, drink:true, teams:[], st:{}, bonus:{}, wave:0, deadline:0, lenS:0,
-    evs:[], evShown:0, pity:[], rank:null, raf:0, endPlan:null, endWave:null, tvPlan:-1 };
+    evs:[], evShown:0, pity:[], walk:[], rank:null, raf:0, endPlan:null, endWave:null, tvPlan:-1 };
   const S_ = t => g.st[t];
   const left = () => g.deadline ? Math.max(0, (g.deadline - performance.now()) / 1000) : null;
   const duo = t => tchars(t).map(ch => bust(ch, TEAMC[t])).join('');
+  const walkText = () => { const c = {}; g.walk.forEach(id => { c[id] = (c[id] || 0) + 1; }); const parts = Object.keys(c).map(id => `${c[id]}× ${EI_CARDS[id].n}`); return parts.length > 1 ? parts.slice(0, -1).join(', ') + ' und ' + parts[parts.length - 1] : parts[0]; };
   const pubTeam = t => {
     const s = S_(t), ns = s.ns;
     return { money:s.money, own:Object.keys(s.own), deck:s.deck, ready: !!(s.plan && s.plan.ready), plan: g.phase === 'plan' ? s.plan : null,
@@ -3246,7 +3265,7 @@ function Einlass() {
       state: ns ? ns.state : null, dec: ns ? ns.dec : null, recv: ns ? ns.recv : [], gone: ns ? ns.gone.map(x => x.id) : [], pay: s.pay || null };
   };
   g.pub = () => ({ id:'ein', gid:g.gid, phase:g.phase, night:g.night, nights:g.nights, round:g.night, wave:g.wave, left:left(), lenS:g.lenS, bonus:g.bonus,
-    teams:g.teams, T:Object.fromEntries(g.teams.map(t => [t, pubTeam(t)])), evs:g.evs.slice(0, g.evShown), pity:g.pity, rank:g.rank, drink:g.drink });
+    teams:g.teams, T:Object.fromEntries(g.teams.map(t => [t, pubTeam(t)])), evs:g.evs.slice(0, g.evShown), pity:g.pity, walk:g.walk, rank:g.rank, drink:g.drink });
   g.stop = () => { g.alive = false; cancelAnimationFrame(g.raf); };
   const waitFor = (sel, ms) => new Promise(res => { const b = document.querySelector(sel); if (b) b.addEventListener('click', res, { once:true }); if (ms) setTimeout(res, ms); }).then(() => { if (!g.alive) throw STOP; Snd.pling(); });
 
@@ -3295,12 +3314,12 @@ function Einlass() {
     if (g.night > 1) {
       const mn = Math.min(...g.teams.map(t => S_(t).money)), low = g.teams.filter(t => S_(t).money === mn);
       if (low.length < g.teams.length) { g.pity = low; low.forEach(t => { S_(t).money += EI_PITY; }); }
-      g.teams.forEach(t => S_(t).deck.push('tourist'));
     }
+    g.walk = eiWalkIns(g.night);
     g.teams.forEach(t => { const s = S_(t); s.ns = null; s.pay = null; s.plan = { motto:null, cart:{}, ready:false }; });
     g.lenS = g.planS; g.deadline = performance.now() + g.planS * 1000;
     renderPlan(); sync();
-    hugo(g.night === 1 ? 'Plant euren ersten Abend! Wählt ein Motto und kauft ein, was eure Hütte braucht.' : g.night === g.nights ? 'Letzter Abend! Jetzt noch mal alles raushauen?' : `Abend ${g.night}! Die Hütten sprechen sich herum: Bei allen steht ein Partytourist mehr in der Schlange.`, 6500);
+    hugo(`${g.night === 1 ? 'Plant euren ersten Abend!' : g.night === g.nights ? 'Letzter Abend!' : `Abend ${g.night}!`} Heute kommt bei allen Hütten Laufkundschaft dazu: ${walkText()}.`, 7000);
     await new Promise((res, rej) => {
       let lastS = -1, doneAt = 0;
       g.endPlan = res;
@@ -3326,6 +3345,7 @@ function Einlass() {
     $('#screen').innerHTML = `<section class="ein eiPlanScr" id="ein">
       <div class="epHead"><h2>Abend ${g.night} von ${g.nights}: Planung</h2><div class="tbar"><i id="epBar" style="width:100%"></i></div><b id="epT"></b></div>
       <div class="epMottos">${EI_MOTTOS.map(m => `<div class="epMot" style="--mc:${m.c}"><span>${m.e}</span><b>${m.n}</b><em>+${g.bonus[m.id]} € pro Gast</em></div>`).join('')}</div>
+      <div class="epWalk"><span>Heute Abend zusätzlich bei allen Hütten:</span>${g.walk.map(id => face(id, 40) + `<b>${esc(EI_CARDS[id].n)}</b><small>${EI_CARDS[id].m} € · ${'⚡'.repeat(EI_CARDS[id].a)}</small>`).join('')}</div>
       <p class="epHint">Den Motto-Bonus bekommt nur, wer sein Motto <b>als einziges Team</b> wählt.${g.pity.length ? ` · Mitleidsbonus +${EI_PITY} € für ${g.pity.map(t => 'Team ' + TEAMC[t].name).join(', ')}` : ''}</p>
       <div class="epTeams" id="epTeams"></div>
       <div class="epActs"><button class="btn sec" id="epSkip">Planung beenden</button></div>
@@ -3368,8 +3388,7 @@ function Einlass() {
       if (it.cat === 'club' || it.cat === 'drink') s.own[id] = true;
       else if (it.cat === 'guest') {
         for (let k = 0; k < q; k++) {
-          if (id === 'hausverbot') { let bi = -1, ba = 0; s.deck.forEach((cid, i) => { const a = eiTrouble(cid, s.own); if (a > ba) { ba = a; bi = i; } }); if (bi >= 0) s.deck.splice(bi, 1); }
-          else for (let j = 0; j < (it.add || 1); j++) s.deck.push(it.card);
+          for (let j = 0; j < (it.add || 1); j++) s.deck.push(it.card);
         }
       } else if (it.def) s.security = true;
       else for (let k = 0; k < q; k++) s.send.push(id);
@@ -3410,7 +3429,7 @@ function Einlass() {
     });
     g.teams.forEach(t => {
       const s = S_(t);
-      eiPrepNight(s, { recv:pre[t].recv, ratten:pre[t].ratten, tipp:pre[t].tipp, strom:pre[t].strom, motto:s.motto, uniq:cnt[s.motto] === 1, bonus:g.bonus[s.motto] });
+      eiPrepNight(s, { walk:g.walk, recv:pre[t].recv, ratten:pre[t].ratten, tipp:pre[t].tipp, strom:pre[t].strom, motto:s.motto, uniq:cnt[s.motto] === 1, bonus:g.bonus[s.motto] });
       s.ns.recv = pre[t].recv;
     });
     g.evShown = 0; g.reveal = { signs:false, queues:false };
@@ -3837,7 +3856,7 @@ function startPhone(room) {
     const own = Object.fromEntries((P.own || []).map(i => [i, true]));
     switch (g.phase) {
       case 'plan':
-        return head + `<div class="timer"><i id="tm" style="width:100%"></i></div>${g.pity.includes(t) ? `<p class="eiPity">Hugo hat Mitleid: +${EI_PITY} € für euch! 🎁</p>` : ''}<div id="eiHost"></div>`;
+        return head + `<div class="timer"><i id="tm" style="width:100%"></i></div>${g.pity.includes(t) ? `<p class="eiPity">Hugo hat Mitleid: +${EI_PITY} € für euch! 🎁</p>` : ''}${(g.walk || []).length ? `<div class="eiWalkP"><small>Heute kommt bei allen Hütten zusätzlich Laufkundschaft:</small><div>${g.walk.map(id => `<span>${face(id)}<b>${esc(EI_CARDS[id].n)}</b><em>${EI_CARDS[id].m} € · ${'⚡'.repeat(EI_CARDS[id].a)}</em></span>`).join('')}</div></div>` : ''}<div id="eiHost"></div>`;
       case 'reveal': {
         const m = P.motto ? EI_MOTTO_BY[P.motto] : null;
         const evs = (g.evs || []).filter(e => e.from === t || e.to === t);
