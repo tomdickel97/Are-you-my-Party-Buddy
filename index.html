@@ -954,15 +954,17 @@ button{font-family:inherit}
 .introCard.eiSet h2{margin:2px 0 8px}
 .introCard.eiSet li{font-size:22px;line-height:1.3;margin-bottom:6px}
 .introCard.eiSet .csetGrid{margin:8px 0 12px}
-/* Laufkundschaft in der Planung */
-.epWalk{position:absolute;left:200px;right:0;top:206px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;color:#fff;font-size:19px;font-weight:600}
-.epWalk b{font-size:19px;margin-left:-4px}
-.epWalk small{font-size:15px;color:#ffd9d5;margin-right:12px}
-.eiPlanScr .epHint{top:250px}
-.eiPlanScr .epTeams{top:288px}
-.eiPlanScr .epMottos{top:56px}
+/* Planung: fließendes Layout, damit nichts überlappt */
+.eiPlanScr{display:flex;flex-direction:column;gap:12px;padding-left:200px}
+.eiPlanScr > .epHead,.eiPlanScr > .epMottos,.eiPlanScr > .epWalk,.eiPlanScr > .epHint,.eiPlanScr > .epTeams{position:relative;left:auto;right:auto;top:auto}
+.eiPlanScr > .epHead{margin-top:-10px}
 .eiPlanScr .epMot{padding:4px 8px}
 .eiPlanScr .epMot span{font-size:34px}
+.epWalk{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;color:#fff;font-size:18px;font-weight:600}
+.epWalk .wk{display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.35);border:2px solid #ff8a8a;border-radius:99px;padding:2px 12px 2px 4px}
+.epWalk .wk em{font-style:normal;font-weight:700;font-size:20px;color:#ffd36b}
+.epWalk .wk b{font-size:18px}
+.epWalk .wk small{font-size:15px;color:#ffd9d5}
 /* Einlass! · Handy */
 #eiHost{min-width:0}
 .eiPity{margin:0;text-align:center;font-weight:700;color:#3a2a10;background:var(--gold);border:3px solid var(--ink);border-radius:14px;padding:6px}
@@ -1010,6 +1012,111 @@ button{font-family:inherit}
 .games .gcard{min-height:280px;padding:16px 10px}
 .games .gcard svg{width:180px;height:160px}
 .games .gcard b{font-size:27px}
+/* Kirmes-Pferderennen · Fernseher */
+.introCard.krSet{max-height:750px;overflow:auto}
+.introCard.krSet h2{margin:2px 0 8px}
+.introCard.krSet li{font-size:23px;line-height:1.3;margin-bottom:4px}
+.introCard.krSet .csetGrid{margin:8px auto 14px}
+.kr{position:absolute;inset:0 0 0 200px;display:flex;flex-direction:column}
+.krTop{position:relative;height:100px;flex:none}
+.krAwn{position:absolute;left:0;top:0;width:100%;height:66px;filter:drop-shadow(0 5px 0 rgba(0,0,0,.35))}
+.krSign{position:absolute;left:50%;top:4px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;background:#2a1b2d;border:4px solid #2a1b2d;outline:4px solid #ffd36b;border-radius:16px;padding:8px 40px 9px;box-shadow:0 8px 0 rgba(0,0,0,.35);white-space:nowrap}
+.krSign::before{content:'';position:absolute;inset:4px;border:5px dotted #ffe9a8;border-radius:12px;animation:krBulb 1s steps(2) infinite;pointer-events:none}
+@keyframes krBulb{50%{border-color:#ff9b42}}
+.krSign b{font-size:40px;line-height:1;color:var(--gold);letter-spacing:.05em;text-transform:uppercase;text-shadow:0 0 14px rgba(255,211,107,.6)}
+.krSign span{font-size:19px;font-weight:600;color:#fff}
+.krTrack{position:relative;flex:1;min-height:0;display:grid;grid-template-rows:repeat(var(--n),minmax(0,1fr));gap:6px;padding:8px 10px 30px;
+  background:repeating-linear-gradient(90deg,#c98b4f 0 38px,#bd7f45 38px 40px);border:5px solid var(--ink);border-radius:18px;box-shadow:5px 6px 0 var(--ink)}
+.krLane{display:grid;grid-template-columns:200px minmax(0,1fr);gap:10px;min-height:0}
+.krTag{position:relative;display:flex;align-items:center;background:var(--t);border:3px solid var(--ink);border-left:12px solid var(--c);border-radius:14px;padding:4px 8px}
+.krTag .bust{width:48px;height:48px;margin-right:-16px;flex:none}
+.krTx{display:flex;flex-direction:column;margin-left:22px;min-width:0;line-height:1.1}
+.krTx b{font-size:24px}
+.krTx small{font-size:15px;font-weight:600;color:var(--ink)}
+.krPlace{position:absolute;right:-12px;top:-10px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--gold);border:3px solid var(--ink);font-style:normal;font-weight:700;font-size:20px;z-index:4}
+.krRun{position:relative;border:3px solid rgba(42,27,45,.55);border-radius:12px;background:linear-gradient(90deg,color-mix(in srgb,var(--t) 55%,transparent),rgba(255,255,255,.06) 60%);transition:box-shadow .3s}
+.krGroove{position:absolute;left:8px;right:24px;bottom:7px;height:9px;border-radius:99px;background:#5a3218;box-shadow:inset 0 3px 0 rgba(0,0,0,.45)}
+.krFin{position:absolute;right:0;top:0;bottom:0;width:20px;border-left:3px solid var(--ink);border-radius:0 9px 9px 0;background:conic-gradient(#2a1b2d 25%,#fff 0 50%,#2a1b2d 0 75%,#fff 0) 0 0/20px 20px}
+.krHorse{position:absolute;bottom:0;left:calc(var(--p) * (100% - var(--hw,140px)));width:var(--hw,140px);height:calc(var(--hw,140px) * .693);transition:left .55s cubic-bezier(.25,1.25,.5,1);z-index:2}
+.krHorse svg{width:100%;height:100%;overflow:visible;transform-origin:45% 95%;animation:krIdle 1.6s ease-in-out infinite}
+.krHorse.krJump svg{animation:krGal .55s ease-out}
+@keyframes krIdle{50%{transform:translateY(-2px)}}
+@keyframes krGal{0%{transform:none}25%{transform:rotate(-8deg) translateY(-8px)}60%{transform:rotate(4deg)}100%{transform:none}}
+.krLane.won .krRun{box-shadow:0 0 0 4px var(--gold),0 0 26px 6px rgba(255,211,107,.8)}
+.krPop{position:absolute;bottom:calc(var(--hw,140px) * .4);left:calc(var(--p) * (100% - var(--hw,140px)) + var(--hw,140px) * .74);font-weight:700;font-size:42px;line-height:1;color:#fff;-webkit-text-stroke:4px var(--ink);paint-order:stroke fill;pointer-events:none;z-index:3;animation:krPop 1.25s ease-out forwards;white-space:nowrap}
+.krPop.v1{color:#9fd4ff}.krPop.v2{color:#ff9aa4}.krPop.v3{color:var(--gold);font-size:54px}
+.krPop.ghost::after{content:' Probe';font-size:20px;-webkit-text-stroke:3px var(--ink)}
+@keyframes krPop{0%{transform:translateY(12px) scale(.5);opacity:0}15%{transform:none;opacity:1}100%{transform:translateY(-34px);opacity:0}}
+.krRuler{position:absolute;left:225px;right:13px;bottom:5px;height:20px;pointer-events:none}
+.krRuler span{position:absolute;left:calc(var(--k) * (100% - var(--hw,140px)) + var(--hw,140px) * .886);transform:translateX(-50%);font-size:15px;font-weight:700;color:#3a1d14}
+.krFoot{flex:none;height:58px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:6px}
+.krLeg{display:flex;align-items:center;gap:8px;color:#ffe8c4;font-size:21px;font-weight:600}
+.krLeg .h{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:3px solid var(--ink);color:#fff;font-weight:700;font-size:20px;box-shadow:inset 0 0 0 5px rgba(0,0,0,.25)}
+.krLeg .h1{background:#3fa9f5}.krLeg .h2{background:#ff4d5e}.krLeg .h3{background:#ffc531;color:var(--ink)}
+.krCtl{display:flex;align-items:center;gap:16px}
+.krCtl .btn{font-size:22px;padding:.4em 1.2em}
+.krPr{color:#fff;font-size:22px;font-weight:600}
+.krPr b{color:var(--gold);font-size:28px;margin-left:6px}
+.krOver{position:absolute;inset:100px 0 58px 0;display:grid;place-items:center;background:rgba(26,15,18,.6);border-radius:18px;z-index:5}
+.krRes{width:min(1120px,96%);padding:20px 28px 22px;text-align:center;animation:pop .45s cubic-bezier(.2,1.5,.4,1) both}
+.krRes h3{margin:0 0 14px;font-size:36px}
+.krResGrid{display:grid;grid-template-columns:1.45fr 1fr;gap:22px;text-align:left}
+.krRow{display:grid;grid-template-columns:34px auto minmax(0,1fr) auto auto;align-items:center;gap:12px;background:var(--t);border:3px solid var(--ink);border-left:10px solid var(--c);border-radius:14px;padding:4px 14px 4px 8px;margin-bottom:7px;font-size:22px;font-weight:600}
+.krRow .n{font-weight:700;font-size:26px;text-align:center}
+.krRow .du{display:flex}
+.krRow .du .bust{width:42px;height:42px;margin-right:-12px}
+.krRow .du .bust:last-child{margin-right:0}
+.krRow .ds{color:var(--muted);font-size:19px}
+.krRow b{font-size:26px}
+.krRow.sm{grid-template-columns:30px auto minmax(0,1fr)}
+.krRow.sm b{justify-self:end}
+.krTot h4{margin:0 0 8px;font-size:22px}
+.krDr{margin:10px 0 0;font-size:22px;font-weight:700;color:#b02a37}
+.krRes .btn{margin-top:14px;font-size:30px}
+.krDuo{display:flex;flex:none}
+.krTag .bust.off{opacity:.3;filter:grayscale(.8)}
+.krTx small i{font-style:normal;font-weight:700}
+.krTx small i.ok{color:#1e8c48}
+.krTx small i.wt{color:#b02a37}
+.krSt{margin:10px 0 0;font-size:24px;font-weight:700;color:#7444cc}
+/* Kirmes-Pferderennen · Handy */
+#ph.krMode .card.me{display:none}
+#krHost{min-width:0}
+.krB{display:grid;gap:8px;min-width:0}
+.krBar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--t);border:3px solid var(--ink);border-left:10px solid var(--c);border-radius:14px;padding:6px 10px;font-weight:700;font-size:15px;line-height:1.1}
+.krBar span{white-space:nowrap}
+.krMe{font-size:17px}
+@media (max-width:370px){.krBar{font-size:13px;padding:5px 8px}.krMe{font-size:15px}}
+.krLf{color:var(--muted)}
+.krPl{text-align:right}
+.krMini{position:relative;height:22px;margin:0 10px;background:rgba(0,0,0,.35);border:2px solid rgba(255,255,255,.35);border-radius:99px}
+.krMini::after{content:'';position:absolute;right:-12px;top:-4px;width:12px;height:26px;border:2px solid var(--ink);background:conic-gradient(#2a1b2d 25%,#fff 0 50%,#2a1b2d 0 75%,#fff 0) 0 0/8px 8px;border-radius:3px}
+.krMini b{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:var(--c);border:2px solid var(--ink);transform:translate(-50%,-50%);transition:left .4s}
+.krMini b.me{width:20px;height:20px;border:3px solid #fff;box-shadow:0 0 0 2px var(--ink);z-index:2}
+.krCv{position:relative;display:flex;justify-content:center;min-width:0}
+.krCv canvas{display:block;border:3px solid var(--ink);border-radius:16px;box-shadow:0 5px 0 var(--ink);touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+.krMsg{position:absolute;left:50%;top:34%;transform:translate(-50%,-50%);width:86%;display:flex;flex-direction:column;gap:4px;padding:14px 12px;text-align:center;background:rgba(255,250,240,.97);border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--ink);pointer-events:none}
+.krMsg small{font-weight:700;color:var(--muted)}
+.krMsg b{font-size:26px;line-height:1.1}
+.krMsg span{font-weight:600}
+.krMsg .dr{color:#b02a37;font-weight:700}
+.krTip{position:absolute;left:50%;bottom:15%;transform:translateX(-50%);background:rgba(42,27,45,.88);color:#fff;font-weight:600;font-size:14px;padding:6px 12px;border-radius:99px;pointer-events:none;white-space:nowrap;transition:opacity .4s}
+.krTip.gone{opacity:0}
+.krB.probe .krCv::before{content:'PROBE';position:absolute;top:42%;left:50%;transform:translate(-50%,-50%) rotate(-10deg);font-size:54px;font-weight:700;color:rgba(255,255,255,.28);pointer-events:none;z-index:1}
+.krMe{display:flex;align-items:center;gap:6px}
+.krMe img{width:28px;height:28px;border-radius:50%;border:2px solid var(--ink);background:#fff;flex:none}
+.krCard{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.krEy{font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.krRider .bust{width:112px;height:112px;border-width:4px;margin:4px 0}
+.krCard .psub{color:var(--ink)}
+.krClaim{width:100%;margin-top:10px;font-size:22px}
+.krSt2{margin:8px 0 4px;font-weight:700;font-size:20px}
+.krPicks{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:12px;width:100%;margin-top:10px}
+.krPick{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;background:#fff;border:3px solid var(--ink);border-radius:18px;box-shadow:0 5px 0 var(--ink);font-family:var(--f);color:var(--ink);cursor:pointer}
+.krPick:active{transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
+.krPick .bust{width:86px;height:86px}
+.krPick b{font-size:21px}
+.krPick small{font-weight:600;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -1264,6 +1371,7 @@ function setNetNote() {
 
 /* ---------- Spielauswahl ---------- */
 const ICONS = {
+  kr: `<svg viewBox="0 0 170 150"><rect x="6" y="106" width="158" height="38" rx="12" fill="#c98b4f" stroke="#2a1b2d" stroke-width="5"/><g stroke="#2a1b2d" stroke-width="4"><circle cx="38" cy="125" r="12" fill="#3fa9f5"/><circle cx="85" cy="125" r="12" fill="#ff4d5e"/><circle cx="132" cy="125" r="12" fill="#ffc531"/></g><g fill="#2a1b2d"><circle cx="38" cy="125" r="6"/><circle cx="85" cy="125" r="6"/><circle cx="132" cy="125" r="6"/></g><svg x="4" y="2" width="150" height="104" viewBox="0 0 130 90">${krHorseInner(TEAMC[0], 1)}</svg><circle cx="154" cy="92" r="9" fill="#fff" stroke="#2a1b2d" stroke-width="3.5"/></svg>`,
   ein: `<svg viewBox="0 0 170 150"><rect x="38" y="52" width="94" height="66" fill="#a8693c" stroke="#2a1b2d" stroke-width="5"/><path d="M26 56 L85 16 L144 56 Z" fill="#7a4a2a" stroke="#2a1b2d" stroke-width="5" stroke-linejoin="round"/><path d="M22 58 L85 12 L148 58 L140 64 L85 26 L30 64 Z" fill="#fff" stroke="#2a1b2d" stroke-width="4" stroke-linejoin="round"/><rect x="50" y="66" width="24" height="20" rx="3" fill="#ffd76b" stroke="#2a1b2d" stroke-width="3"/><rect x="92" y="72" width="28" height="46" rx="4" fill="#ffe9a8" stroke="#2a1b2d" stroke-width="4"/><path d="M14 132 Q48 116 82 132" fill="none" stroke="#d92f3c" stroke-width="7" stroke-linecap="round"/><g fill="#ffc531" stroke="#2a1b2d" stroke-width="3"><rect x="9" y="112" width="10" height="28" rx="3"/><rect x="77" y="112" width="10" height="28" rx="3"/><circle cx="14" cy="110" r="6"/><circle cx="82" cy="110" r="6"/></g><g stroke="#2a1b2d" stroke-width="3"><circle cx="118" cy="128" r="9" fill="#f6cfb2"/><circle cx="140" cy="130" r="9" fill="#e8b48d"/><circle cx="160" cy="132" r="8" fill="#ffd9b8"/></g></svg>`,
   wl: `<svg viewBox="0 0 170 150"><path d="M52 44 Q60 18 88 22 Q110 8 126 28 Q150 28 150 52 Q160 72 140 82 Q132 100 108 94 Q92 106 74 96 Q50 104 42 84 Q20 76 28 58 Q30 40 52 44Z" fill="#fff" stroke="#2a1b2d" stroke-width="5" stroke-linejoin="round"/><circle cx="90" cy="54" r="17" fill="#ffd36b" stroke="#2a1b2d" stroke-width="4"/><rect x="82" y="70" width="16" height="11" rx="3" fill="#cfd5df" stroke="#2a1b2d" stroke-width="3"/><path d="M84 54 L90 48 L96 54" fill="none" stroke="#2a1b2d" stroke-width="3" stroke-linecap="round"/><circle cx="56" cy="108" r="6" fill="#fff" stroke="#2a1b2d" stroke-width="3"/><circle cx="118" cy="108" r="6" fill="#fff" stroke="#2a1b2d" stroke-width="3"/><circle cx="34" cy="126" r="20" fill="#f6cfb2" stroke="#2a1b2d" stroke-width="4"/><path d="M14 122 Q20 100 40 104 Q54 108 52 122 Q40 112 14 122Z" fill="#7a4e2c" stroke="#2a1b2d" stroke-width="3"/><circle cx="40" cy="128" r="2.8" fill="#2a1b2d"/><path d="M34 136 Q40 140 46 136" fill="none" stroke="#2a1b2d" stroke-width="2.5" stroke-linecap="round"/><circle cx="136" cy="126" r="20" fill="#e8b48d" stroke="#2a1b2d" stroke-width="4"/><path d="M116 122 Q118 102 136 104 Q156 104 156 122 Q140 112 116 122Z" fill="#ffc531" stroke="#2a1b2d" stroke-width="3"/><circle cx="130" cy="128" r="2.8" fill="#2a1b2d"/><path d="M124 136 Q130 140 136 136" fill="none" stroke="#2a1b2d" stroke-width="2.5" stroke-linecap="round"/></svg>`,
   cocktail: `<svg viewBox="0 0 170 150"><path d="M40 30 L130 30 L85 92 Z" fill="#ff8a5c" stroke="#2a1b2d" stroke-width="5" stroke-linejoin="round"/><path d="M52 44 L118 44 L85 88 Z" fill="#ffb07a"/><path d="M85 92 L85 132 M60 138 L110 138" stroke="#2a1b2d" stroke-width="6" stroke-linecap="round"/><path d="M106 34 L132 2" stroke="#2a1b2d" stroke-width="5" stroke-linecap="round"/><g transform="translate(134 4) rotate(-20)"><path d="M-26 0 Q0 -26 26 0 Z" fill="#ff6fb1" stroke="#2a1b2d" stroke-width="4" stroke-linejoin="round"/><path d="M-26 0 Q-14 -20 -6 -21 L0 0 Z M6 -21 Q14 -20 26 0 L0 0 Z" fill="#ffd36b"/></g><circle cx="58" cy="28" r="14" fill="#ffa62b" stroke="#2a1b2d" stroke-width="4"/><circle cx="58" cy="28" r="9" fill="#ffd27a"/></svg>`,
@@ -1280,7 +1388,7 @@ const GAMES = [
   { id:'cocktail', title:'Hugos Cocktail-Bar', desc:'Hugos Freunde kommen an die Bar. Mixt geheim am Handy den Cocktail, der zu ihrem Motto passt.', meta:'1–12 Gäste · ca. 3 Min pro Gast', make: () => Cocktail() },
   { id:'wl', title:'Zwei Köpfe, ein Gedanke', desc:'Startwort, dann tippen beide geheim ein Wort. Ungleich? Findet ein Wort, das beide verbindet.', meta:'Bis 15 Runden pro Team · ca. 4 Min pro Team', make: () => Gedanke() },
   { id:'ein', title:'Einlass!', desc:'', meta:'', make: () => Einlass() },
-  { id:'cookies', title:'Hugos Plätzchen-Tabletts', desc:'Vier Tabletts, wenig bis viel Plätzchen. Wählt ein Tablett, aber nicht dasselbe wie die anderen!', meta:'7 Runden · ca. 8 Min', make: () => Cookies() },
+  { id:'kr', title:'Kirmes-Pferderennen', desc:'', meta:'', make: () => Pferderennen() },
 ];
 function renderMenu() {
   hugoPose(false);
@@ -3006,7 +3114,9 @@ const EI_PITY = 20;           // Mitleidsbonus für den Letzten vor jeder Planun
 const EI_CAP = 10;            // So viele Gäste passen in die Hütte
 // Laufkundschaft: zusätzliche Störenfriede, bei allen Hütten gleich, jeden Abend mehr.
 // Sie bringen Geld und Ärger.
-const EI_WALK_N = [1, 2, 2, 3, 4, 4, 5, 5, 6];
+const EI_WALK_N = [1, 2, 2, 3, 4, 4, 5, 5, 6, 6];
+// gleiche Gäste zusammenfassen: [[id, Anzahl], …]
+const eiGroup = ids => { const c = {}; ids.forEach(id => { c[id] = (c[id] || 0) + 1; }); return Object.keys(c).map(id => [id, c[id]]); };
 function eiWalkIns(n) {
   const pool = n <= 2 ? ['suff', 'tourist'] : n <= 4 ? ['suff', 'tourist', 'jga'] : ['tourist', 'jga', 'jga'];
   return Array.from({ length: EI_WALK_N[Math.min(n, EI_WALK_N.length) - 1] }, () => pick(pool));
@@ -3046,7 +3156,7 @@ const EI_SHOP = [
   { id:'dj', cat:'club', n:'DJ-Pult', e:'🎧', p:55, t:'Partygäste bringen +5 €.' },
   { id:'kugel', cat:'club', n:'Discokugel', e:'🪩', p:60, t:'Euer Motto-Bonus zählt doppelt.' },
   { id:'foto', cat:'club', n:'Fotobox', e:'📸', p:45, t:'Jeder 4. zahlende Gast bringt +15 €.' },
-  { id:'garderobe', cat:'club', n:'Garderobe', e:'🧥', p:35, t:'+15 € für jeden Abend ohne Polizei.' },
+  { id:'garderobe', cat:'club', n:'Garderobe', e:'🧥', p:35, t:'+30 € für jeden Abend ohne Polizei.' },
   { id:'gluehwein', cat:'drink', n:'Glühweinkessel', e:'♨️', p:45, t:'Jeder zahlende Gast bringt +2 €.' },
   { id:'eierpunsch', cat:'drink', n:'Eierpunsch', e:'🥚', p:30, t:'Stammgäste bringen +5 €.' },
   { id:'jaeger', cat:'drink', n:'Jägerbomben', e:'💣', p:45, t:'Partygäste bringen +8 €, aber Beschwipste machen 1 Ärger mehr.' },
@@ -3133,7 +3243,7 @@ function eiAdmit(ts) {
 function eiPayout(ts) {
   const ns = ts.ns, own = ts.own;
   if (ns.state === 'busted') return { pay: Math.floor(ns.tonight * (own.anwalt ? .75 : .5)), lost: true, garde:0 };
-  return { pay: ns.tonight + (own.garderobe ? 15 : 0), lost:false, garde: own.garderobe ? 15 : 0 };
+  return { pay: ns.tonight + (own.garderobe ? 30 : 0), lost:false, garde: own.garderobe ? 30 : 0 };
 }
 // Zusammensetzung der Schlange (Reihenfolge bleibt geheim)
 function eiComp(q) { const c = {}; q.forEach(x => { c[x.id] = (c[x.id] || 0) + 1; }); return c; }
@@ -3250,7 +3360,7 @@ function eiHutSVG(c, st) {
   </svg>`;
 }
 function Einlass() {
-  const g = { id:'ein', gid: Date.now().toString(36), phase:'intro', night:0, nights:6, planS:150, waveS:25, drink:true, teams:[], st:{}, bonus:{}, wave:0, deadline:0, lenS:0,
+  const g = { id:'ein', gid: Date.now().toString(36), phase:'intro', night:0, nights:8, planS:150, waveS:25, drink:true, teams:[], st:{}, bonus:{}, wave:0, deadline:0, lenS:0,
     evs:[], evShown:0, pity:[], walk:[], rank:null, raf:0, endPlan:null, endWave:null, tvPlan:-1 };
   const S_ = t => g.st[t];
   const left = () => g.deadline ? Math.max(0, (g.deadline - performance.now()) / 1000) : null;
@@ -3299,7 +3409,7 @@ function Einlass() {
       <button class="btn" id="go">Türen auf!</button></div></section>`;
     const upd = () => { $('#sN').textContent = g.nights; $('#sP').textContent = g.planS >= 60 ? `${Math.floor(g.planS / 60)}:${String(g.planS % 60).padStart(2, '0')} Min` : g.planS + ' s'; };
     upd();
-    document.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => { if (b.dataset.d === 'n') g.nights = clamp(g.nights + +b.dataset.v, 3, 9); else g.planS = clamp(g.planS + +b.dataset.v, 60, 300); Snd.tick(); upd(); }));
+    document.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => { if (b.dataset.d === 'n') g.nights = clamp(g.nights + +b.dataset.v, 3, 10); else g.planS = clamp(g.planS + +b.dataset.v, 60, 300); Snd.tick(); upd(); }));
     $('#sDr').addEventListener('change', e => { g.drink = e.target.checked; });
     hugo('Heute macht jeder seine eigene Hütte auf! Wer hat am Ende die vollste Kasse?', 6000); sync();
     await waitFor('#go');
@@ -3345,7 +3455,7 @@ function Einlass() {
     $('#screen').innerHTML = `<section class="ein eiPlanScr" id="ein">
       <div class="epHead"><h2>Abend ${g.night} von ${g.nights}: Planung</h2><div class="tbar"><i id="epBar" style="width:100%"></i></div><b id="epT"></b></div>
       <div class="epMottos">${EI_MOTTOS.map(m => `<div class="epMot" style="--mc:${m.c}"><span>${m.e}</span><b>${m.n}</b><em>+${g.bonus[m.id]} € pro Gast</em></div>`).join('')}</div>
-      <div class="epWalk"><span>Heute Abend zusätzlich bei allen Hütten:</span>${g.walk.map(id => face(id, 40) + `<b>${esc(EI_CARDS[id].n)}</b><small>${EI_CARDS[id].m} € · ${'⚡'.repeat(EI_CARDS[id].a)}</small>`).join('')}</div>
+      <div class="epWalk"><span>Heute zusätzlich bei allen Hütten:</span>${eiGroup(g.walk).map(([id, n]) => `<span class="wk"><em>${n}×</em>${face(id, 34)}<b>${esc(EI_CARDS[id].n)}</b><small>${EI_CARDS[id].m} € · ${'⚡'.repeat(EI_CARDS[id].a)}</small></span>`).join('')}</div>
       <p class="epHint">Den Motto-Bonus bekommt nur, wer sein Motto <b>als einziges Team</b> wählt.${g.pity.length ? ` · Mitleidsbonus +${EI_PITY} € für ${g.pity.map(t => 'Team ' + TEAMC[t].name).join(', ')}` : ''}</p>
       <div class="epTeams" id="epTeams"></div>
       <div class="epActs"><button class="btn sec" id="epSkip">Planung beenden</button></div>
@@ -3596,6 +3706,527 @@ function Einlass() {
   return g;
 }
 
+/* =================================================================
+   KIRMES-PFERDERENNEN · gemeinsame Teile (Physik, Pferd, Wurfbrett)
+   Schräges Brett: x 0..100, y 0 (Abwurf) .. 150 (Rinne). Die Kugel rollt hoch,
+   wird langsamer und fällt in ein Loch, wenn sie langsam genug darüber rollt.
+   ================================================================= */
+const KR = { W:100, H:150, G:260, FR:12, RB:4, VCAP:65, AMAX:175, ANG:60, AK:.55, WE:.7 };
+const KR_HOLES = [
+  { x:15, y:50, r:7.5, v:1 }, { x:38, y:56, r:7.5, v:1 }, { x:62, y:56, r:7.5, v:1 }, { x:85, y:50, r:7.5, v:1 },
+  { x:28, y:96, r:5.5, v:2 }, { x:72, y:96, r:5.5, v:2 },
+  { x:50, y:128, r:5.5, v:3 },
+];
+const KR_HC = { 1:'#3fa9f5', 2:'#ff4d5e', 3:'#ffc531' };
+const KR_PTS = [5, 3, 2, 1, 0];
+// f: Zugstärke 0..1, ang: Abwurfwinkel in Grad (0 = gerade hoch, + = nach rechts)
+function krLaunch(f, ang) { const v0 = Math.sqrt(2 * KR.G * KR.AMAX * f), a = ang * Math.PI / 180; return { x:KR.W / 2, y:0, vx:v0 * Math.sin(a), vy:v0 * Math.cos(a), t:0 }; }
+// Rückgabe: null (rollt weiter), Loch-Objekt (Treffer), 'out' (Rinne) oder 'miss' (zurück unten angekommen)
+function krStep(b, dt) {
+  const n = Math.max(1, Math.ceil(dt * 240)), h = dt / n;
+  for (let i = 0; i < n; i++) {
+    const sp = Math.hypot(b.vx, b.vy);
+    if (sp > 0) { const d = Math.min(sp, KR.FR * h); b.vx -= b.vx / sp * d; b.vy -= b.vy / sp * d; }
+    b.vy -= KR.G * h; b.x += b.vx * h; b.y += b.vy * h; b.t += h;
+    if (b.y > (b.maxY || 0)) b.maxY = b.y;
+    if (b.x < KR.RB) { b.x = KR.RB; b.vx = Math.abs(b.vx) * KR.WE; }
+    if (b.x > KR.W - KR.RB) { b.x = KR.W - KR.RB; b.vx = -Math.abs(b.vx) * KR.WE; }
+    if (b.y > KR.H - KR.RB) return 'out';
+    const s2 = Math.hypot(b.vx, b.vy);
+    for (const ho of KR_HOLES) if (s2 < KR.VCAP && Math.hypot(b.x - ho.x, b.y - ho.y) < ho.r - KR.RB * .3) return ho;
+    if (b.y < 0 && b.vy < 0 && b.t > .1) return 'miss';
+  }
+  return null;
+}
+
+// Kirmes-Pferd (Blechpferd an der Stange), Blick nach rechts. ch: Spielfigur als Reiter (sonst Jockey)
+function krHorseInner(tc, num, ch) {
+  const far = 'M42 52 L34 66 L30 76 M76 52 L86 64 L84 75', near = 'M36 50 L22 60 L11 61 M80 49 L96 56 L108 51';
+  const body = '<ellipse cx="58" cy="44" rx="27" ry="13"/><path d="M71 41 L85 15 L99 20 L89 51 Z"/><path d="M85 11 Q96 3 110 17 Q119 26 113 31 Q107 35 99 29 L88 25 Z"/><path d="M88 13 L90 2 L97 11 Z"/>';
+  const tail = 'M32 37 Q14 28 5 46 Q11 50 19 45 Q25 42 32 43 Z';
+  const F = 'font-family="Fredoka,Arial Rounded MT Bold,sans-serif"';
+  const horse = `<rect x="58" y="62" width="7" height="27" rx="2" fill="#b9c0cc" stroke="#2a1b2d" stroke-width="2.5"/>
+    <g stroke="#2a1b2d" stroke-linecap="round" stroke-linejoin="round"><path d="${far}" fill="none" stroke-width="11"/><path d="${tail}" fill="#2a1b2d" stroke-width="6"/><path d="${near}" fill="none" stroke-width="11"/><g fill="#2a1b2d" stroke-width="7">${body}</g></g>
+    <path d="${far}" fill="none" stroke="${tc.d}" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="${tail}" fill="#fff3d1"/>
+    <path d="${near}" fill="none" stroke="${tc.c}" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="${tc.c}">${body}</g>
+    <path d="M88 12 Q83 19 80 27" fill="none" stroke="#fff3d1" stroke-width="5" stroke-linecap="round"/>
+    <path d="M42 41 Q56 49 70 42" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="101" cy="17" r="2.3" fill="#2a1b2d"/><circle cx="112" cy="26" r="1.4" fill="#2a1b2d"/>
+    <g fill="#2a1b2d"><circle cx="30" cy="76" r="3.4"/><circle cx="84" cy="75" r="3.4"/><circle cx="11" cy="61" r="3.4"/><circle cx="108" cy="51" r="3.4"/></g>`;
+  if (ch && ART.bust[ch]) return horse + `
+    <path d="M84 27 Q76 30 70 33" fill="none" stroke="#2a1b2d" stroke-width="2.2" stroke-linecap="round"/>
+    <image href="${ART.bust[ch]}" x="27" y="-17" width="62" height="62"/>
+    <path d="M36 35 Q58 28 81 35 L79 51 Q58 57 38 51 Z" fill="${tc.d}" stroke="#2a1b2d" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M39 47 Q58 53 78 47" fill="none" stroke="#ffd36b" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M63 44 L66 57" stroke="#2a1b2d" stroke-width="9" stroke-linecap="round"/><path d="M63 44 L66 57" stroke="#4a3d5c" stroke-width="4.5" stroke-linecap="round"/>
+    <ellipse cx="68" cy="58" rx="5.5" ry="3.2" fill="#2a1b2d"/>
+    <circle cx="47" cy="42" r="7" fill="#fff" stroke="#2a1b2d" stroke-width="2.5"/>
+    <text x="47" y="46.5" text-anchor="middle" font-size="12" font-weight="700" fill="#2a1b2d" ${F}>${num}</text>`;
+  return horse + `
+    <rect x="36" y="35" width="21" height="18" rx="4" fill="#fff" stroke="#2a1b2d" stroke-width="3"/>
+    <text x="46.5" y="49" text-anchor="middle" font-size="14" font-weight="700" fill="#2a1b2d" ${F}>${num}</text>
+    <path d="M60 31 L69 36 L64 43" fill="none" stroke="#2a1b2d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 31 L69 36 L64 43" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="64" cy="43.5" r="3.2" fill="#2a1b2d"/>
+    <path d="M60 31 L70 20" stroke="#2a1b2d" stroke-width="12" stroke-linecap="round"/><path d="M60 31 L70 20" stroke="${tc.d}" stroke-width="7" stroke-linecap="round"/>
+    <path d="M69 22 L82 27" stroke="#2a1b2d" stroke-width="7" stroke-linecap="round"/><path d="M69 22 L82 27" stroke="${tc.d}" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="74" cy="14" r="6.5" fill="#f6cfb2" stroke="#2a1b2d" stroke-width="3"/>
+    <path d="M67 13 Q69 4 77 6 Q82 8 81 13 L86 14 Z" fill="#fff" stroke="#2a1b2d" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M70 8 Q75 6 79 9" fill="none" stroke="${tc.c}" stroke-width="2.5" stroke-linecap="round"/>`;
+}
+const krHorseSVG = (tc, num, ch) => `<svg viewBox="0 0 130 90" class="krHsv" aria-hidden="true">${krHorseInner(tc, num, ch)}</svg>`;
+
+/* ---------- Wurfbrett am Handy ---------- */
+function KrBoard(opts) {
+  const el = document.createElement('div'); el.className = 'krB';
+  el.innerHTML = `<div class="krBar"><span class="krMe"></span><span class="krLf"></span><span class="krPl"></span></div>
+    <div class="krMini"></div>
+    <div class="krCv"><canvas></canvas><div class="krMsg" hidden></div><div class="krTip">Kugel nach unten ziehen, zielen, loslassen</div></div>`;
+  const cv = el.querySelector('canvas'), cx = cv.getContext('2d'), q = s => el.querySelector(s);
+  const X0 = -6, X1 = 106, Y0 = -20, Y1 = 158, VW = X1 - X0, VH = Y1 - Y0;
+  let cw = 300, ch = 476, sc = 1, lastTop = -1, ball = null, fx = [], drag = null, can = false, raf = 0, lastT = 0, thrown = 0, info = {}, prevTxt = {}, respawnAt = 0;
+  const P = (x, y) => [(x - X0) * sc, (Y1 - y) * sc];
+  const gauss = () => { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const spawn = () => { ball = { x:KR.W / 2, y:0, vx:0, vy:0, st:'in', t:0 }; };
+  spawn();
+
+  function layout() {
+    const box = q('.krCv'), maxW = Math.max(220, box.clientWidth || el.clientWidth || 320);
+    const top = box.getBoundingClientRect().top + (window.scrollY || 0); lastTop = top;
+    const availH = Math.max(340, window.innerHeight - top - 12);
+    cw = Math.floor(Math.min(maxW, availH * VW / VH)); ch = Math.floor(cw * VH / VW); sc = cw / VW;
+    const dpr = Math.min(3, window.devicePixelRatio || 1);
+    cv.style.width = cw + 'px'; cv.style.height = ch + 'px'; cv.width = Math.round(cw * dpr); cv.height = Math.round(ch * dpr);
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener('resize', () => { if (el.isConnected) layout(); });
+
+  // ---------- Eingabe: irgendwo antippen, nach unten ziehen, loslassen ----------
+  const aim = () => {
+    if (!drag) return null;
+    const dx = drag.x - drag.x0, dy = drag.y - drag.y0, p = Math.hypot(dx, dy);
+    if (dy < 4 || p < 8) return null;
+    const a = clamp(Math.atan2(-dx, dy) * 180 / Math.PI, -KR.ANG, KR.ANG) * KR.AK;
+    return { a, f: clamp(p / (ch * .45), 0, 1) };
+  };
+  const mv = e => { if (!drag || e.pointerId !== drag.id) return; drag.x = e.clientX; drag.y = e.clientY; e.preventDefault(); };
+  const end = e => {
+    if (!drag || (e && e.pointerId !== drag.id)) return;
+    const s = e && e.type === 'pointerup' ? aim() : null;
+    drag = null; off();
+    if (!s || s.f < .07 || !can || !ball || ball.st !== 'ready') return;
+    ball = Object.assign(krLaunch(clamp(s.f * (1 + gauss() * .012), 0, 1), s.a + gauss() * .3), { st:'roll', maxY:0 });
+    thrown++; if (thrown === 2) q('.krTip').classList.add('gone');
+    opts.onThrow && opts.onThrow();
+  };
+  const off = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end); };
+  cv.addEventListener('pointerdown', e => {
+    if (!can || !ball || ball.st !== 'ready' || drag) return;
+    e.preventDefault();
+    drag = { id:e.pointerId, x0:e.clientX, y0:e.clientY, x:e.clientX, y:e.clientY };
+    window.addEventListener('pointermove', mv, { passive:false }); window.addEventListener('pointerup', end); window.addEventListener('pointercancel', end);
+  });
+  cv.addEventListener('contextmenu', e => e.preventDefault());
+
+  // ---------- Ablauf ----------
+  const pop = (x, y, txt, col, big) => fx.push({ x, y, txt, col, big, t:0, life:1.1 });
+  function step(dt) {
+    fx = fx.filter(f => (f.t += dt) < f.life);
+    if (!ball) { if (performance.now() >= respawnAt) spawn(); return; }
+    ball.t = (ball.t || 0);
+    if (ball.st === 'in') { ball.t += dt; if (ball.t > .22) { ball.st = 'ready'; ball.t = 0; } return; }
+    if (ball.st === 'roll') {
+      const r = krStep(ball, dt);
+      if (r && r !== 'out' && r !== 'miss') {
+        ball.st = 'sink'; ball.h = r; ball.k = 0;
+        pop(r.x, r.y + 8, '+' + r.v, KR_HC[r.v], r.v === 3);
+        opts.onHit && opts.onHit(r.v);
+      } else if (r === 'out') { pop(50, 138, 'Zu fest!', '#fff'); ball = null; respawnAt = performance.now() + 450; opts.onMiss && opts.onMiss(); }
+      else if (r === 'miss') { ball.st = 'back'; if (ball.maxY < 40) pop(50, 26, 'Zu schwach!', '#fff'); opts.onMiss && opts.onMiss(); }
+    } else if (ball.st === 'sink') {
+      ball.k += dt / .28; ball.x += (ball.h.x - ball.x) * Math.min(1, dt * 14); ball.y += (ball.h.y - ball.y) * Math.min(1, dt * 14);
+      if (ball.k >= 1) { ball = null; respawnAt = performance.now() + 250; }
+    } else if (ball.st === 'back') {
+      ball.vy -= KR.G * dt; ball.y += ball.vy * dt; ball.x += ball.vx * dt * .5;
+      if (ball.y < Y0 + 2) { ball = null; respawnAt = performance.now() + 150; }
+    }
+  }
+
+  // ---------- Zeichnen ----------
+  function draw() {
+    const c = cx;
+    c.clearRect(0, 0, cw, ch);
+    // Holzbrett, oben dunkler (weiter weg)
+    let [bx0, by0] = P(0, KR.H), [bx1, by1] = P(KR.W, 0);
+    const gr = c.createLinearGradient(0, by0, 0, by1); gr.addColorStop(0, '#a8693c'); gr.addColorStop(1, '#e0a868');
+    c.fillStyle = '#5a3218'; c.fillRect(0, 0, cw, ch);
+    c.fillStyle = gr; c.fillRect(bx0, by0, bx1 - bx0, by1 - by0);
+    c.strokeStyle = 'rgba(90,50,24,.22)'; c.lineWidth = Math.max(1, sc * .5);
+    for (let x = 12.5; x < KR.W; x += 12.5) { const [px] = P(x, 0); c.beginPath(); c.moveTo(px, by0); c.lineTo(px, by1); c.stroke(); }
+    // Rinne oben
+    const [, gy0] = P(0, Y1), [, gy1] = P(0, KR.H);
+    c.fillStyle = '#2a1b2d'; c.fillRect(bx0, gy0, bx1 - bx0, gy1 - gy0);
+    c.fillStyle = 'rgba(255,255,255,.55)'; c.font = `700 ${Math.round(sc * 4.4)}px Fredoka, Arial Rounded MT Bold, sans-serif`; c.textAlign = 'center'; c.textBaseline = 'middle';
+    c.fillText('RINNE · zu fest = 0', (bx0 + bx1) / 2, (gy0 + gy1) / 2);
+    // Abwurfzone
+    const [, ly0] = P(0, -2), [, ly1] = P(0, Y0);
+    c.fillStyle = 'rgba(255,240,210,.35)'; c.fillRect(bx0, ly0, bx1 - bx0, ly1 - ly0);
+    c.strokeStyle = '#2a1b2d'; c.lineWidth = sc * .7; c.setLineDash([sc * 2.5, sc * 2]); c.beginPath(); c.moveTo(bx0, ly0); c.lineTo(bx1, ly0); c.stroke(); c.setLineDash([]);
+    // Banden links/rechts
+    c.fillStyle = '#7a4a2a'; c.strokeStyle = '#2a1b2d'; c.lineWidth = sc * .8;
+    [[X0, 0], [KR.W, X1]].forEach(([a, b]) => { const [p0] = P(a, 0), [p1] = P(b, 0); c.fillRect(p0, 0, p1 - p0, ch); c.strokeRect(p0, -4, p1 - p0, ch + 8); });
+    // Löcher
+    for (const h of KR_HOLES) {
+      const [hx, hy] = P(h.x, h.y), r = h.r * sc;
+      c.beginPath(); c.arc(hx, hy, r + sc * 2.6, 0, Math.PI * 2); c.fillStyle = KR_HC[h.v]; c.fill(); c.lineWidth = sc * .8; c.strokeStyle = '#2a1b2d'; c.stroke();
+      const hg = c.createRadialGradient(hx, hy - r * .3, r * .1, hx, hy, r); hg.addColorStop(0, '#4a3048'); hg.addColorStop(1, '#120a12');
+      c.beginPath(); c.arc(hx, hy, r, 0, Math.PI * 2); c.fillStyle = hg; c.fill(); c.stroke();
+      c.fillStyle = '#fff'; c.font = `700 ${Math.round(r * 1.25)}px Fredoka, Arial Rounded MT Bold, sans-serif`; c.fillText(h.v, hx, hy + r * .06);
+      if (h.v === 3) { c.fillStyle = '#fff6c2'; for (let k = 0; k < 4; k++) { const a = performance.now() / 700 + k * Math.PI / 2, d = r + sc * 4.2; c.beginPath(); c.arc(hx + Math.cos(a) * d, hy + Math.sin(a) * d, sc * .9, 0, Math.PI * 2); c.fill(); } }
+    }
+    // Zielpfeil beim Ziehen
+    const s = aim();
+    if (s && ball && ball.st === 'ready') {
+      const L = 10 + s.f * 58, rad = s.a * Math.PI / 180, [ax, ay] = P(50, 0), [ex, ey] = P(50 + Math.sin(rad) * L, Math.cos(rad) * L);
+      const col = `hsl(${Math.round(120 - 120 * s.f)},85%,48%)`;
+      c.strokeStyle = '#2a1b2d'; c.lineWidth = sc * 3.4; c.lineCap = 'round'; c.beginPath(); c.moveTo(ax, ay); c.lineTo(ex, ey); c.stroke();
+      c.strokeStyle = col; c.lineWidth = sc * 1.9; c.beginPath(); c.moveTo(ax, ay); c.lineTo(ex, ey); c.stroke();
+      const hd = sc * 5, an = Math.atan2(ey - ay, ex - ax);
+      c.fillStyle = col; c.strokeStyle = '#2a1b2d'; c.lineWidth = sc * .8; c.beginPath(); c.moveTo(ex + Math.cos(an) * hd, ey + Math.sin(an) * hd); c.lineTo(ex + Math.cos(an + 2.3) * hd, ey + Math.sin(an + 2.3) * hd); c.lineTo(ex + Math.cos(an - 2.3) * hd, ey + Math.sin(an - 2.3) * hd); c.closePath(); c.fill(); c.stroke();
+      // Stärke-Balken in der Abwurfzone
+      const [k0, kb] = P(8, -12), [k1] = P(92, -12), bh = sc * 3.4;
+      c.fillStyle = 'rgba(42,27,45,.35)'; c.fillRect(k0, kb - bh / 2, k1 - k0, bh);
+      c.fillStyle = col; c.fillRect(k0, kb - bh / 2, (k1 - k0) * s.f, bh); c.strokeStyle = '#2a1b2d'; c.lineWidth = sc * .6; c.strokeRect(k0, kb - bh / 2, k1 - k0, bh);
+    }
+    // Kugel
+    if (ball) {
+      let bxp = ball.x, byp = ball.y, rr = KR.RB, al = 1;
+      if (ball.st === 'in') bxp = 104 - (104 - 50) * Math.min(1, ball.t / .22);
+      if (ball.st === 'sink') { rr = KR.RB * (1 - .7 * Math.min(1, ball.k)); al = 1 - .5 * Math.min(1, ball.k); }
+      const [px, py] = P(bxp, byp), r = rr * sc;
+      c.globalAlpha = al;
+      c.fillStyle = 'rgba(42,27,45,.35)'; c.beginPath(); c.ellipse(px + r * .25, py + r * .45, r, r * .7, 0, 0, Math.PI * 2); c.fill();
+      const bg = c.createRadialGradient(px - r * .35, py - r * .4, r * .1, px, py, r); bg.addColorStop(0, '#fff'); bg.addColorStop(1, '#cfc6ba');
+      c.fillStyle = bg; c.beginPath(); c.arc(px, py, r, 0, Math.PI * 2); c.fill(); c.lineWidth = sc * .7; c.strokeStyle = '#2a1b2d'; c.stroke();
+      c.globalAlpha = 1;
+    }
+    // Treffer-Texte
+    for (const f of fx) {
+      const k = f.t / f.life, [px, py] = P(f.x, f.y + k * 12), size = Math.round(sc * (f.big ? 13 : f.txt.length > 3 ? 7 : 10) * (1 + .15 * Math.sin(Math.min(1, k * 4) * Math.PI)));
+      c.globalAlpha = k > .7 ? (1 - k) / .3 : 1;
+      c.font = `700 ${size}px Fredoka, Arial Rounded MT Bold, sans-serif`; c.lineWidth = sc * 1.6; c.strokeStyle = '#2a1b2d'; c.lineJoin = 'round';
+      c.strokeText(f.txt, px, py); c.fillStyle = f.col; c.fillText(f.txt, px, py); c.globalAlpha = 1;
+    }
+  }
+  function loop(t) {
+    if (!el.isConnected) { raf = 0; return; }
+    const dt = Math.min(.05, (t - (lastT || t)) / 1000); lastT = t;
+    step(dt); draw();
+    raf = requestAnimationFrame(loop);
+  }
+  const setTxt = (sel, h) => { if (prevTxt[sel] !== h) { prevTxt[sel] = h; q(sel).innerHTML = h; } };
+  return {
+    el,
+    wake() { layout(); if (!raf) { lastT = 0; raf = requestAnimationFrame(loop); } },
+    reset() { spawn(); fx = []; drag = null; off(); },
+    update(i) {
+      info = i; can = i.phase === 'probe' || i.phase === 'race';
+      if (!can && drag) { drag = null; off(); }
+      const tc = TEAMC[i.me], N = i.N || 1, ttl = i.stech ? 'Stechen' : `Durchgang ${i.dg} von 2`;
+      el.style.setProperty('--c', tc.c); el.style.setProperty('--t', tc.t);
+      setTxt('.krMe', i.rider ? `<img src="${ART.bust[i.rider]}" alt="">${esc(i.rider)}` : `Team ${tc.name}`);
+      setTxt('.krLf', i.phase === 'probe' ? 'Proberollen' : i.stech ? 'Stechen' : `Durchgang ${i.dg}/2`);
+      const order = i.racers.slice().sort((a, b) => (i.pos[b] || 0) - (i.pos[a] || 0));
+      const pl = i.place && i.place[i.me] ? i.place[i.me] : order.indexOf(i.me) + 1;
+      setTxt('.krPl', i.phase === 'probe' ? 'zählt nicht' : i.phase === 'ready' || i.phase === 'pick' ? `Ziel bei ${N}` : `Platz ${pl} · ${Math.floor(i.pos[i.me] || 0)}/${N}`);
+      setTxt('.krMini', `${i.racers.map(t => `<b class="${t === i.me ? 'me' : ''}" style="--c:${TEAMC[t].c};left:${clamp((i.pos[t] || 0) / N, 0, 1) * 100}%"></b>`).join('')}`);
+      let msg = '';
+      if (i.phase === 'pick') msg = `<small>Stechen um den Sieg</small><b>Du reitest für Team ${tc.name}!</b><span>Gleich geht’s los …</span>`;
+      else if (i.phase === 'ready') msg = `<small>${ttl}</small><b>${esc(i.cd || 'Gleich geht’s los …')}</b>`;
+      else if (i.phase === 'finish') {
+        const wr = i.riders && i.riders[i.win], mine = i.win === i.me, lp = i.lp ? i.lp[i.me] || 0 : 0, maxP = Math.max(...i.racers.map(t => (i.place && i.place[t]) || 0)), last = i.racers.length > 1 && maxP > 1 && pl === maxP;
+        msg = i.stech ? `<small>Stechen vorbei</small><b>${mine ? 'Du holst den Sieg! 🏆' : `${esc(wr || '')} gewinnt das Stechen`}</b>`
+          : `<small>${ttl} vorbei</small><b>${mine ? 'Du gewinnst den Durchgang! 🏆' : `${esc(wr || '')} gewinnt`}</b><span>Du: Platz ${pl} · +${lp} ${lp === 1 ? 'Punkt' : 'Punkte'}</span>${i.drink && last ? '<span class="dr">Letzter Platz: 2 Schlucke für dich! 🍺</span>' : ''}`;
+      }
+      setTxt('.krMsg', msg); q('.krMsg').hidden = !msg;
+      el.classList.toggle('probe', i.phase === 'probe');
+      if (el.isConnected && Math.abs(q('.krCv').getBoundingClientRect().top + (window.scrollY || 0) - lastTop) > 2) layout();
+    },
+  };
+}
+/* =================================================================
+   SPIEL: KIRMES-PFERDERENNEN (Fernseher)
+   Am Handy werden Kugeln in Löcher gerollt (1, 2 oder 3 Felder), auf dem Fernseher
+   reiten die Spielfiguren. Durchgang 1: Spieler 1 jedes Teams, Durchgang 2: Spieler 2.
+   Gleichstand an der Spitze: Stechen mit je einem Reiter pro Team.
+   ================================================================= */
+function krAwning(n) {
+  const w = 1300 / n; let s = '';
+  for (let i = 0; i < n; i++) { const x = i * w; s += `<path d="M${x} 0 H${x + w} V40 A${w / 2} ${w / 2 * .55} 0 0 1 ${x} 40 Z" fill="${i % 2 ? '#fff6e8' : '#e8343f'}" stroke="#2a1b2d" stroke-width="4" stroke-linejoin="round"/>`; }
+  return `<svg class="krAwn" viewBox="-4 -4 1308 76" preserveAspectRatio="none" aria-hidden="true">${s}</svg>`;
+}
+function Pferderennen() {
+  const g = { id:'kr', gid: Date.now().toString(36), phase:'intro', dg:0, N:40, len:40, drink:true, probeS:40, stech:false,
+    teams:[], racers:[], riders:{}, rp:{}, rpAll:{}, pos:{}, pts:{}, lp:{}, place:{}, dist:{}, at:{}, seen:{}, ack:{}, cd:'', deadline:0, lenS:0, win:-1, sw:-1, tied:[],
+    raf:0, endRace:null, lead:-1, talkAt:0, stretch:false };
+  const key = () => g.gid + '|' + g.dg;
+  const left = () => g.deadline ? Math.max(0, (g.deadline - performance.now()) / 1000) : null;
+  const duo = t => tchars(t).map(ch => bust(ch, TEAMC[t])).join('');
+  const nm = t => 'Team ' + TEAMC[t].name;
+  const list = a => a.length > 1 ? a.slice(0, -1).join(', ') + ' und ' + a[a.length - 1] : a[0] || '';
+  const num = t => g.teams.indexOf(t) + 1;
+  g.pub = () => ({ id:'kr', gid:g.gid, key:key(), phase:g.phase, dg:g.dg, round:g.dg, stech:g.stech, N:g.len, teams:g.teams, racers:g.racers, riders:g.riders, rp:g.rp,
+    pos:g.pos, pts:g.pts, lp:g.lp, place:g.place, cd:g.cd, left:left(), lenS:g.lenS, ack:g.ack, win:g.win, tied:g.tied, drink:g.drink });
+  g.stop = () => { g.alive = false; cancelAnimationFrame(g.raf); };
+  const waitFor = (sel, ms) => new Promise(res => { const b = document.querySelector(sel); if (b) b.addEventListener('click', res, { once:true }); if (ms) setTimeout(res, ms); }).then(() => { if (!g.alive) throw STOP; Snd.pling(); });
+
+  g.run = async () => {
+    await settings();
+    g.teams = realTeams();
+    g.teams.forEach(t => { g.pts[t] = 0; g.dist[t] = 0; });
+    for (g.dg = 1; g.dg <= 2; g.dg++) {
+      g.stech = false; g.racers = g.teams.slice(); g.len = g.N;
+      g.riders = {}; g.racers.forEach(t => { const c = tchars(t); g.riders[t] = c[g.dg - 1] || c[0]; });
+      await probe();
+      await race();
+      await results();
+    }
+    const mx = Math.max(...g.teams.map(t => g.pts[t]));
+    g.tied = g.teams.filter(t => g.pts[t] === mx);
+    g.sw = g.tied[0];
+    if (g.tied.length > 1) {
+      g.dg = 3; g.stech = true; g.racers = g.tied.slice(); g.len = Math.max(20, Math.round(g.N / 20) * 10);
+      g.riders = {}; g.racers.forEach(t => { g.riders[t] = tchars(t).length === 1 ? tchars(t)[0] : null; });
+      await pickRiders();
+      await race();
+      g.sw = g.win;
+      await g.wait(3400);
+    }
+    const top = Math.max(1, ...g.teams.map(x => g.pts[x]));
+    finishGame(g, [0, 1, 2, 3, 4].map(t => g.teams.includes(t) ? g.pts[t] * 10 + (t === g.sw ? 1 : 0) : -1), {
+      disp: [0, 1, 2, 3, 4].map(t => g.teams.includes(t) ? `${g.pts[t]} Pkt${g.stech && t === g.sw ? ' + Stechen' : ''}` : '–'),
+      bar: [0, 1, 2, 3, 4].map(t => g.teams.includes(t) ? Math.round(g.pts[t] / top * 100) : 0) });
+  };
+
+  // ---------- Einstellungen ----------
+  async function settings() {
+    g.phase = 'intro';
+    $('#screen').innerHTML = `<section class="intro"><div class="card introCard cset krSet"><div class="eyebrow">Spiel um die Buddy-Box</div><h2>Kirmes-Pferderennen</h2>
+      <ul>${['Eure Figuren reiten! Am Handy rollt ihr Kugeln in die Löcher: <b>1, 2 oder 3 Felder</b> vor.',
+        'Irgendwo aufs Brett tippen, <b>nach unten ziehen</b>, zielen, loslassen. Zu fest? Dann landet die Kugel in der Rinne.',
+        '<b>Zwei Durchgänge:</b> Erst reitet Spieler 1 jedes Teams, dann Spieler 2. Platz 1 bis 4 bekommen 5, 3, 2 und 1 Punkte.',
+        'Die meisten Punkte gewinnen. Bei Gleichstand an der Spitze gibt es ein <b>Stechen</b>: ein Reiter pro Team.'].map((r, i) => `<li><i>${i + 1}</i><span>${r}</span></li>`).join('')}</ul>
+      <div class="csetGrid">
+        <div class="csetRow"><span>Strecke</span><button class="btn sec sm" data-d="n" data-v="-10" aria-label="Kürzere Strecke">−</button><b id="sN"></b><button class="btn sec sm" data-d="n" data-v="10" aria-label="Längere Strecke">+</button><label class="tgl"><input type="checkbox" id="sDr" checked> Trinkregeln</label></div>
+        <div class="csetRow"><span>Durchgang 1</span><span class="csetTeams">${realTeams().map(t => `<span class="ctm" style="--t:${TEAMC[t].t};--c:${TEAMC[t].c}">${bust(tchars(t)[0], TEAMC[t])}</span>`).join('')}</span></div>
+        <div class="csetRow"><span>Durchgang 2</span><span class="csetTeams">${realTeams().map(t => { const c = tchars(t); return `<span class="ctm" style="--t:${TEAMC[t].t};--c:${TEAMC[t].c}">${bust(c[1] || c[0], TEAMC[t])}</span>`; }).join('')}</span></div>
+      </div>
+      <button class="btn" id="go">Ab auf die Kirmes!</button></div></section>`;
+    const upd = () => { $('#sN').textContent = g.N + ' Felder'; };
+    upd();
+    document.querySelectorAll('[data-d]').forEach(b => b.addEventListener('click', () => { g.N = clamp(g.N + +b.dataset.v, 20, 80); Snd.tick(); upd(); }));
+    $('#sDr').addEventListener('change', e => { g.drink = e.target.checked; });
+    hugo('Hereinspaziert! Eure Figuren reiten um die Buddy-Box. Erst Spieler 1, dann Spieler 2!', 6000); sync();
+    await waitFor('#go');
+  }
+
+  // ---------- Bahn ----------
+  const title = () => g.stech ? 'Stechen um den Sieg' : `Durchgang ${g.dg} von 2`;
+  function renderTrack() {
+    const marks = []; for (let k = 0; k <= g.len; k += 10) marks.push(k);
+    $('#screen').innerHTML = `<section class="kr" id="kr">
+      <div class="krTop">${krAwning(13)}<div class="krSign"><b>Hugos Pferderennen</b><span id="krInfo"></span></div></div>
+      <div class="krTrack" style="--n:${g.racers.length};--hw:${({ 1:220, 2:220, 3:200, 4:160 })[g.racers.length] || 140}px">
+        ${g.racers.map(t => `<div class="krLane" id="krL${t}" style="--c:${TEAMC[t].c};--d:${TEAMC[t].d};--t:${TEAMC[t].t}">
+          <div class="krTag"><span class="krDuo" id="krD${t}"></span><span class="krTx"><b>${TEAMC[t].name}</b><small id="krS${t}"></small></span><em class="krPlace" id="krP${t}" hidden></em></div>
+          <div class="krRun" id="krR${t}"><i class="krGroove"></i><i class="krFin"></i><div class="krHorse" id="krH${t}" style="--p:0"></div></div>
+        </div>`).join('')}
+        <div class="krRuler">${marks.map(k => `<span style="--k:${k / g.len}">${k}</span>`).join('')}</div>
+      </div>
+      <div class="krFoot"><div class="krLeg">Am Handy: ziehen, zielen, loslassen <span class="h h1">1</span><span class="h h2">2</span><span class="h h3">3</span> Felder</div><div class="krCtl" id="krCtl"></div></div>
+      <div class="krOver" id="krOver" hidden></div></section>`;
+    g.racers.forEach(t => drawRider(t));
+    updTrack();
+  }
+  function drawRider(t) {
+    const h = document.getElementById('krH' + t); if (h) h.innerHTML = krHorseSVG(TEAMC[t], num(t), g.riders[t]);
+    const d = document.getElementById('krD' + t); if (d) d.innerHTML = tchars(t).map(ch => bust(ch, TEAMC[t], g.riders[t] && ch !== g.riders[t] ? 'off' : '')).join('');
+  }
+  function updTrack() {
+    const inf = $('#krInfo'); if (inf) inf.textContent = g.phase === 'probe' ? `${title()} · Proberollen` : `${title()} · Ziel bei ${g.len}`;
+    g.racers.forEach(t => {
+      const h = document.getElementById('krH' + t); if (h) h.style.setProperty('--p', clamp((g.pos[t] || 0) / g.len, 0, 1));
+      const s = document.getElementById('krS' + t);
+      if (s) { const r = g.riders[t]; s.innerHTML = r ? `${esc(r)} ${g.rp[t] ? '<i class="ok">✓</i>' : teamPhones(t) ? '<i class="wt">wartet</i>' : '<i class="wt">kein Handy</i>'}` : '<i class="wt">Wer reitet?</i>'; }
+      const p = document.getElementById('krP' + t); if (p) { p.textContent = g.place[t] ? g.place[t] + '.' : ''; p.hidden = !g.place[t]; }
+    });
+    const rd = document.getElementById('krRdy'); if (rd) rd.textContent = `${g.racers.filter(t => g.rp[t]).length}/${g.racers.length} Reiter bereit`;
+  }
+  function popAt(t, txt, cls) {
+    const run = document.getElementById('krR' + t); if (!run) return;
+    const el = document.createElement('span'); el.className = 'krPop ' + (cls || ''); el.textContent = txt;
+    el.style.setProperty('--p', clamp((g.pos[t] || 0) / g.len, 0, 1)); run.appendChild(el);
+    setTimeout(() => el.remove(), 1300);
+  }
+  const resetRace = () => { g.pos = {}; g.place = {}; g.lp = {}; g.rp = {}; g.rpAll = {}; g.seen = {}; g.ack = {}; g.win = -1; g.racers.forEach(t => { g.pos[t] = 0; g.at[t] = Infinity; g.rpAll[t] = new Set(); }); };
+
+  // ---------- Proberollen + Aufsitzen ----------
+  async function probe() {
+    resetRace();
+    g.phase = 'probe'; g.lenS = g.probeS; g.deadline = performance.now() + g.probeS * 1000;
+    renderTrack();
+    $('#krCtl').innerHTML = `<span class="krPr"><span id="krRdy"></span> · Proberollen <b id="krPT"></b></span><button class="btn" id="krGo">Rennen starten</button>`;
+    updTrack();
+    hugo(`Durchgang ${g.dg}! Es reiten ${list(g.racers.map(t => g.riders[t]))}. Tippt am Handy auf „Aufsitzen“ und rollt euch warm.`, 8000); sync();
+    await new Promise((res, rej) => {
+      let lastS = -1;
+      $('#krGo').addEventListener('click', () => { Snd.pling(); res(); }, { once:true });
+      const loop = () => {
+        if (!g.alive) return rej(STOP);
+        if (g.phase !== 'probe') return;
+        const l = left(), s = Math.ceil(l), el = document.getElementById('krPT');
+        if (el) el.textContent = `0:${String(s).padStart(2, '0')}`;
+        if (s !== lastS) { lastS = s; if (s <= 3 && s > 0) Snd.tick(); updTrack(); }
+        if (l <= 0) return res();
+        g.raf = requestAnimationFrame(loop);
+      };
+      g.raf = requestAnimationFrame(loop);
+    });
+    if (!g.alive) throw STOP;
+    g.deadline = 0;
+  }
+
+  // ---------- Stechen: Reiter wählen ----------
+  async function pickRiders() {
+    resetRace();
+    g.phase = 'pick';
+    renderTrack();
+    $('#krCtl').innerHTML = `<span class="krPr" id="krRdy"></span><button class="btn" id="krGo">Stechen starten</button>`;
+    updTrack();
+    big('Stechen!', list(g.racers.map(nm)), 2600); Snd.drum(1.5);
+    hugo(`Gleichstand! ${list(g.racers.map(nm))} reiten im Stechen um den Sieg. Wer reitet für euch? Tippt es am Handy an!`, 8000); sync();
+    await new Promise((res, rej) => {
+      let allAt = 0;
+      $('#krGo').addEventListener('click', () => { Snd.pling(); res(); }, { once:true });
+      const loop = () => {
+        if (!g.alive) return rej(STOP);
+        if (g.racers.every(t => g.riders[t] && g.rp[t])) { if (!allAt) allAt = performance.now(); if (performance.now() - allAt > 2500) return res(); } else allAt = 0;
+        g.raf = requestAnimationFrame(loop);
+      };
+      g.raf = requestAnimationFrame(loop);
+    });
+    if (!g.alive) throw STOP;
+    // Wer sich nicht entschieden hat, bekommt einen Reiter von Hugo
+    g.racers.forEach(t => { if (!g.riders[t]) { g.riders[t] = pick(tchars(t)); drawRider(t); } });
+    updTrack();
+  }
+
+  // ---------- Rennen ----------
+  async function race() {
+    g.phase = 'ready'; g.lead = -1; g.stretch = false;
+    g.racers.forEach(t => { g.pos[t] = 0; g.at[t] = Infinity; });
+    updTrack();
+    $('#krCtl').innerHTML = '';
+    hideBig();
+    for (const [txt, ms] of [['Auf die Plätze …', 1200], ['Fertig …', 1100]]) { g.cd = txt; sync(); big(txt, '', 0); Snd.tick(); await g.wait(ms); }
+    g.cd = ''; g.phase = 'race'; sync();
+    big('LOS!', '', 800); Snd.pop(); shake();
+    hugo(pick(['Und sie sind gestartet!', 'Die Pferde sind los!', 'Peng! Ab geht die wilde Fahrt!']), 2600);
+    $('#krCtl').innerHTML = `<button class="btn ghost" id="krStop">Lauf beenden</button>`;
+    await new Promise((res, rej) => {
+      g.endRace = res;
+      $('#krStop').addEventListener('click', () => { if (g.phase === 'race') finishRace(null); }, { once:true });
+      const chk = () => { if (!g.alive) return rej(STOP); if (g.phase !== 'race') return res(); g.raf = requestAnimationFrame(chk); };
+      g.raf = requestAnimationFrame(chk);
+    });
+    if (!g.alive) throw STOP;
+    g.endRace = null;
+  }
+  function applyHit(t, v) {
+    g.pos[t] = Math.min(g.len, g.pos[t] + v); g.at[t] = performance.now();
+    const h = document.getElementById('krH' + t);
+    if (h) { h.style.setProperty('--p', clamp(g.pos[t] / g.len, 0, 1)); h.classList.remove('krJump'); void h.offsetWidth; h.classList.add('krJump'); }
+    popAt(t, '+' + v, 'v' + v);
+    if (v === 3) Snd.pling(); else Snd.tick();
+    talk(t, v);
+    if (g.pos[t] >= g.len) finishRace(t);
+  }
+  function talk(t, v) {
+    const now = performance.now(), mx = Math.max(...g.racers.map(x => g.pos[x])), lead = g.racers.filter(x => g.pos[x] === mx);
+    if (!g.stretch && mx >= g.len * .8 && now - g.talkAt > 1500) { g.stretch = true; g.talkAt = now; hugo(`Zielgerade! ${g.riders[lead[0]]} liegt vorn!`, 2600); return; }
+    if (lead.length === 1 && lead[0] !== g.lead && mx >= 4) {
+      const prevLead = g.lead; g.lead = lead[0];
+      if (prevLead !== -1 && now - g.talkAt > 3000) { g.talkAt = now; const r = g.riders[g.lead]; hugo(pick([`${r} übernimmt die Führung!`, `Jetzt führt ${r} für ${nm(g.lead)}!`, `${r} zieht vorbei!`]), 2400); return; }
+    }
+    if (v === 3 && now - g.talkAt > 3500) { g.talkAt = now; const r = g.riders[t]; hugo(pick([`Goldloch für ${r}!`, `Volltreffer! Drei Felder für ${r}!`, `${r} trifft die Drei!`]), 2200); }
+  }
+  function finishRace(w) {
+    if (g.phase !== 'race') return;
+    g.phase = 'finish';
+    const order = g.racers.slice().sort((a, b) => (g.pos[b] - g.pos[a]) || (g.at[a] - g.at[b]));
+    if (w != null) { order.splice(order.indexOf(w), 1); order.unshift(w); }
+    g.win = order[0];
+    // Wer gar nicht losgelaufen ist, teilt sich den letzten Platz und bekommt keine Punkte. Im Stechen gibt es keine Punkte.
+    const z = order.findIndex(t => g.pos[t] <= 0);
+    order.forEach((t, i) => {
+      const zero = z >= 0 && i >= z && !(g.stech && i === 0);
+      g.place[t] = zero ? z + 1 : i + 1; g.lp[t] = g.stech || zero ? 0 : KR_PTS[i] || 0;
+      if (!g.stech) { g.pts[t] += g.lp[t]; g.dist[t] += g.pos[t] / g.len * 100; }
+    });
+    const ctl = $('#krCtl'); if (ctl) ctl.innerHTML = '';
+    updTrack();
+    const lane = document.getElementById('krL' + g.win); if (lane) lane.classList.add('won');
+    Snd.fanfare(); confetti(140, 700, 1500);
+    big(esc(g.riders[g.win]) + '!', g.stech ? `holt den Sieg für ${nm(g.win)}` : `gewinnt Durchgang ${g.dg} für ${nm(g.win)}`, g.stech ? 3200 : 2600);
+    hugo(g.stech ? `${g.riders[g.win]} gewinnt das Stechen! ${nm(g.win)} holt sich die Buddy-Box!` : pick([`${g.riders[g.win]} gewinnt für ${nm(g.win)}! Was für ein Ritt!`, `Sieg für ${g.riders[g.win]}! Die Kirmes tobt!`]), 4000);
+    sync();
+    if (g.endRace) g.endRace();
+  }
+
+  // ---------- Ergebnis eines Durchgangs ----------
+  async function results() {
+    await g.wait(2600);
+    const order = g.racers.slice().sort((a, b) => g.place[a] - g.place[b]), lastP = Math.max(...g.racers.map(t => g.place[t])), last = order.filter(t => g.place[t] === lastP);
+    const tot = g.teams.slice().sort((a, b) => g.pts[b] - g.pts[a]);
+    const mx = g.pts[tot[0]], tied = g.teams.filter(t => g.pts[t] === mx), end = g.dg === 2;
+    const ov = $('#krOver');
+    ov.innerHTML = `<div class="card krRes"><h3>Durchgang ${g.dg} von 2: ${esc(g.riders[g.win])} gewinnt für ${nm(g.win)}!</h3>
+      <div class="krResGrid"><div>${order.map(t => `<div class="krRow" style="--c:${TEAMC[t].c};--t:${TEAMC[t].t}"><span class="n">${g.place[t]}</span><span class="du">${bust(g.riders[t], TEAMC[t])}</span><span class="nm">${esc(g.riders[t])}</span><span class="ds">${Math.floor(g.pos[t])}/${g.len}</span><b>+${g.lp[t]}</b></div>`).join('')}</div>
+      <div class="krTot"><h4>${end ? 'Gesamtpunkte' : 'Zwischenstand'}</h4>${tot.map((t, i) => `<div class="krRow sm" style="--c:${TEAMC[t].c};--t:${TEAMC[t].t}"><span class="n">${end && g.pts[t] === mx ? '★' : i + 1}</span><span class="du">${duo(t)}</span><b>${g.pts[t]} Pkt</b></div>`).join('')}</div></div>
+      ${g.drink && g.racers.length > 1 && last.length < g.racers.length ? `<p class="krDr">🍺 ${list(last.map(t => g.riders[t]))} ${last.length > 1 ? 'sind Letzte und trinken je' : 'ist Letzter und trinkt'} 2 Schlucke.</p>` : ''}
+      ${end && tied.length > 1 ? `<p class="krSt">Gleichstand mit ${mx} Punkten: ${list(tied.map(nm))} müssen ins Stechen!</p>` : ''}
+      <button class="btn" id="krNext">${!end ? 'Weiter zu Durchgang 2' : tied.length > 1 ? 'Zum Stechen' : 'Zur Siegerehrung'}</button></div>`;
+    ov.hidden = false;
+    hugo(!end ? `Nach Durchgang 1 führt ${nm(tot[0])}. Jetzt sind die zweiten Reiter dran!` : tied.length > 1 ? 'Gleichstand! Das gibt ein Stechen!' : `${nm(tot[0])} hat die meisten Punkte! Ab zur Siegerehrung!`, 5000);
+    sync();
+    await waitFor('#krNext');
+  }
+
+  // ---------- Handy-Eingaben ----------
+  g.onAct = (pid, t, a) => {
+    if (!g.racers.includes(t) || !g.rpAll[t]) return;
+    if (a.kr === 'pick' && g.phase === 'pick' && tchars(t).includes(a.ch)) {
+      g.riders[t] = a.ch; g.rp[t] = pid; g.rpAll[t].add(pid); drawRider(t); updTrack(); Snd.pling();
+      hugo(`${a.ch} reitet für ${nm(t)}!`, 2200); return;
+    }
+    if (a.kr === 'claim' && g.riders[t] && ['probe', 'ready', 'race', 'finish', 'pick'].includes(g.phase)) { g.rp[t] = pid; g.rpAll[t].add(pid); updTrack(); Snd.pling(); return; }
+    if (!g.rpAll[t].has(pid)) return;
+    if (a.kr === 'probe' && g.phase === 'probe' && [1, 2, 3].includes(a.v)) { popAt(t, '+' + a.v, 'ghost v' + a.v); Snd.tick(); return; }
+    if (a.kr !== 'hits' || a.k !== key() || !Array.isArray(a.h)) return;
+    const seen = g.seen[pid] || (g.seen[pid] = new Set());
+    for (const h of a.h.slice(-30)) {
+      if (!Array.isArray(h)) continue;
+      const s = h[0] | 0, v = h[1] | 0;
+      if (s < 1 || seen.has(s) || ![1, 2, 3].includes(v)) continue;
+      seen.add(s);
+      if (g.phase === 'race') applyHit(t, v);
+    }
+    let k = g.ack[pid] || 0; while (seen.has(k + 1)) k++; g.ack[pid] = k;
+  };
+  return g;
+}
+
 /* ---------- Start Fernseher ---------- */
 async function startTV() {
   $('#tv').hidden = false; document.title = 'Party Buddy Spieleabend · Fernseher';
@@ -3674,9 +4305,9 @@ function startPhone(room) {
     else if (myTeam() < 0) h += pickHTML();
     else h += meHTML() + screenHTML();
     h += `</div>`;
-    if (h === lastHTML) { mountWL(false); mountEI(); return; }
+    if (h === lastHTML) { mountWL(false); mountEI(); mountKR(); return; }
     const wlF = !!document.activeElement && document.activeElement.id === 'wlInp';
-    lastHTML = h; root.innerHTML = h; bind(); mountMix(); mountWL(wlF); mountEI();
+    lastHTML = h; root.innerHTML = h; bind(); mountMix(); mountWL(wlF); mountEI(); mountKR();
   }
   function pickHTML() {
     return `<section class="card pcard"><h2 class="ph2">Welches Team seid ihr in diesem Spiel?</h2><p class="psub">Tippt auf eure Teamfarbe. Ein Handy pro Team reicht.</p><div class="tpick">${S.teams.map((t, i) => t.length ? `<button class="tpb" data-team="${i}" style="--t:${TEAMC[i].t};--c:${TEAMC[i].c}"><span class="pics">${t.map(ch => bust(ch, TEAMC[i])).join('')}</span><span class="tx"><b>Team ${TEAMC[i].name}</b>${esc(duoName(t))}<small>${S.tlive[i] ? (S.tlive[i] === 1 ? '1 Handy verbunden' : S.tlive[i] + ' Handys verbunden') : 'noch kein Handy'}</small></span></button>` : '').join('')}</div></section>`;
@@ -3700,6 +4331,7 @@ function startPhone(room) {
     if (g.id === 'cocktail') return cocktailHTML(g);
     if (g.id === 'wl') return wlHTML(g);
     if (g.id === 'ein') return einHTML(g);
+    if (g.id === 'kr') return krHTML(g);
     return '';
   }
   // ---------- Cocktail-Bar am Handy ----------
@@ -3856,7 +4488,7 @@ function startPhone(room) {
     const own = Object.fromEntries((P.own || []).map(i => [i, true]));
     switch (g.phase) {
       case 'plan':
-        return head + `<div class="timer"><i id="tm" style="width:100%"></i></div>${g.pity.includes(t) ? `<p class="eiPity">Hugo hat Mitleid: +${EI_PITY} € für euch! 🎁</p>` : ''}${(g.walk || []).length ? `<div class="eiWalkP"><small>Heute kommt bei allen Hütten zusätzlich Laufkundschaft:</small><div>${g.walk.map(id => `<span>${face(id)}<b>${esc(EI_CARDS[id].n)}</b><em>${EI_CARDS[id].m} € · ${'⚡'.repeat(EI_CARDS[id].a)}</em></span>`).join('')}</div></div>` : ''}<div id="eiHost"></div>`;
+        return head + `<div class="timer"><i id="tm" style="width:100%"></i></div>${g.pity.includes(t) ? `<p class="eiPity">Hugo hat Mitleid: +${EI_PITY} € für euch! 🎁</p>` : ''}${(g.walk || []).length ? `<div class="eiWalkP"><small>Heute kommt bei allen Hütten zusätzlich Laufkundschaft:</small><div>${eiGroup(g.walk).map(([id, n]) => `<span>${face(id)}<b>${n}× ${esc(EI_CARDS[id].n)}</b><em>${EI_CARDS[id].m} € · ${'⚡'.repeat(EI_CARDS[id].a)}</em></span>`).join('')}</div></div>` : ''}<div id="eiHost"></div>`;
       case 'reveal': {
         const m = P.motto ? EI_MOTTO_BY[P.motto] : null;
         const evs = (g.evs || []).filter(e => e.from === t || e.to === t);
@@ -3885,7 +4517,7 @@ function startPhone(room) {
       }
       case 'settle': {
         const p = P.pay, rk = g.teams.slice().sort((a, b) => g.T[b].money - g.T[a].money);
-        return head + `<section class="card pcard wait"><h2 class="ph2">${p ? `Abend ${g.night}: +${p.pay} €` : 'Abrechnung'}</h2><p class="psub" style="color:var(--ink)">${p && p.lost ? 'Die Polizei hat die Hälfte kassiert.' : p && p.garde ? 'Inklusive 15 € von der Garderobe.' : 'Gut gewirtschaftet!'}</p></section>
+        return head + `<section class="card pcard wait"><h2 class="ph2">${p ? `Abend ${g.night}: +${p.pay} €` : 'Abrechnung'}</h2><p class="psub" style="color:var(--ink)">${p && p.lost ? 'Die Polizei hat die Hälfte kassiert.' : p && p.garde ? `Inklusive ${p.garde} € von der Garderobe.` : 'Gut gewirtschaftet!'}</p></section>
           <section class="card pcard"><h2 class="ph2">Kassenstand</h2>${rk.map((x, i) => `<div class="ckRow wlRk${x === t ? ' me2' : ''}" style="--c:${TEAMC[x].c};--t:${TEAMC[x].t}"><span class="n">${i + 1}</span><span>Team ${TEAMC[x].name}</span><b>${g.T[x].money} €</b></div>`).join('')}</section>`;
       }
       case 'finale': {
@@ -3906,6 +4538,48 @@ function startPhone(room) {
       local.eiKey = key; local.eiInfo = { money:P.money, ownN:P.own.length, deckN:P.deck.length };
       local.eiUI.update({ key, money:P.money, own:Object.fromEntries(P.own.map(i => [i, true])), deck:P.deck, bonus:S.g.bonus, plan:P.plan });
     }
+  }
+  // ---------- Kirmes-Pferderennen am Handy ----------
+  function krHTML(g) {
+    const t = myTeam(), tc = TEAMC[t], lst = a => a.length > 1 ? a.slice(0, -1).join(', ') + ' und ' + a[a.length - 1] : a[0] || '';
+    const card = (inner, bg) => `<section class="card pcard krCard"${bg ? ` style="background:${bg}"` : ''}>${inner}</section>`;
+    if (!g.racers.includes(t)) return card(`<img class="bust" src="${ART.bust.Hugo}" alt="Hugo"><h2 class="ph2">${g.stech ? 'Stechen!' : 'Ihr spielt diesmal nicht mit'}</h2><p class="psub">${g.stech ? `${lst(g.racers.map(x => 'Team ' + TEAMC[x].name))} reiten um den Sieg. Ihr schaut zu und feuert an!` : 'Schaut auf den Fernseher.'}</p>`);
+    const r = g.riders[t], rp = g.rp[t];
+    if (g.phase === 'pick' && !r) return card(`<h2 class="ph2">Stechen! Wer reitet für euch?</h2><p class="psub">Wer hier tippt, reitet mit diesem Handy.</p><div class="krPicks">${S.teams[t].map(ch => `<button class="krPick" data-kr="pick" data-ch="${esc(ch)}" style="--c:${tc.c};--t:${tc.t}">${bust(ch, tc)}<b>${esc(ch)}</b><small>Ich reite!</small></button>`).join('')}</div>`, tc.t);
+    if (rp === me) return `<div id="krHost"></div>`;
+    const ttl = g.stech ? 'Stechen' : `Durchgang ${g.dg} von 2`;
+    if (!rp) return card(`<small class="krEy">${ttl}</small><div class="krRider">${bust(r, tc)}</div><h2 class="ph2">${esc(r)} reitet für euch!</h2><p class="psub">${S.teams[t].length > 1 ? `Bist du ${esc(r)}? Dann sitz auf. Sonst gib das Handy an ${esc(r)} weiter.` : 'Sitz auf und los!'}</p><button class="btn krClaim" data-kr="claim">Ich bin ${esc(r)} – aufsitzen!</button>`, tc.t);
+    const pos = Math.floor(g.pos[t] || 0), order = g.racers.slice().sort((a, b) => (g.pos[b] || 0) - (g.pos[a] || 0)), pl = g.place[t] || order.indexOf(t) + 1;
+    const st = g.phase === 'race' ? `Platz ${pl} · ${pos} von ${g.N} Feldern` : g.phase === 'finish' ? (g.stech ? (g.win === t ? 'Gewonnen! 🏆' : 'Knapp verloren.') : `Platz ${pl} · +${g.lp[t] || 0} Punkte`) : 'Gleich geht’s los …';
+    return card(`<small class="krEy">${ttl}</small><div class="krRider">${bust(r, tc)}</div><h2 class="ph2">${esc(r)} reitet gerade</h2><p class="psub">auf dem anderen Handy. Feuer ${esc(r)} an!</p><p class="krSt2">${st}</p><button class="linkbtn" data-kr="claim">${esc(r)} spielt doch an diesem Handy</button>`, tc.t);
+  }
+  function krSend() {
+    if (!local.krQ || !local.krQ.length || !S || !S.g || S.g.id !== 'kr' || S.g.key !== local.krKey) return;
+    local.krSent = performance.now();
+    act({ kr:'hits', k:local.krKey, h:local.krQ.slice(-30) });
+  }
+  function mountKR() {
+    const host = document.getElementById('krHost');
+    root.classList.toggle('krMode', !!host);
+    if (!S || !S.g || S.g.id !== 'kr') return;
+    const g = S.g, t = myTeam();
+    if (local.krKey !== g.key) { local.krKey = g.key; local.krSeq = 0; local.krQ = []; }
+    const ack = (g.ack && g.ack[me]) || 0;
+    if (local.krQ.length) local.krQ = local.krQ.filter(h => h[0] > ack);
+    if (!host) return;
+    if (!local.krUI) local.krUI = KrBoard({
+      onThrow: () => { buzz(12); keepAwake(); },
+      onHit: v => {
+        if (!S || !S.g || S.g.id !== 'kr' || S.g.rp[myTeam()] !== me) return;
+        buzz(v === 3 ? [40, 50, 40, 50, 160] : v === 2 ? [40, 50, 90] : 60);
+        if (S.g.phase === 'probe') act({ kr:'probe', v });
+        else if (S.g.phase === 'race' && S.g.key === local.krKey) { local.krQ.push([++local.krSeq, v]); krSend(); }
+      },
+    });
+    if (local.krUI.el.parentNode !== host) { host.appendChild(local.krUI.el); local.krUI.wake(); }
+    const ph = g.key + '|' + g.phase;
+    if (local.krPh !== ph) { if (g.phase === 'probe' || g.phase === 'pick' || (g.phase === 'ready' && /finish$/.test(local.krPh || ''))) local.krUI.reset(); if (g.phase === 'race') buzz(150); local.krPh = ph; }
+    local.krUI.update({ phase:g.phase, dg:g.dg, stech:g.stech, N:g.N, pos:g.pos, racers:g.racers, riders:g.riders, rider:g.riders[t], me:t, cd:g.cd, win:g.win, place:g.place, lp:g.lp, drink:g.drink });
   }
   function ludoHTML(g) {
     const t = myTeam(), tc = TEAMC[t], meP = g.players.find(p => p.seat === t);
@@ -3969,6 +4643,7 @@ function startPhone(room) {
     const pd = $('#pdie'); if (pd) pd.addEventListener('click', () => { if (pd.disabled || local.sent) return; local.sent = true; act({ roll:true }); buzz(40); render(); setTimeout(() => { local.sent = false; lastHTML = ''; render(); }, 4000); });
     root.querySelectorAll('.mvb').forEach(b => b.addEventListener('click', () => { if (local.sent) return; local.sent = true; act({ move: +b.dataset.mv }); buzz(30); render(); }));
     const lock = $('#lock'); if (lock) lock.addEventListener('click', () => { if (lock.disabled) return; act({ lock:true }); buzz(60); });
+    root.querySelectorAll('[data-kr]').forEach(b => b.addEventListener('click', () => { if (b.disabled) return; b.disabled = true; act(b.dataset.kr === 'pick' ? { kr:'pick', ch:b.dataset.ch } : { kr:'claim' }); buzz(30); }));
     root.querySelectorAll('[data-eid]').forEach(b => b.addEventListener('click', () => { if (b.disabled || !S.g) return; root.querySelectorAll('[data-eid]').forEach(x => { x.disabled = true; }); act({ ei: b.dataset.eid, w: S.g.wave, n: S.g.night }); buzz(35); }));
   }
   // Timer ohne Neuaufbau aktualisieren
@@ -3984,6 +4659,7 @@ function startPhone(room) {
       if (tm) tm.style.width = clamp((S.g.left - (performance.now() - recvAt) / 1000) / S.g.voteS * 100, 0, 100) + '%';
     }
     if (S && S.g && S.g.id === 'ein' && S.g.left != null && S.g.lenS) { const tm = document.getElementById('tm'); if (tm) tm.style.width = clamp((S.g.left - (performance.now() - recvAt) / 1000) / S.g.lenS * 100, 0, 100) + '%'; }
+    if (S && S.g && S.g.id === 'kr' && local.krQ && local.krQ.length && performance.now() - (local.krSent || 0) > 800) krSend();
     requestAnimationFrame(tick);
   }
   render(); requestAnimationFrame(tick);
